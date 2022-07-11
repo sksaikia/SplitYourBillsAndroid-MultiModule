@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk ConfigData.compileSdkVersion
 
     defaultConfig {
         applicationId "com.example.authentication"
-        minSdk 26
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        minSdk ConfigData.minSdkVersion
+        targetSdk ConfigData.targetSdkVersion
+        versionCode ConfigData.versionCode
+        versionName ConfigData.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -47,11 +47,13 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
-    implementation 'androidx.activity:activity-compose:1.5.0'
     implementation project(path: ':common')
+
+    implementation(Deps.coreKtx)
+    implementation(Deps.activityCompose)
+    implementation(Deps.lifecycleRuntimeKtx)
+    implementation(Deps.uiCompose)
+    implementation(Deps.toolingCompose)
+    implementation(Deps.materialCompose)
+
 }
