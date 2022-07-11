@@ -22,7 +22,7 @@ class AuthenticationActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting("From Authentication Module")
                 }
             }
         }
