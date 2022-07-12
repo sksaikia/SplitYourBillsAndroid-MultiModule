@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.authentication.ui.theme.SplitYourBillsAndroidTheme
+import com.example.design.ErenYeager
+import com.example.design.SKS
+import com.example.design.SouravSaikia
 
 class AuthenticationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +25,9 @@ class AuthenticationActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("From Authentication Module")
+              //     Greeting("From Authentication Module")
+                    ErenYeager(string = "ERen Yeager")
+                    SKS()
                 }
             }
         }

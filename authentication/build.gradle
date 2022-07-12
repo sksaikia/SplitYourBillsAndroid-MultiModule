@@ -36,7 +36,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion Versions.composeVersion
     }
     packagingOptions {
         resources {
@@ -48,12 +48,18 @@ android {
 dependencies {
 
     implementation project(path: ':common')
+    implementation project(path: ':design')
 
     implementation(Deps.coreKtx)
-    implementation(Deps.activityCompose)
     implementation(Deps.lifecycleRuntimeKtx)
+
+    implementation(Deps.activityCompose)
     implementation(Deps.uiCompose)
     implementation(Deps.toolingCompose)
     implementation(Deps.materialCompose)
+
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.androidxJunit)
+    androidTestImplementation(Deps.espresso)
 
 }

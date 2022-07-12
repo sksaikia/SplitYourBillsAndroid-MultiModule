@@ -16,3 +16,4 @@ rootProject.name = "SplitYourBillsAndroid"
 include ':app'
 include ':authentication'
 include ':common'
+include ':design'
