@@ -15,6 +15,10 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/design" />
+            <option value="$PROJECT_DIR$/feature_home" />
+            <option value="$PROJECT_DIR$/feature_profile" />
+            <option value="$PROJECT_DIR$/feature_space" />
+            <option value="$PROJECT_DIR$/feature_transaction" />
           </set>
         </option>
       </GradleProjectSettings>
