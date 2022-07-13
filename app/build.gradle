@@ -47,17 +47,18 @@ android {
 
 dependencies {
 
-    implementation project(path: ':common')
-    implementation project(path: ':design')
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.DESIGN))
 
-    implementation(Deps.coreKtx)
-    implementation(Deps.activityCompose)
-    implementation(Deps.lifecycleRuntimeKtx)
-    implementation(Deps.uiCompose)
-    implementation(Deps.toolingCompose)
-    implementation(Deps.materialCompose)
+    implementation(CoreDependencies.coreKtx)
+    implementation(CoreDependencies.lifecycleRuntimeKtx)
 
-    testImplementation(Deps.junit)
-    androidTestImplementation(Deps.androidxJunit)
-    androidTestImplementation(Deps.espresso)
+    implementation(ComposeDependencies.activityCompose)
+    implementation(ComposeDependencies.uiCompose)
+    implementation(ComposeDependencies.toolingCompose)
+    implementation(ComposeDependencies.materialCompose)
+
+    testImplementation(TestDependencies.junit)
+    androidTestImplementation(TestDependencies.androidxJunit)
+    androidTestImplementation(TestDependencies.espresso)
 }

@@ -41,13 +41,14 @@ android {
 
 dependencies {
 
-    implementation(Deps.coreKtx)
-    testImplementation(Deps.junit)
-    androidTestImplementation(Deps.androidxJunit)
-    androidTestImplementation(Deps.espresso)
+    implementation(CoreDependencies.coreKtx)
 
-    implementation(Deps.activityCompose)
-    implementation(Deps.uiCompose)
-    implementation(Deps.toolingCompose)
-    implementation(Deps.materialCompose)
+    testImplementation(TestDependencies.junit)
+    androidTestImplementation(TestDependencies.androidxJunit)
+    androidTestImplementation(TestDependencies.espresso)
+
+    implementation(ComposeDependencies.activityCompose)
+    implementation(ComposeDependencies.uiCompose)
+    implementation(ComposeDependencies.toolingCompose)
+    implementation(ComposeDependencies.materialCompose)
 }
