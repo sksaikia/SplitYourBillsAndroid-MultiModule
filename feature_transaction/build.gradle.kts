@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
         applicationId = "com.example.feature_transaction"
-        minSdk = 26
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = ConfigData.minSdkVersion
+        targetSdk = ConfigData.targetSdkVersion
+        versionCode = ConfigData.versionCode
+        versionName = ConfigData.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -39,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
+        kotlinCompilerExtensionVersion = Versions.composeVersion
     }
     packagingOptions {
         resources {
@@ -50,16 +50,18 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose_version"]}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.activity:activity-compose:1.3.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${rootProject.extra["compose_version"]}")
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.DESIGN))
+
+    implementation(CoreDependencies.coreKtx)
+    implementation(CoreDependencies.lifecycleRuntimeKtx)
+
+    implementation(ComposeDependencies.activityCompose)
+    implementation(ComposeDependencies.uiCompose)
+    implementation(ComposeDependencies.toolingCompose)
+    implementation(ComposeDependencies.materialCompose)
+
+    testImplementation(TestDependencies.junit)
+    androidTestImplementation(TestDependencies.androidxJunit)
+    androidTestImplementation(TestDependencies.espresso)
 }
