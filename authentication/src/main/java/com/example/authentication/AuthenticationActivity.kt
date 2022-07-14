@@ -9,11 +9,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.authentication.ui.theme.SplitYourBillsAndroidTheme
 import com.example.design.ErenYeager
 import com.example.design.SKS
 import com.example.design.SouravSaikia
+import com.example.design.UnifyEditText
+import com.example.design.UnifyText
 
 class AuthenticationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +28,8 @@ class AuthenticationActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-              //     Greeting("From Authentication Module")
-                    ErenYeager(string = "ERen Yeager")
-                    SKS()
+                //    UnifyText(text = "Tatakae")
+                    UnifyEditText("Phone No.")
                 }
             }
         }
