@@ -1,5 +1,7 @@
 package com.example.authentication
 
+import LoginScreen
+import RegistrationScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +17,7 @@ import com.example.authentication.ui.theme.SplitYourBillsAndroidTheme
 import com.example.design.ErenYeager
 import com.example.design.SKS
 import com.example.design.SouravSaikia
+import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 
@@ -28,8 +31,7 @@ class AuthenticationActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                //    UnifyText(text = "Tatakae")
-                    UnifyEditText("Phone No.")
+                    AuthenticationSelectionScreen()
                 }
             }
         }
