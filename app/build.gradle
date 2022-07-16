@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
 }
 
 android {
@@ -49,6 +52,10 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DESIGN))
+    implementation(project(Modules.FEATURE_HOME))
+    implementation(project(Modules.FEATURE_SPACE))
+    implementation(project(Modules.FEATURE_PROFILE))
+    implementation(project(Modules.FEATURE_TRANSACTION))
 
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.lifecycleRuntimeKtx)
@@ -61,4 +68,9 @@ dependencies {
     testImplementation(TestDependencies.junit)
     androidTestImplementation(TestDependencies.androidxJunit)
     androidTestImplementation(TestDependencies.espresso)
+
+    implementation(HiltDependencies.androidHilt)
+    implementation(HiltDependencies.hiltViewModelLifecycle)
+    kapt(HiltDependencies.hiltCompiler)
+    kapt(HiltDependencies.androidCompiler)
 }

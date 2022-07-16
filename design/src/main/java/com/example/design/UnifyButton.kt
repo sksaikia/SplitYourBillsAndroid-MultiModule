@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun UnifyButton(
-    buttonText: String
+    buttonText: String,
+    modifier: Modifier = Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.Top,

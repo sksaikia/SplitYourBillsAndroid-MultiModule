@@ -9,4 +9,8 @@ object Versions {
     const val junitV = "4.13.2"
     const val androidXJunitV = "1.1.3"
     const val espressoVersion = "3.4.0"
+    const val daggerHilt = "2.38.1"
+    const val viewModelHilt = "1.0.0-alpha03"
+    const val daggerCompiler = "2.37"
+    const val hiltCompiler = "1.0.0"
 }
