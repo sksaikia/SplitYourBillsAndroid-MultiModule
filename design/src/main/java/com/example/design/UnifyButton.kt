@@ -1,5 +1,6 @@
 package com.example.design
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,16 +19,18 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun UnifyButton(
     buttonText: String,
+    onClickButton : () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedButton(
-            onClick = { },
+            onClick = onClickButton,
             border = BorderStroke(1.dp, color = Color.Black),
             shape = MaterialTheme.shapes.large
         ) {

@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,12 +8,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController, name : String?) {
     Column( verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         UnifyText(text = "Split Your Bills", fontSize = 36.sp)
@@ -24,5 +26,6 @@ fun LoginScreen() {
         UnifyEditText(headerText = "Password")
         Spacer(modifier = Modifier.height(50.dp))
         UnifyButton(buttonText = "Login")
+        Log.d("Fatal", "LoginScreen: $name")
     }
 }
