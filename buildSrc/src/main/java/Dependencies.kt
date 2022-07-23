@@ -10,6 +10,11 @@ object ComposeDependencies {
     const val materialCompose = "androidx.compose.material:material:${Versions.composeVersion}"
     const val toolingCompose = "androidx.compose.ui:ui-tooling-preview:${Versions.composeVersion}"
     const val uiCompose = "androidx.compose.ui:ui:${Versions.composeVersion}"
+    const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
+}
+
+object AccompanistDependencies {
+    const val navigationAnimation = "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanistVersion}"
 }
 
 object TestDependencies {

@@ -13,7 +13,7 @@ import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 
 @Composable
-fun RegistrationScreen(navController: NavHostController) {
+fun RegistrationScreen(navigateTo : (String) -> Unit,) {
     Column( verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         UnifyText(text = "Split Your Bills", fontSize = 36.sp)

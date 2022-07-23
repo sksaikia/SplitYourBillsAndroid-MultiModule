@@ -13,4 +13,6 @@ object Versions {
     const val viewModelHilt = "1.0.0-alpha03"
     const val daggerCompiler = "2.37"
     const val hiltCompiler = "1.0.0"
+    const val composeNavigationVersion = "2.5.0"
+    const val accompanistVersion = "0.24.9-beta"
 }

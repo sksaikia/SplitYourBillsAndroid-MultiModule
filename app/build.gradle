@@ -52,8 +52,9 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DESIGN))
-
+    implementation(project(Modules.FEATURE_AUTHENTICATION))
     
+    implementation(AccompanistDependencies.navigationAnimation)
 
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.lifecycleRuntimeKtx)
@@ -62,6 +63,7 @@ dependencies {
     implementation(ComposeDependencies.uiCompose)
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
 
     testImplementation(TestDependencies.junit)
     androidTestImplementation(TestDependencies.androidxJunit)

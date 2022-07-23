@@ -14,7 +14,7 @@ import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 
 @Composable
-fun LoginScreen(navController: NavHostController, name : String?) {
+fun LoginScreen(navigateTo : (String) -> Unit, name : String?) {
     Column( verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         UnifyText(text = "Split Your Bills", fontSize = 36.sp)
