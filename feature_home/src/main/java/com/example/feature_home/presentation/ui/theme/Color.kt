@@ -1,4 +1,4 @@
-package com.example.feature_home.ui.theme
+package com.example.feature_home.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

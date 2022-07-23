@@ -15,4 +15,8 @@ sealed class NavigationItem(
     object RegistrationScreen : NavigationItem(
         "registration_screen"
     )
+
+    object HomeScreen : NavigationItem(
+        "home_screen"
+    )
 }

@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
+import com.example.navigation.NavigationItem
 
 @Composable
 fun LoginScreen(navigateTo : (String) -> Unit, name : String?) {
@@ -25,7 +26,9 @@ fun LoginScreen(navigateTo : (String) -> Unit, name : String?) {
         Spacer(modifier = Modifier.height(20.dp))
         UnifyEditText(headerText = "Password")
         Spacer(modifier = Modifier.height(50.dp))
-        UnifyButton(buttonText = "Login")
+        UnifyButton(buttonText = "Login", {
+            navigateTo(NavigationItem.HomeScreen.route)
+        })
         Log.d("Fatal", "LoginScreen: $name")
     }
 }

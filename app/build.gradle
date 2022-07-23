@@ -53,6 +53,7 @@ dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DESIGN))
     implementation(project(Modules.FEATURE_AUTHENTICATION))
+    implementation(project(Modules.FEATURE_HOME))
     
     implementation(AccompanistDependencies.navigationAnimation)
 
