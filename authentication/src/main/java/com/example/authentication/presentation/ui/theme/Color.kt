@@ -1,4 +1,4 @@
-package com.example.authentication.ui.theme
+package com.example.authentication.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
