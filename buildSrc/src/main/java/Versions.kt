@@ -15,4 +15,8 @@ object Versions {
     const val hiltCompiler = "1.0.0"
     const val composeNavigationVersion = "2.5.0"
     const val accompanistVersion = "0.24.9-beta"
+    const val retrofitVersion = "2.9.0"
+    const val gsonConverterVersion = "2.9.0"
+    const val okhttpVersion = "5.0.0-alpha.3"
+    const val loggingInterceptorVersion = "5.0.0-alpha.3"
 }

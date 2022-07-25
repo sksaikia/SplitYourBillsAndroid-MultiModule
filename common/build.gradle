@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
 }
 
 android {
@@ -42,4 +45,13 @@ dependencies {
     implementation(AccompanistDependencies.navigationAnimation)
     implementation(ComposeDependencies.navigationCompose)
 
+    implementation(HiltDependencies.androidHilt)
+    implementation(HiltDependencies.hiltViewModelLifecycle)
+    kapt(HiltDependencies.hiltCompiler)
+    kapt(HiltDependencies.androidCompiler)
+
+    implementation(RetrofitDependencies.retrofit)
+    implementation(RetrofitDependencies.gsonConverter)
+    implementation(RetrofitDependencies.okhttp)
+    implementation(RetrofitDependencies.loggingInterceptor)
 }

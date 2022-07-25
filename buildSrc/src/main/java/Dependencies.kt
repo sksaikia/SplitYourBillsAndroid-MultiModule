@@ -29,3 +29,10 @@ object HiltDependencies {
     const val hiltViewModelLifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.viewModelHilt}"
     const val androidCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltCompiler}"
 }
+
+object RetrofitDependencies {
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.gsonConverterVersion}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttpVersion}"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptorVersion}"
+}
