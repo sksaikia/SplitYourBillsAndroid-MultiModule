@@ -1,4 +1,4 @@
-package com.example.authentication.presentation.viewModel
+package com.example.authentication.presentation.viewModel.registration
 
 import com.example.authentication.domain.model.response.registration.RegistrationResponse
 

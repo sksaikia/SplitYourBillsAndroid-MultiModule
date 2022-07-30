@@ -1,10 +1,12 @@
 package com.example.authentication.data.repository
 
+import com.example.authentication.data.mapper.toLogin
 import com.example.authentication.data.mapper.toRegistration
-import com.example.authentication.data.mapper.toRegistrationDto
 import com.example.authentication.data.remote.AuthenticationService
 import com.example.authentication.data.remote.request.registration.RegistrationDTO
+import com.example.authentication.domain.model.request.login.LoginBody
 import com.example.authentication.domain.model.request.registration.RegistrationBody
+import com.example.authentication.domain.model.response.login.LoginResponse
 import com.example.authentication.domain.model.response.registration.RegistrationResponse
 import com.example.authentication.domain.repository.AuthenticationRepository
 import com.example.network.RemoteDataSource
@@ -14,6 +16,8 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
+
+
 
 @Singleton
 class AuthenticationRepositoryImpl @Inject constructor(
@@ -29,6 +33,21 @@ class AuthenticationRepositoryImpl @Inject constructor(
             safeApiCall({
                 val registrationResponse = api.registerUser(registrationBody)
                 send(Result.Success(data = registrationResponse.toRegistration()))
+            }, { exception ->
+                send(Result.Error(exception))
+            })
+
+        }
+    }
+
+    override suspend fun loginUser(loginBody: LoginBody)
+        : Flow<Result<LoginResponse>> {
+        return channelFlow {
+            send(Result.Loading(true))
+
+            safeApiCall({
+                val loginResponse = api.loginUser(loginBody)
+                send(Result.Success(data = loginResponse.toLogin()))
             }, { exception ->
                 send(Result.Error(exception))
             })

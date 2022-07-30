@@ -1,4 +1,4 @@
-package com.example.authentication.data.remote.response
+package com.example.authentication.data.remote.response.registration
 
 import com.google.gson.annotations.SerializedName
 

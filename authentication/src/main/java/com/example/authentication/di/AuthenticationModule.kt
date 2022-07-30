@@ -3,6 +3,7 @@ package com.example.authentication.di
 import com.example.authentication.data.remote.AuthenticationService
 import com.example.authentication.data.repository.AuthenticationRepositoryImpl
 import com.example.authentication.domain.repository.AuthenticationRepository
+import com.example.authentication.domain.usecase.LoginUseCase
 import com.example.authentication.domain.usecase.RegistrationUseCase
 import dagger.Module
 import dagger.Provides
@@ -33,4 +34,11 @@ object AuthenticationModule {
     fun provideAuthenticationRepository(api : AuthenticationService) : AuthenticationRepository {
         return AuthenticationRepositoryImpl(api)
     }
+
+    @Provides
+    @Singleton
+    fun provideLoginUseCase(repository: AuthenticationRepository) : LoginUseCase {
+        return LoginUseCase(repository)
+    }
+
 }

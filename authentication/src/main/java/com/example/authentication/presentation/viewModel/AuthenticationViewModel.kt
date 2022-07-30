@@ -7,21 +7,27 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.authentication.domain.model.request.registration.RegistrationBody
+import com.example.authentication.domain.usecase.LoginUseCase
 import com.example.authentication.domain.usecase.RegistrationUseCase
+import com.example.authentication.presentation.viewModel.login.LoginEvent
+import com.example.authentication.presentation.viewModel.login.LoginState
+import com.example.authentication.presentation.viewModel.registration.RegistrationEvent
+import com.example.authentication.presentation.viewModel.registration.RegistrationState
 import com.example.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val registrationUseCase: RegistrationUseCase
+    private val registrationUseCase: RegistrationUseCase,
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(RegistrationState())
+    var registrationState by mutableStateOf(RegistrationState())
+    var loginState by mutableStateOf(LoginState())
 
-    fun onEvent(event: RegistrationEvent) {
+    fun onRegistrationEvent(event: RegistrationEvent) {
         when(event) {
             is RegistrationEvent.OnUserRegistrationClick -> {
                 registerUser(event.userName, event.phoneNo, event.password)
@@ -29,10 +35,21 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
-    init {
-        registerUser("Test 1", "1231234568", "password")
+    fun onLoginEvent(event : LoginEvent) {
+        when(event) {
+            is LoginEvent.OnUserLoginClick -> {
+                loginUser(event.phoneNo, event.password)
+            }
+        }
     }
 
+    init {
+    //    registerUser("Test 1", "1231234568", "password")
+   //     Correct User DEtails
+    //    loginUser("1234567893", "test")
+        //     INCorrect User DEtails
+            loginUser("1234567893", "test2")
+    }
 
     private fun registerUser(userName : String,phoneNo : String,password : String) {
         viewModelScope.launch {
@@ -41,7 +58,7 @@ class AuthenticationViewModel @Inject constructor(
                     when(result) {
                         is Result.Success -> {
                             result.data?.let { registrationResponse ->
-                                state = state.copy(
+                                registrationState = registrationState.copy(
                                     registration = registrationResponse
                                 )
                             }
@@ -50,12 +67,36 @@ class AuthenticationViewModel @Inject constructor(
 
                         }
                         is Result.Loading -> {
-                            state = state.copy(isLoading = result.isLoading)
+                            registrationState = registrationState.copy(isLoading = result.isLoading)
                         }
                     }
                 }
         }
     }
+
+    private fun loginUser(phoneNo : String, password : String) {
+        viewModelScope.launch {
+            loginUseCase(phoneNo, password).collect{ result ->
+                when(result) {
+                    is Result.Success -> {
+                        result.data?.let { loginResponse ->
+                            Log.d("FATAL", "loginUser: $loginResponse")
+                            loginState = loginState.copy(
+                                loginResponse = loginResponse
+                            )
+                        }
+                    }
+                    is Result.Error -> {
+                        Log.d("FATAL", "loginUser: ERROR : $result.message" )
+                    }
+                    is Result.Loading -> {
+                        loginState = loginState.copy(isLoading = result.isLoading)
+                    }
+                }
+            }
+        }
+    }
+
 
 
 }
