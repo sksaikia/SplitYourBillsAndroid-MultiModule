@@ -1,5 +1,6 @@
 package com.example.design
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,8 @@ import androidx.compose.ui.unit.sp
 fun UnifyEditText(
     headerText : String,
     editText : String = "",
-    textColor : Color = Color.Black
+    textColor : Color = Color.Black,
+    onValueChanged : (String) -> Unit = {}
 ) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -33,7 +35,10 @@ fun UnifyEditText(
 
         TextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = {
+                text = it
+                onValueChanged(it)
+            },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = textColor,
                 disabledTextColor = Color.Transparent,

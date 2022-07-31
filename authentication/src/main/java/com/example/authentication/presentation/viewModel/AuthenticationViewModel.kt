@@ -15,6 +15,8 @@ import com.example.authentication.presentation.viewModel.registration.Registrati
 import com.example.authentication.presentation.viewModel.registration.RegistrationState
 import com.example.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +28,9 @@ class AuthenticationViewModel @Inject constructor(
 
     var registrationState by mutableStateOf(RegistrationState())
     var loginState by mutableStateOf(LoginState())
+
+    private val _eventFlow = MutableSharedFlow<LoginEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     fun onRegistrationEvent(event: RegistrationEvent) {
         when(event) {
@@ -46,9 +51,9 @@ class AuthenticationViewModel @Inject constructor(
     init {
     //    registerUser("Test 1", "1231234568", "password")
    //     Correct User DEtails
-    //    loginUser("1234567893", "test")
+  //      loginUser("1234567893", "test")
         //     INCorrect User DEtails
-            loginUser("1234567893", "test2")
+    //        loginUser("1234567893", "test2")
     }
 
     private fun registerUser(userName : String,phoneNo : String,password : String) {
@@ -76,6 +81,16 @@ class AuthenticationViewModel @Inject constructor(
 
     private fun loginUser(phoneNo : String, password : String) {
         viewModelScope.launch {
+            if (phoneNo.isEmpty()) {
+                _eventFlow.emit(LoginEvent.ShowErrorToast("Phone No can not be empty"))
+                return@launch
+            }
+            if (password.isEmpty()) {
+                _eventFlow.emit(LoginEvent.ShowErrorToast("Password can not be empty"))
+                return@launch
+            }
+
+
             loginUseCase(phoneNo, password).collect{ result ->
                 when(result) {
                     is Result.Success -> {
@@ -84,10 +99,12 @@ class AuthenticationViewModel @Inject constructor(
                             loginState = loginState.copy(
                                 loginResponse = loginResponse
                             )
+                            _eventFlow.emit(LoginEvent.NavigateToHome)
                         }
                     }
                     is Result.Error -> {
-                        Log.d("FATAL", "loginUser: ERROR : $result.message" )
+                        _eventFlow.emit(LoginEvent.ShowErrorToast("${result.message}"))
+                        Log.d("FATAL", "loginUser: ERROR : ${result.message}" )
                     }
                     is Result.Loading -> {
                         loginState = loginState.copy(isLoading = result.isLoading)
