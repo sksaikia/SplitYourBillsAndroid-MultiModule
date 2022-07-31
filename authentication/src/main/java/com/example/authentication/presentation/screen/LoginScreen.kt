@@ -25,6 +25,7 @@ import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.navigation.NavigationItem
+import com.example.session.SessionManager
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -40,7 +41,9 @@ fun LoginScreen(
     LaunchedEffect(key1 = true) {
         authenticationViewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is LoginEvent.NavigateToHome -> navigateTo(NavigationItem.HomeScreen.route)
+                is LoginEvent.NavigateToHome -> {
+                    navigateTo(NavigationItem.HomeScreen.route)
+                }
                 is LoginEvent.ShowErrorToast -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.errorMessage

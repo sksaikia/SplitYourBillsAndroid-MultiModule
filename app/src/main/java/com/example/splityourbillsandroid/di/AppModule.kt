@@ -1,6 +1,7 @@
 package com.example.splityourbillsandroid.di
 
 import android.content.Context
+import com.example.session.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,12 @@ object AppModule {
     @Singleton
     fun providesContext(@ApplicationContext context : Context)
         : Context = context
+
+    @Provides
+    @Singleton
+    fun providesSessionManager(@ApplicationContext context: Context)
+        : SessionManager {
+        return SessionManager(context)
+    }
 
 }

@@ -14,6 +14,7 @@ import com.example.authentication.presentation.viewModel.login.LoginState
 import com.example.authentication.presentation.viewModel.registration.RegistrationEvent
 import com.example.authentication.presentation.viewModel.registration.RegistrationState
 import com.example.network.Result
+import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -23,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
     private val registrationUseCase: RegistrationUseCase,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
     var registrationState by mutableStateOf(RegistrationState())
@@ -99,7 +101,9 @@ class AuthenticationViewModel @Inject constructor(
                             loginState = loginState.copy(
                                 loginResponse = loginResponse
                             )
+                            sessionManager.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
                             _eventFlow.emit(LoginEvent.NavigateToHome)
+                            Log.d("FATAL", "loginUser: ${sessionManager.fetchAuthToken()}")
                         }
                     }
                     is Result.Error -> {
