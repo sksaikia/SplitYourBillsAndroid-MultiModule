@@ -53,7 +53,7 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     init {
-    //    registerUser("Test 1", "1231234569", "password")
+//        registerUser("Test 1", "1231234569", "password")
    //     Correct User DEtails
   //      loginUser("1234567893", "test")
         //     INCorrect User DEtails
@@ -91,7 +91,7 @@ class AuthenticationViewModel @Inject constructor(
                             }
                         }
                         is Result.Error -> {
-
+                            _registrationEventFlow.emit(RegistrationEvent.ShowErrorToast("${result.message}"))
                         }
                         is Result.Loading -> {
                             registrationState = registrationState.copy(isLoading = result.isLoading)

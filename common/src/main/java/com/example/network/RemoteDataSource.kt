@@ -23,7 +23,11 @@ open class RemoteDataSource() {
                     is HttpException -> {
                         if (e.code()==401) {
                             Log.d("FATAL", "safeApiCall: Auth exception")
-                            error("${e.code()} , Unauthorized")
+                            error("Code :  ${e.code()} , Unauthorized")
+                        }
+                        if (e.code() == 409) {
+                            Log.d("FATAL", "safeApiCall: ")
+                            error("Code : ${e.code()} , Phone no. already exists")
                         }
                     }
 //                    is SocketTimeoutException -> error("Socket Exception with code ${e.message}")
