@@ -31,8 +31,10 @@ class AuthenticationViewModel @Inject constructor(
     var registrationState by mutableStateOf(RegistrationState())
     var loginState by mutableStateOf(LoginState())
 
-    private val _eventFlow = MutableSharedFlow<LoginEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
+    private val _loginEventFlow = MutableSharedFlow<LoginEvent>()
+    val loginEventFlow = _loginEventFlow.asSharedFlow()
+    private val _registrationEventFlow = MutableSharedFlow<RegistrationEvent>()
+    val registrationEventFlow = _registrationEventFlow.asSharedFlow()
 
     fun onRegistrationEvent(event: RegistrationEvent) {
         when(event) {
@@ -53,14 +55,30 @@ class AuthenticationViewModel @Inject constructor(
     init {
     //    registerUser("Test 1", "1231234569", "password")
    //     Correct User DEtails
-        loginUser("1234567893", "test")
+  //      loginUser("1234567893", "test")
         //     INCorrect User DEtails
     //        loginUser("1234567893", "test2")
     }
 
     private fun registerUser(userName : String,phoneNo : String,password : String) {
         viewModelScope.launch {
-            registrationUseCase(RegistrationBody(userName, phoneNo, password))
+
+            if (userName.isEmpty()) {
+                _registrationEventFlow.emit(RegistrationEvent.ShowErrorToast("Username can not be empty"))
+                return@launch
+            }
+
+            if (phoneNo.isEmpty()) {
+                _registrationEventFlow.emit(RegistrationEvent.ShowErrorToast("Phone no. can not be empty"))
+                return@launch
+            }
+
+            if (password.isEmpty()) {
+                _registrationEventFlow.emit(RegistrationEvent.ShowErrorToast("Password can not be empty"))
+                return@launch
+            }
+
+            registrationUseCase(RegistrationBody(userName, password, phoneNo))
                 .collect{ result ->
                     when(result) {
                         is Result.Success -> {
@@ -68,6 +86,8 @@ class AuthenticationViewModel @Inject constructor(
                                 registrationState = registrationState.copy(
                                     registration = registrationResponse
                                 )
+                                _registrationEventFlow.emit(RegistrationEvent.NavigateToHome)
+                                loginUser(phoneNo, password)
                             }
                         }
                         is Result.Error -> {
@@ -84,11 +104,11 @@ class AuthenticationViewModel @Inject constructor(
     private fun loginUser(phoneNo : String, password : String) {
         viewModelScope.launch {
             if (phoneNo.isEmpty()) {
-                _eventFlow.emit(LoginEvent.ShowErrorToast("Phone No can not be empty"))
+                _loginEventFlow.emit(LoginEvent.ShowErrorToast("Phone No can not be empty"))
                 return@launch
             }
             if (password.isEmpty()) {
-                _eventFlow.emit(LoginEvent.ShowErrorToast("Password can not be empty"))
+                _loginEventFlow.emit(LoginEvent.ShowErrorToast("Password can not be empty"))
                 return@launch
             }
 
@@ -102,12 +122,12 @@ class AuthenticationViewModel @Inject constructor(
                                 loginResponse = loginResponse
                             )
                             sessionManager.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
-                            _eventFlow.emit(LoginEvent.NavigateToHome)
+                            _loginEventFlow.emit(LoginEvent.NavigateToHome)
                             Log.d("FATAL", "loginUser: ${sessionManager.fetchAuthToken()}")
                         }
                     }
                     is Result.Error -> {
-                        _eventFlow.emit(LoginEvent.ShowErrorToast("${result.message}"))
+                        _loginEventFlow.emit(LoginEvent.ShowErrorToast("${result.message}"))
                         Log.d("FATAL", "loginUser: ERROR : ${result.message}" )
                     }
                     is Result.Loading -> {
