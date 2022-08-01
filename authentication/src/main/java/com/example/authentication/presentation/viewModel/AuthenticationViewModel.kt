@@ -51,9 +51,9 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     init {
-    //    registerUser("Test 1", "1231234568", "password")
+    //    registerUser("Test 1", "1231234569", "password")
    //     Correct User DEtails
-  //      loginUser("1234567893", "test")
+        loginUser("1234567893", "test")
         //     INCorrect User DEtails
     //        loginUser("1234567893", "test2")
     }

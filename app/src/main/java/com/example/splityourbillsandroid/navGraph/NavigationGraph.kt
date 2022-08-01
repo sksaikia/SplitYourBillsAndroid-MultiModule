@@ -15,10 +15,11 @@ import com.google.accompanist.navigation.animation.composable
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
+    startLocation : String
 ) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = NavigationItem.AuthenticationSelectionScreen.route
+        startDestination = startLocation
     ) {
         composable(
             route = NavigationItem.AuthenticationSelectionScreen.route,
