@@ -17,24 +17,21 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
-
 @Singleton
 class AuthenticationRepositoryImpl @Inject constructor(
     private val api : AuthenticationService
 ) : AuthenticationRepository, RemoteDataSource() {
 
-    //Replace Channel with Flow
     override suspend fun registerUser(registrationBody: RegistrationBody)
         : Flow<Result<RegistrationResponse>> {
-        return channelFlow {
-            send(Result.Loading(true))
+        return flow {
+            emit(Result.Loading(true))
 
             safeApiCall({
                 val registrationResponse = api.registerUser(registrationBody)
-                send(Result.Success(data = registrationResponse.toRegistration()))
+                emit(Result.Success(data = registrationResponse.toRegistration()))
             }, { exception ->
-                send(Result.Error(exception))
+                emit(Result.Error(exception))
             })
 
         }
@@ -42,14 +39,14 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override suspend fun loginUser(loginBody: LoginBody)
         : Flow<Result<LoginResponse>> {
-        return channelFlow {
-            send(Result.Loading(true))
+        return flow {
+            emit(Result.Loading(true))
 
             safeApiCall({
                 val loginResponse = api.loginUser(loginBody)
-                send(Result.Success(data = loginResponse.toLogin()))
+                emit(Result.Success(data = loginResponse.toLogin()))
             }, { exception ->
-                send(Result.Error(exception))
+                emit(Result.Error(exception))
             })
 
         }

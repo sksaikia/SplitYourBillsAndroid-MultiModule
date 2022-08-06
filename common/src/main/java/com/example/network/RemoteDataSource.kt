@@ -1,22 +1,13 @@
 package com.example.network
 
-import android.security.keystore.UserNotAuthenticatedException
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import java.io.IOException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
-open class RemoteDataSource() {
+open class RemoteDataSource {
 
-    open suspend fun <T> safeApiCall(apiCall : suspend () -> T, error : suspend (String) -> Unit) : Unit {
-        return withContext(Dispatchers.IO) {
+    open suspend fun <T> safeApiCall(apiCall : suspend () -> T, error : suspend (String) -> Unit) {
             try {
-                val response = apiCall.invoke()
-                Log.d("FATAL", "safeApiCall response: $response")
+                apiCall.invoke()
             } catch (e : Throwable) {
               //  Log.d("FATAL", "safeApiCall error: ${(e as BaseErrorResponse).s}")
                 when(e) {
@@ -37,7 +28,6 @@ open class RemoteDataSource() {
 //                    else -> error("Http Exception with code }")
                     else -> error("Unknown error occured")
                 }
-            }
         }
     }
 

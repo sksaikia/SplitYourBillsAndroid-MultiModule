@@ -74,7 +74,6 @@ fun LoginScreen(
             UnifyButton(buttonText = "Login", {
                 Log.d("FATAL", "LoginScreen: $phoneNo , $password")
                 authenticationViewModel.onLoginEvent(LoginEvent.OnUserLoginClick(phoneNo, password))
-                //   navigateTo(NavigationItem.HomeScreen.route)
             })
         }
     }

@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 class LoginUseCase(
     private val repository : AuthenticationRepository
 ) {
-
     suspend operator fun invoke(phoneNo : String, password : String) : Flow<Result<LoginResponse>> {
         val loginBody = LoginBody(phoneNo, password)
         return repository.loginUser(loginBody)
