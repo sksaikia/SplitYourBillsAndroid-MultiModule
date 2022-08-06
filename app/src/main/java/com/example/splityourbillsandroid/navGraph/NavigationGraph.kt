@@ -1,4 +1,4 @@
-package com.example.splityourbillsandroid
+package com.example.splityourbillsandroid.navGraph
 
 import LoginScreen
 import RegistrationScreen
@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.authentication.presentation.screen.AuthenticationSelectionScreen
 import com.example.feature_home.presentation.screens.HomeScreen
+import com.example.feature_profile.ProfileScreen
+import com.example.feature_space.SpacesScreen
+import com.example.feature_transaction.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -55,5 +58,28 @@ fun NavigationGraph(
             })
         }
 
+        composable(
+            route = NavigationItem.TransactionScreen.route
+        ) {
+            TransactionScreen(navigateTo = {
+                navController.navigate(it)
+            })
+        }
+
+        composable(
+            route = NavigationItem.SpacesScreen.route
+        ) {
+            SpacesScreen(navigateTo = {
+                navController.navigate(it)
+            })
+        }
+
+        composable(
+            route = NavigationItem.ProfileScreen.route
+        ) {
+            ProfileScreen(navigateTo = {
+                navController.navigate(it)
+            })
+        }
     }
 }

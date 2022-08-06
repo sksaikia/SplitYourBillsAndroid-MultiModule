@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation(project(Modules.COMMON))
+
     implementation(CoreDependencies.coreKtx)
 
     testImplementation(TestDependencies.junit)
@@ -51,4 +53,5 @@ dependencies {
     implementation(ComposeDependencies.uiCompose)
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
 }

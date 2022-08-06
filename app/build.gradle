@@ -54,6 +54,9 @@ dependencies {
     implementation(project(Modules.DESIGN))
     implementation(project(Modules.FEATURE_AUTHENTICATION))
     implementation(project(Modules.FEATURE_HOME))
+    implementation(project(Modules.FEATURE_TRANSACTION))
+    implementation(project(Modules.FEATURE_SPACE))
+    implementation(project(Modules.FEATURE_PROFILE))
     
     implementation(AccompanistDependencies.navigationAnimation)
 
