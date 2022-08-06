@@ -44,7 +44,7 @@ sealed class NavigationItem(
 
     object TransactionScreen : NavigationItem(
         route = "transaction_screen",
-        title = "Transactions",
+        title = "TXN",
         icon = R.drawable.ic_transaction
     )
 
