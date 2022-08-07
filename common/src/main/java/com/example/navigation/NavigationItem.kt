@@ -6,7 +6,6 @@ import com.example.common.R
 sealed class NavigationItem(
     val route : String,
     val title : String,
-    //TODO change this
     val icon : Int = R.drawable.ic_home
 ) {
     object AuthenticationSelectionScreen : NavigationItem(
@@ -52,6 +51,16 @@ sealed class NavigationItem(
         route = "profile_screen",
         title = "Profile",
         icon = R.drawable.ic_user
+    )
+
+    object CreateNewSpaceScreen : NavigationItem(
+        route = "create_space_screen",
+        title = "Create new Space"
+    )
+
+    object ShareSpaceScreen : NavigationItem(
+        route = "share_space_screen",
+        title = "Share Space"
     )
 
 }

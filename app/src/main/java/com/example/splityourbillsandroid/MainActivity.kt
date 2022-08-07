@@ -53,8 +53,8 @@ class MainActivity : ComponentActivity() {
                         UnifyBottomNavigation(
                             navController = navController,
                             items = listOf(
-                                NavigationItem.HomeScreen,
                                 NavigationItem.SpacesScreen,
+                                NavigationItem.HomeScreen,
                                 NavigationItem.TransactionScreen,
                                 NavigationItem.ProfileScreen
                             )
@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
                             )
                         else {
                             isVisibleBT = true
-                            NavigationGraph(navController, NavigationItem.HomeScreen.route)
+                            NavigationGraph(navController, NavigationItem.SpacesScreen.route)
                         }
                     }
                 }

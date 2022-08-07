@@ -8,7 +8,9 @@ import androidx.navigation.NavHostController
 import com.example.authentication.presentation.screen.AuthenticationSelectionScreen
 import com.example.feature_home.presentation.screens.HomeScreen
 import com.example.feature_profile.ProfileScreen
-import com.example.feature_space.SpacesScreen
+import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
+import com.example.feature_space.presentation.screen.ShareSpaceScreen
+import com.example.feature_space.presentation.screen.SpacesScreen
 import com.example.feature_transaction.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -78,6 +80,22 @@ fun NavigationGraph(
             route = NavigationItem.ProfileScreen.route
         ) {
             ProfileScreen(navigateTo = {
+                navController.navigate(it)
+            })
+        }
+
+        composable(
+            route = NavigationItem.CreateNewSpaceScreen.route
+        ) {
+            CreateNewSpaceScreen(navigateTo = {
+                navController.navigate(it)
+            })
+        }
+
+        composable(
+            route = NavigationItem.ShareSpaceScreen.route
+        ) {
+            ShareSpaceScreen(navigateTo = {
                 navController.navigate(it)
             })
         }

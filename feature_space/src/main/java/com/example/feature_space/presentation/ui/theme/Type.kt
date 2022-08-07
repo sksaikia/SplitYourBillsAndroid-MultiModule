@@ -1,4 +1,4 @@
-package com.example.feature_space.ui.theme
+package com.example.feature_space.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
