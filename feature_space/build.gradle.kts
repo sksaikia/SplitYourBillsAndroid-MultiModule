@@ -69,4 +69,9 @@ dependencies {
     implementation(HiltDependencies.hiltViewModelLifecycle)
     kapt(HiltDependencies.hiltCompiler)
     kapt(HiltDependencies.androidCompiler)
+
+    implementation(RetrofitDependencies.retrofit)
+    implementation(RetrofitDependencies.gsonConverter)
+    implementation(RetrofitDependencies.okhttp)
+    implementation(RetrofitDependencies.loggingInterceptor)
 }

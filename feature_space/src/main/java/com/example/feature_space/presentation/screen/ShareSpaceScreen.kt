@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.design.UnifyButton
 import com.example.design.UnifyText
+import com.example.navigation.NavigationItem
 
 @Composable
 fun ShareSpaceScreen(navigateTo : (String) -> Unit) {
@@ -27,7 +28,9 @@ fun ShareSpaceScreen(navigateTo : (String) -> Unit) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             UnifyButton(buttonText = "Add a transaction")
             Spacer(modifier = Modifier.width(20.dp))
-            UnifyButton(buttonText = "Go to Spaces")
+            UnifyButton(buttonText = "Go to Spaces" , {
+                navigateTo(NavigationItem.SpacesScreen.route)
+            })
         }
 
         Spacer(modifier = Modifier.height(10.dp))

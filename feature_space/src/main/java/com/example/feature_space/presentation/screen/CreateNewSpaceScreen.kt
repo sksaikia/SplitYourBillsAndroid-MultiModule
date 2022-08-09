@@ -2,8 +2,10 @@ package com.example.feature_space.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
@@ -28,9 +30,17 @@ fun CreateNewSpaceScreen(navigateTo : (String) -> Unit) {
             text = "Note: Once you have created a space, you will be able to invite other people too.... ",
             modifier = Modifier.padding(horizontal = 20.dp))
         Spacer(modifier = Modifier.height(20.dp))
-        UnifyButton(buttonText = "Invite Members" , {
-            //TODO for testing
-            navigateTo(NavigationItem.ShareSpaceScreen.route)
-        })
+
+        Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly) {
+            UnifyButton(buttonText = "Invite Members" , {
+            })
+
+            UnifyButton(buttonText = "Save Space" , {
+                //TODO for testing
+                navigateTo(NavigationItem.ShareSpaceScreen.route)
+            })
+        }
+
     }
 }
