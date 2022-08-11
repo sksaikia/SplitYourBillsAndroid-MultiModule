@@ -4,6 +4,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import com.example.BuildConfig
+import com.example.network.AuthInterceptor
+import com.example.session.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,10 +36,12 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
     ): OkHttpClient {
         val client = OkHttpClient.Builder()
         client.addInterceptor(loggingInterceptor)
+        client.addInterceptor(authInterceptor)
 //
 //        client.addInterceptor(Interceptor{ chain ->
 //            val request = chain.request()
@@ -51,6 +55,13 @@ object NetworkModule {
 
         return client.build()
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor(sessionManager: SessionManager) : AuthInterceptor{
+        return AuthInterceptor(sessionManager)
+    }
+
 
     @Provides
     @Singleton

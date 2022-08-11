@@ -60,6 +60,7 @@ dependencies {
     implementation(ComposeDependencies.uiCompose)
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
 
     testImplementation(TestDependencies.junit)
     androidTestImplementation(TestDependencies.androidxJunit)
@@ -74,4 +75,6 @@ dependencies {
     implementation(RetrofitDependencies.gsonConverter)
     implementation(RetrofitDependencies.okhttp)
     implementation(RetrofitDependencies.loggingInterceptor)
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
 }
