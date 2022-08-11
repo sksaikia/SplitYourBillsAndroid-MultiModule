@@ -2,6 +2,7 @@ package com.example.session
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.common.R
 
 class SessionManager(context : Context) {
@@ -16,6 +17,7 @@ class SessionManager(context : Context) {
     }
 
     fun fetchAuthToken() : String? {
+        Log.d("FATAL", "fetchAuthToken: ${prefs.getString(USER_TOKEN, null)}")
         return prefs.getString(USER_TOKEN, null)
     }
 

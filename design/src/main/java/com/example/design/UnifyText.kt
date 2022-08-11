@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
@@ -17,6 +18,7 @@ fun UnifyText(
     fontColor : Color = Color.Black,
     fontStyle: FontStyle = FontStyle.Normal,
     fontFamily: FontFamily = FontFamily.Default,
+    fontWeight: FontWeight = FontWeight.Normal
 ) {
     Text(
         text = text,
