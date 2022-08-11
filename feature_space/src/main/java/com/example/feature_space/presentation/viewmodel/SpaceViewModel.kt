@@ -45,7 +45,7 @@ class SpaceViewModel @Inject constructor(
                             )
 
                             //TODO as of now Navigate to Share Space
-                            _createSpaceEventFlow.emit(CreateSpaceEvent.NavigateToShareSpace)
+                            _createSpaceEventFlow.emit(CreateSpaceEvent.ShowSuccessToast("Space is created with id ${createSpaceResponse.data.spaceId}"))
 
                         }
                     }

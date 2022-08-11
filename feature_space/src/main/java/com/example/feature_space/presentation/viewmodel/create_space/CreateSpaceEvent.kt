@@ -5,4 +5,5 @@ sealed class CreateSpaceEvent {
     object NavigateToShareSpace : CreateSpaceEvent()
     object NavigateToInviteMembers : CreateSpaceEvent()
     data class ShowErrorToast(val errorMessage : String) : CreateSpaceEvent()
+    data class ShowSuccessToast(val message : String) : CreateSpaceEvent()
 }

@@ -47,6 +47,11 @@ fun CreateNewSpaceScreen(
                         message = event.errorMessage
                     )
                 }
+                is CreateSpaceEvent.ShowSuccessToast -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
+                }
             }
         }
     }

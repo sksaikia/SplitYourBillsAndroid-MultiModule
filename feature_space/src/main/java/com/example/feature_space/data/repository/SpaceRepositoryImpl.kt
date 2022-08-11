@@ -1,6 +1,7 @@
 package com.example.feature_space.data.repository
 
 import com.example.feature_space.data.mapper.convertToCreateSpaceBodyData
+import com.example.feature_space.data.mapper.convertToCreateSpaceResponseBodyData
 import com.example.feature_space.data.remote.SpaceService
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
@@ -23,7 +24,8 @@ class SpaceRepositoryImpl @Inject constructor(
             emit(Result.Loading(isLoading = true))
             //Domain to Data
             safeApiCall({
-                api.createNewSpace(createSpaceBody.convertToCreateSpaceBodyData())
+                val response =  api.createNewSpace(createSpaceBody.convertToCreateSpaceBodyData())
+                emit(Result.Success(data = response.convertToCreateSpaceResponseBodyData()))
             }, { exception ->
                 emit(Result.Error(exception))
             })
