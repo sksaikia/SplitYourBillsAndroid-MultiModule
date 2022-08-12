@@ -60,7 +60,12 @@ fun SpacesScreen(navigateTo : (String) -> Unit) {
 
     ) {
         Column {
-            SpaceCard()
+            SpaceCard(
+                spaceName =  "Space Name here",
+                date = "28 - Jan",
+                otherUserCount = 3 ,
+                amount = 1170
+            )
         }
     }
 }

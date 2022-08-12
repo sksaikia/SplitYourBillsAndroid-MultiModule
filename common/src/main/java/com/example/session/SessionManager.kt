@@ -2,8 +2,7 @@ package com.example.session
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
-import com.example.common.R
+
 
 class SessionManager(context : Context) {
 
@@ -16,15 +15,45 @@ class SessionManager(context : Context) {
         editor.apply()
     }
 
+    fun saveUserName(name : String) {
+        val editor = prefs.edit()
+        editor.putString(USER_NAME, name)
+        editor.apply()
+    }
+
+    fun saveUserId(userId : Long) {
+        val editor = prefs.edit()
+        editor.putLong(USER_ID, userId)
+        editor.apply()
+    }
+
+    fun savePhoneNo(phoneNo : String) {
+        val editor = prefs.edit()
+        editor.putString(USER_PHONE_NO, phoneNo)
+        editor.apply()
+    }
+
     fun fetchAuthToken() : String? {
-        Log.d("FATAL", "fetchAuthToken: ${prefs.getString(USER_TOKEN, null)}")
         return prefs.getString(USER_TOKEN, null)
+    }
+
+    fun fetchUserId() : Long {
+        return prefs.getLong(USER_ID, -1)
+    }
+
+    fun fetchUserName() : String? {
+        return prefs.getString(USER_NAME, null)
+    }
+
+    fun fetchPhoneNo() : String? {
+        return prefs.getString(USER_PHONE_NO, null)
     }
 
     companion object {
         const val USER_TOKEN = "bearer_token"
         const val USER_NAME = "user_name"
         const val USER_PHONE_NO = "user_phone"
+        const val USER_ID = "user_id"
     }
 
 }

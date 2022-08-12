@@ -25,7 +25,12 @@ import com.example.design.UnifyText
 
 
 @Composable
-fun SpaceCard() {
+fun SpaceCard(
+    spaceName : String ,
+    date : String,
+    otherUserCount : Int,
+    amount : Int
+) {
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
@@ -37,9 +42,10 @@ fun SpaceCard() {
             .height(160.dp)
             .padding(
                 start = 24.dp,
-                top = 16.dp ,
-                end = 16.dp ,
-                bottom = 16.dp)
+                top = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            )
         ) {
 
             Column(modifier = Modifier.fillMaxSize()) {
@@ -48,13 +54,13 @@ fun SpaceCard() {
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    UnifyText("This is a card view", fontWeight = FontWeight.Bold)
-                    UnifyLabel("28 - Jan")
+                    UnifyText(spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+                    UnifyLabel(date)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                UnifyChip("+3 Other users")
+                UnifyChip("+ ${otherUserCount} Other users")
                 Spacer(modifier = Modifier.height(20.dp))
-                UnifyText(text = "+ ₹ 1174.0",
+                UnifyText(text = "+ ₹ ${amount}",
                     fontSize = 20.sp,
                     fontColor = Color.Green,
                     fontFamily = FontFamily.SansSerif,
