@@ -5,11 +5,14 @@ import RegistrationScreen
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.example.authentication.presentation.screen.AuthenticationSelectionScreen
 import com.example.feature_home.presentation.screens.HomeScreen
 import com.example.feature_profile.ProfileScreen
 import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
 import com.example.feature_space.presentation.screen.ShareSpaceScreen
+import com.example.feature_space.presentation.screen.SpaceDetailsScreen
 import com.example.feature_space.presentation.screen.SpacesScreen
 import com.example.feature_transaction.TransactionScreen
 import com.example.navigation.NavigationItem
@@ -99,5 +102,23 @@ fun NavigationGraph(
                 navController.navigate(it)
             })
         }
+
+        composable(
+            route = NavigationItem.SpaceDetailsScreen.route + "/{spaceId}",
+            arguments = listOf(
+                navArgument("spaceId"){
+                    type = NavType.StringType
+                    defaultValue = "0"
+                }
+            )
+        ) {
+            SpaceDetailsScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                },
+                spaceId = it.arguments?.getString("spaceId")
+            )
+        }
+
     }
 }

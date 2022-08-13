@@ -2,6 +2,7 @@ package com.example.feature_space.presentation.screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -115,7 +116,12 @@ fun SpacesScreen(
                         spaceName = (spaceMember?.spaceDetailsResponse?.spaceName ?: 0).toString(),
                         date = "28 - Jan",
                         otherUserCount = 3,
-                        amount = 1170
+                        amount = 1170,
+                        modifier = Modifier.clickable {
+                            navigateTo(NavigationItem.SpaceDetailsScreen.withArgs(
+                                (spaceMember?.spaceId ?: 0).toString())
+                            )
+                        }
                     )
                 }
             }

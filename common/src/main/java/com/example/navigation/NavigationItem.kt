@@ -63,4 +63,17 @@ sealed class NavigationItem(
         title = "Share Space"
     )
 
+    object SpaceDetailsScreen : NavigationItem(
+        route = "space_details_screen",
+        title = "Space Details"
+    )
+
+    fun withArgs(vararg args : String) : String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
 }

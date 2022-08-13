@@ -29,11 +29,12 @@ fun SpaceCard(
     spaceName : String ,
     date : String,
     otherUserCount : Int,
-    amount : Int
+    amount : Int,
+    modifier : Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp),
         elevation = 12.dp
     ) {
