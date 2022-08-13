@@ -34,8 +34,6 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.DESIGN))
-
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.materialDesign)
