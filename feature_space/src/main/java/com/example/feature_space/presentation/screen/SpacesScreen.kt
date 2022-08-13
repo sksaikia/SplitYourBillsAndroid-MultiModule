@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -33,17 +37,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.design.UnifyChip
 import com.example.design.UnifyLabel
 import com.example.design.UnifyText
 import com.example.feature_space.presentation.ui_composition.SpaceCard
+import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.navigation.NavigationItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SpacesScreen(navigateTo : (String) -> Unit) {
+fun SpacesScreen(
+    navigateTo : (String) -> Unit,
+    spaceViewModel: SpaceViewModel = hiltViewModel()
+) {
 
     val scaffoldState = rememberScaffoldState()
+
+    val allSpacesState = spaceViewModel.allSpacesState
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(
@@ -59,13 +70,26 @@ fun SpacesScreen(navigateTo : (String) -> Unit) {
         modifier =  Modifier.padding(bottom = 50.dp)
 
     ) {
-        Column {
-            SpaceCard(
-                spaceName =  "Space Name here",
-                date = "28 - Jan",
-                otherUserCount = 3 ,
-                amount = 1170
-            )
+//        Column {
+//            SpaceCard(
+//                spaceName =  "Space Name here",
+//                date = "28 - Jan",
+//                otherUserCount = 3 ,
+//                amount = 1170
+//            )
+//        }
+        Column(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(){
+                items(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.size ?: 0) { i->
+                    val spaceMember = allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.get(i)
+                    SpaceCard(
+                        spaceName = (spaceMember?.spaceDetailsResponse?.spaceName ?: 0).toString(),
+                        date = "28 - Jan",
+                        otherUserCount = 3,
+                        amount = 1170
+                    )
+                }
+            }
         }
     }
 }

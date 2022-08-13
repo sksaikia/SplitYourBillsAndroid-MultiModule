@@ -121,7 +121,13 @@ class AuthenticationViewModel @Inject constructor(
                             loginState = loginState.copy(
                                 loginResponse = loginResponse
                             )
-                            sessionManager.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
+                            with(sessionManager) {
+
+                                this.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
+                                this.saveUserId(loginResponse.loginData.userDetailsResponse.userId)
+                                this.savePhoneNo(loginResponse.loginData.userDetailsResponse.phoneNo)
+                                this.saveUserName(loginResponse.loginData.userDetailsResponse.username)
+                            }
                             _loginEventFlow.emit(LoginEvent.NavigateToHome)
                             Log.d("FATAL", "loginUser: ${sessionManager.fetchAuthToken()}")
                         }

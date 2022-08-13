@@ -6,9 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
+import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
+import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
+import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceState
 import com.example.network.Result
+import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -18,13 +22,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SpaceViewModel @Inject constructor(
-    private val createNewSpaceUseCase : CreateSpaceUseCase
+    private val createNewSpaceUseCase : CreateSpaceUseCase,
+    private val getAllSpaceByUserIdUsecase: GetAllSpaceByUserIdUsecase,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
     var createSpaceState by mutableStateOf(CreateSpaceState())
+    var allSpacesState by mutableStateOf(AllSpacesState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
+
+    private val _allSpacesEventFlow = MutableSharedFlow<AllSpacesEvent>()
+    val allSpacesEventFlow = _allSpacesEventFlow.asSharedFlow()
+
+    init {
+        getAllSpaces(sessionManager.fetchUserId())
+    }
 
     fun onCreateNewSpaceEvent(event : CreateSpaceEvent) {
         when(event) {
@@ -54,6 +68,26 @@ class SpaceViewModel @Inject constructor(
                     }
                     is Result.Loading -> {
                         createSpaceState = createSpaceState.copy(isLoading = result.isLoading)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getAllSpaces(userId : Int) {
+        viewModelScope.launch {
+            getAllSpaceByUserIdUsecase(userId).collectLatest { result ->
+                when(result) {
+                    is Result.Success -> {
+                        allSpacesState = allSpacesState.copy(
+                            getAllSpacesResponse = result.data
+                        )
+                    }
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Error -> {
+
                     }
                 }
             }

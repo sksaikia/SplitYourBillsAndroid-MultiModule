@@ -21,9 +21,9 @@ class SessionManager(context : Context) {
         editor.apply()
     }
 
-    fun saveUserId(userId : Long) {
+    fun saveUserId(userId : Int) {
         val editor = prefs.edit()
-        editor.putLong(USER_ID, userId)
+        editor.putInt(USER_ID, userId)
         editor.apply()
     }
 
@@ -37,8 +37,8 @@ class SessionManager(context : Context) {
         return prefs.getString(USER_TOKEN, null)
     }
 
-    fun fetchUserId() : Long {
-        return prefs.getLong(USER_ID, -1)
+    fun fetchUserId() : Int {
+        return prefs.getInt(USER_ID, -1)
     }
 
     fun fetchUserName() : String? {
