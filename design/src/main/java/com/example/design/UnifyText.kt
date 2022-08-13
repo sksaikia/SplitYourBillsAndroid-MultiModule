@@ -26,6 +26,7 @@ fun UnifyText(
         color = fontColor,
         fontStyle = fontStyle,
         fontFamily = fontFamily,
-        modifier = modifier
+        modifier = modifier,
+        fontWeight = fontWeight
     )
 }

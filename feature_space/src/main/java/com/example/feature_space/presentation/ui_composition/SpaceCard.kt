@@ -32,10 +32,9 @@ fun SpaceCard(
     amount : Int
 ) {
     Card(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(8.dp),
         modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
+            .padding(8.dp),
         elevation = 12.dp
     ) {
         Box(modifier = Modifier

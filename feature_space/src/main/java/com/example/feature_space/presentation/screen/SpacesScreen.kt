@@ -41,7 +41,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.design.UnifyChip
 import com.example.design.UnifyLabel
 import com.example.design.UnifyText
+import com.example.feature_space.R
 import com.example.feature_space.presentation.ui_composition.SpaceCard
+import com.example.feature_space.presentation.ui_composition.SpaceTrxCard
+import com.example.feature_space.presentation.ui_composition.TotalBalanceCard
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.navigation.NavigationItem
 
@@ -70,15 +73,41 @@ fun SpacesScreen(
         modifier =  Modifier.padding(bottom = 50.dp)
 
     ) {
-//        Column {
-//            SpaceCard(
-//                spaceName =  "Space Name here",
-//                date = "28 - Jan",
-//                otherUserCount = 3 ,
-//                amount = 1170
-//            )
-//        }
         Column(modifier = Modifier.fillMaxSize()) {
+
+            TotalBalanceCard(amount = "₹ 5000.00")
+
+//            Row {
+//                SpaceTrxCard(headerText = "Total In" , amount = "10000")
+//                SpaceTrxCard(headerText = "Total Out", amount = "5000")
+//            }
+
+            val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
+                Triple("Total In" , "10000", R.drawable.trx_in),
+                Triple("Total Out", "5000", R.drawable.trx_out)
+            )
+
+            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                items(listOfTrxCard.size) { i ->
+                    SpaceTrxCard(
+                        headerText = listOfTrxCard[i].first,
+                        amount = listOfTrxCard[i].second,
+                        icon = listOfTrxCard[i].third
+                        )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            UnifyText(
+                text = "All Spaces",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier.padding(horizontal = 10.dp)
+            )
+            
+            Spacer(modifier = Modifier.height(10.dp))
+            
             LazyVerticalGrid(columns = GridCells.Fixed(2)){
                 items(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.size ?: 0) { i->
                     val spaceMember = allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.get(i)
