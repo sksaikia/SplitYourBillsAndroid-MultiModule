@@ -20,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design.UnifyText
-import com.example.feature_space.R
 
 @Composable
 fun SpaceTrxCard(

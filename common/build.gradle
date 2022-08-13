@@ -34,6 +34,8 @@ android {
 
 dependencies {
 
+    implementation(project(Modules.DESIGN))
+
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.appCompat)
     implementation(CoreDependencies.materialDesign)
@@ -54,4 +56,11 @@ dependencies {
     implementation(RetrofitDependencies.gsonConverter)
     implementation(RetrofitDependencies.okhttp)
     implementation(RetrofitDependencies.loggingInterceptor)
+
+    implementation(ComposeDependencies.activityCompose)
+    implementation(ComposeDependencies.uiCompose)
+    implementation(ComposeDependencies.toolingCompose)
+    implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
+
 }
