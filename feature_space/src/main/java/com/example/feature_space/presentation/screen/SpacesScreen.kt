@@ -79,7 +79,7 @@ fun SpacesScreen(
 //            )
 //        }
         Column(modifier = Modifier.fillMaxSize()) {
-            LazyColumn(){
+            LazyVerticalGrid(columns = GridCells.Fixed(2)){
                 items(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.size ?: 0) { i->
                     val spaceMember = allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.get(i)
                     SpaceCard(

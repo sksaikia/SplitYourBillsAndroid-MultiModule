@@ -34,17 +34,16 @@ fun SpaceCard(
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .padding(16.dp)
+            .padding(8.dp)
             .fillMaxWidth(),
         elevation = 12.dp
     ) {
         Box(modifier = Modifier
-            .height(160.dp)
             .padding(
-                start = 24.dp,
-                top = 16.dp,
-                end = 16.dp,
-                bottom = 16.dp
+                start = 16.dp,
+                top = 8.dp,
+                end = 8.dp,
+                bottom = 8.dp
             )
         ) {
 
@@ -54,14 +53,14 @@ fun SpaceCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    UnifyText(spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+                    UnifyText(spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
                     UnifyLabel(date)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                UnifyChip("+ ${otherUserCount} Other users")
-                Spacer(modifier = Modifier.height(20.dp))
+                UnifyChip(date)
+                Spacer(modifier = Modifier.height(10.dp))
                 UnifyText(text = "+ ₹ ${amount}",
-                    fontSize = 20.sp,
+                    fontSize = 14.sp,
                     fontColor = Color.Green,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold

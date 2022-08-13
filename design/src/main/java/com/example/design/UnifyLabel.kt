@@ -21,7 +21,7 @@ fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A)) {
         color = color,
         shape = RectangleShape,
         elevation = 5.dp,
-        modifier = Modifier.width(80.dp)
+        modifier = Modifier.width(60.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -29,8 +29,8 @@ fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A)) {
             ) {
             UnifyText(
                 text = text,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(8.dp),
+                fontSize = 10.sp,
+                modifier = Modifier.padding(4.dp),
                 fontColor = Color.White,
                 fontWeight = FontWeight.Bold
             )

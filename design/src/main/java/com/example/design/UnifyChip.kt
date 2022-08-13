@@ -28,16 +28,19 @@ fun UnifyChip(
         modifier = modifier) {
         UnifyText(
             text = text,
-            fontSize = 12.sp,
-            modifier = Modifier.padding(8.dp)
+            fontSize = 10.sp,
+            modifier = Modifier.padding(
+                horizontal = 8.dp,
+                vertical = 4.dp
+            )
         )
     }
 }
 
 fun getRandomColor(): Color {
     val colorList = listOf<Color>(
-        Color.Red,
         Color.Green,
+        Color.Red,
         Color.Gray,
         Color.Magenta,
         Color.Yellow,
