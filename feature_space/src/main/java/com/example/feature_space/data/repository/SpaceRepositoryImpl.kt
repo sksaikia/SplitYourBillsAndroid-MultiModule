@@ -3,10 +3,12 @@ package com.example.feature_space.data.repository
 import com.example.feature_space.data.mapper.convertToCreateSpaceBodyData
 import com.example.feature_space.data.mapper.convertToCreateSpaceResponseBodyData
 import com.example.feature_space.data.mapper.toDomainGetAllSpacesResponse
+import com.example.feature_space.data.mapper.toDomainSingleSpaceMemberResponse
 import com.example.feature_space.data.remote.SpaceService
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
+import com.example.feature_space.domain.model.response.space_details.SingleSpaceDetailsResponse
 import com.example.feature_space.domain.repository.SpacesRepository
 import com.example.network.RemoteDataSource
 import com.example.network.Result
@@ -45,6 +47,20 @@ class SpaceRepositoryImpl @Inject constructor(
             }, { exception ->
                 emit(Result.Error(exception))
             })
+        }
+    }
+
+    override suspend fun getSpecificSpaceBySpaceId(spaceId: Int): Flow<Result<SingleSpaceDetailsResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+
+            safeApiCall({
+                val response = api.getSpecificSpaceById(spaceId)
+                emit(Result.Success(data = response.toDomainSingleSpaceMemberResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+
         }
     }
 }

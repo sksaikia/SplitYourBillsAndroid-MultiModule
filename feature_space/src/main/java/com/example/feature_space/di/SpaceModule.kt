@@ -5,6 +5,7 @@ import com.example.feature_space.data.repository.SpaceRepositoryImpl
 import com.example.feature_space.domain.repository.SpacesRepository
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
+import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +38,12 @@ object SpaceModule {
     @Singleton
     fun provideGetAllSpacesByUserIdUsecase(repository : SpacesRepository) : GetAllSpaceByUserIdUsecase {
         return GetAllSpaceByUserIdUsecase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSpecificSpaceDetailsBySpaceId(repository : SpacesRepository) : GetSpecificSpaceDetailsBySpaceIdUseCase {
+        return GetSpecificSpaceDetailsBySpaceIdUseCase(repository)
     }
 
 

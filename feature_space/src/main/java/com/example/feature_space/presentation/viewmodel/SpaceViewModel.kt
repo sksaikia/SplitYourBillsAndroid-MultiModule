@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
+import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceState
+import com.example.feature_space.presentation.viewmodel.specific_space.SingleSpaceState
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,11 +26,13 @@ import javax.inject.Inject
 class SpaceViewModel @Inject constructor(
     private val createNewSpaceUseCase : CreateSpaceUseCase,
     private val getAllSpaceByUserIdUsecase: GetAllSpaceByUserIdUsecase,
+    private val getSpecificSpaceDetailsBySpaceIdUseCase: GetSpecificSpaceDetailsBySpaceIdUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
     var createSpaceState by mutableStateOf(CreateSpaceState())
     var allSpacesState by mutableStateOf(AllSpacesState())
+    var singleSpaceState by mutableStateOf(SingleSpaceState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
@@ -90,6 +94,31 @@ class SpaceViewModel @Inject constructor(
 
                     }
                 }
+            }
+        }
+    }
+
+    fun getSpecificSpaceBySpaceId(spaceId : Int) {
+        viewModelScope.launch {
+            getSpecificSpaceDetailsBySpaceIdUseCase
+                .invoke(spaceId)
+                .collectLatest { result ->
+                    when(result) {
+                        is Result.Success -> {
+                            singleSpaceState = singleSpaceState.copy(
+                                isLoading = false,
+                                data = result.data
+                            )
+                        }
+                        is Result.Loading -> {
+                            singleSpaceState = singleSpaceState.copy(
+                                isLoading = true
+                            )
+                        }
+                        is Result.Error -> {
+
+                        }
+                    }
             }
         }
     }

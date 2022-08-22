@@ -46,7 +46,6 @@ fun getRandomColor(): Color {
         Color.Yellow,
     )
     val state = rand(0,4)
-    Log.d("Fatal", "getRandomColor: $state")
     return colorList[state]
 }
 
