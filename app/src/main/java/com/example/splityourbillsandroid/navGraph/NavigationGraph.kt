@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.authentication.presentation.screen.AuthenticationSelectionScreen
+import com.example.contact_picker.view.ContactPickerScreen
 import com.example.feature_home.presentation.screens.HomeScreen
 import com.example.feature_profile.ProfileScreen
 import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
@@ -117,6 +118,16 @@ fun NavigationGraph(
                     navController.navigate(it)
                 },
                 spaceId = it.arguments?.getString("spaceId")
+            )
+        }
+
+        composable(
+            route = NavigationItem.ContactPickerScreen.route,
+        ) {
+            ContactPickerScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                }
             )
         }
 

@@ -6,4 +6,5 @@ object Modules {
     const val FEATURE_PROFILE = ":feature_profile"
     const val FEATURE_SPACE = ":feature_space"
     const val FEATURE_TRANSACTION = ":feature_transaction"
+    const val LIBRARY_CONTACT_PICKER = ":contact_picker"
 }

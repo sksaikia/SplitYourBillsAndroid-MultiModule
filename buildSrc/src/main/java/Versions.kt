@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlinV = "1.6.10"
+    const val kotlinV = "1.7.0"
     const val composeVersion = "1.1.0"
     const val coreKtx = "1.8.0"
     const val lifeCycleRunTimeKtx = "2.5.0"

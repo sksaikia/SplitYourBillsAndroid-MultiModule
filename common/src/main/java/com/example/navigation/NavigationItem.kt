@@ -68,6 +68,11 @@ sealed class NavigationItem(
         title = "Space Details"
     )
 
+    object ContactPickerScreen : NavigationItem(
+        route = "contact_picker_screen",
+        title = "Contact Picker"
+    )
+
     fun withArgs(vararg args : String) : String {
         return buildString {
             append(route)

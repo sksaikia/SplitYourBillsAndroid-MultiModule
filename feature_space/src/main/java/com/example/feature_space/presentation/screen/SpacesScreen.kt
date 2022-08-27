@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.design.UnifyButton
 import com.example.design.UnifyChip
 import com.example.design.UnifyLabel
 import com.example.design.UnifyText
@@ -79,6 +80,10 @@ fun SpacesScreen(
         Column(modifier = Modifier
             .fillMaxSize()) {
 
+            UnifyButton(buttonText = "Go to Contacts page", {
+                navigateTo(NavigationItem.ContactPickerScreen.route)
+            })
+            
             TotalBalanceCard(amount = "₹ 5000.00")
 
 //            Row {

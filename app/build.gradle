@@ -57,6 +57,7 @@ dependencies {
     implementation(project(Modules.FEATURE_TRANSACTION))
     implementation(project(Modules.FEATURE_SPACE))
     implementation(project(Modules.FEATURE_PROFILE))
+    implementation(project(Modules.LIBRARY_CONTACT_PICKER))
     
     implementation(AccompanistDependencies.navigationAnimation)
 
