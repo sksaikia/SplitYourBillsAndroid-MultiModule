@@ -19,4 +19,5 @@ object Versions {
     const val gsonConverterVersion = "2.9.0"
     const val okhttpVersion = "5.0.0-alpha.3"
     const val loggingInterceptorVersion = "5.0.0-alpha.3"
+    const val hiltNavigation = "1.0.0-alpha03"
 }

@@ -59,16 +59,11 @@ dependencies {
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
     implementation(ComposeDependencies.navigationCompose)
-    implementation("androidx.appcompat:appcompat:1.5.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation(HiltDependencies.androidHilt)
     implementation(HiltDependencies.hiltViewModelLifecycle)
     kapt(HiltDependencies.hiltCompiler)
     kapt(HiltDependencies.androidCompiler)
 
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
-
-
+    implementation(HiltDependencies.hiltNavigation)
 }

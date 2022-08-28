@@ -76,5 +76,5 @@ dependencies {
     implementation(RetrofitDependencies.okhttp)
     implementation(RetrofitDependencies.loggingInterceptor)
 
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation(HiltDependencies.hiltNavigation)
 }

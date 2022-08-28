@@ -28,6 +28,7 @@ object HiltDependencies {
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.daggerCompiler}"
     const val hiltViewModelLifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.viewModelHilt}"
     const val androidCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltCompiler}"
+    const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigation}"
 }
 
 object RetrofitDependencies {
