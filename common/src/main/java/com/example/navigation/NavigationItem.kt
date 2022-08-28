@@ -6,7 +6,8 @@ import com.example.common.R
 sealed class NavigationItem(
     val route : String,
     val title : String,
-    val icon : Int = R.drawable.ic_home
+    val icon : Int = R.drawable.ic_home,
+    val navBack : String = ""
 ) {
     object AuthenticationSelectionScreen : NavigationItem(
         route = "authentication_selection_screen",

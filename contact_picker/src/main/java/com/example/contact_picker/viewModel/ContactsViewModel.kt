@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contact_picker.entity.Contact
+import com.example.contact_picker.util.convertNumber
 import com.example.contact_picker.util.get
+import com.example.contact_picker.util.launchMain
 import com.example.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -84,8 +86,15 @@ class ContactsViewModel @Inject constructor()
                 }
 
                 val number = phoneCursor get ContactsContract.CommonDataKinds.Phone.NUMBER
+
+                var updatedNumber = ""
+
+                number?.forEach {
+                    updatedNumber += it.convertNumber()
+                }
+
                 if (name != null && number!= null) {
-                    val contact = Contact(name, number)
+                    val contact = Contact(name, updatedNumber)
                     list.add(contact)
                 }
 
@@ -103,10 +112,4 @@ class ContactsViewModel @Inject constructor()
 
         }
     }
-
-
-
 }
-
-suspend fun launchMain(block: suspend CoroutineScope.() -> Unit) =
-    withContext(Dispatchers.Main, block)

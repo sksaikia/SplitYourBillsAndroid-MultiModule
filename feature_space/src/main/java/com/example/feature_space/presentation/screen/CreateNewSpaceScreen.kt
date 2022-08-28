@@ -78,6 +78,9 @@ fun CreateNewSpaceScreen(
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly) {
                 UnifyButton(buttonText = "Invite Members" , {
+                    navigateTo(
+                        NavigationItem.ContactPickerScreen.route
+                    )
                 })
 
                 UnifyButton(buttonText = "Save Space" , {
