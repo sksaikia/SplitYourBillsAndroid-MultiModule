@@ -1,7 +1,8 @@
 package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
-import android.widget.Toast
+import android.app.DatePickerDialog
+import android.widget.DatePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,13 +21,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -47,6 +50,7 @@ import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSp
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -57,6 +61,12 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
     val scaffoldState = rememberScaffoldState()
 
     val allSpacesState = transactionViewModel.allSpacesState
+
+    var showCalender by remember {
+        mutableStateOf(false)
+    }
+
+    var mDate = remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = true) {
         transactionViewModel.createNewTxnEventFlow.collectLatest { event ->
@@ -72,6 +82,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 
     var spaceName by remember { mutableStateOf("") }
     var spaceDescription by remember { mutableStateOf("") }
+    var date by remember { mutableStateOf("")}
 
     Scaffold(scaffoldState = scaffoldState) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState()),
@@ -85,9 +96,20 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
             })
             Spacer(modifier = Modifier.height(20.dp))
 
-            UnifyEditText(headerText = "When" , onValueChanged = {
-                spaceDescription = it
-            })
+//            UnifyEditText(headerText = "When" , onValueChanged = {
+//                date = mDate.toString()
+//            })
+            UnifyText(text = "When", modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 10.dp))
+
+            UnifyText(
+                text =
+                mDate.value,
+                modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 10.dp))
+
             Spacer(modifier = Modifier.height(20.dp))
 
             UnifyText(text = "Space", modifier = Modifier
@@ -95,6 +117,17 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
                 .padding(horizontal = 10.dp))
 
             MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList())
+
+            IconButton(onClick = {
+                showCalender = true
+            }) {
+                Icon(painter = painterResource(
+                    id = com.example.common.R.drawable.ic_space ),
+                    contentDescription = "Calender")
+            }
+
+            if (showCalender)
+                Calender(mDate)
 
             Spacer(modifier = Modifier.height(20.dp))
             
@@ -256,4 +289,35 @@ fun ComposeMenu(
             }
         }
     }
+}
+
+@Composable
+fun Calender(mDate: MutableState<String>) {
+    val localContext = LocalContext.current
+
+    // Initializing a Calendar
+    val mCalendar = Calendar.getInstance()
+
+    // Fetching current year, month and day
+    val year = mCalendar.get(Calendar.YEAR)
+    val month = mCalendar.get(Calendar.MONTH)
+    val day = mCalendar.get(Calendar.DAY_OF_MONTH)
+
+    mCalendar.time = Date()
+
+    // Declaring a string value to
+    // store date in string format
+
+
+    // Declaring DatePickerDialog and setting
+    // initial values as current values (present year, month and day)
+    val mDatePickerDialog = DatePickerDialog(
+        localContext,
+        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
+        }, year, month, day
+    )
+
+    mDatePickerDialog.show()
+
 }
