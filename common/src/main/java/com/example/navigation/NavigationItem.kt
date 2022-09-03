@@ -74,6 +74,16 @@ sealed class NavigationItem(
         title = "Contact Picker"
     )
 
+    object ManualBillSplitScreen : NavigationItem(
+        route = "manual_bill_split",
+        title = "Manual Bill Split"
+    )
+
+    object CreateNewTransactionScreen : NavigationItem(
+        route = "create_new_txn",
+        title = "Create New Transaction"
+    )
+
     fun withArgs(vararg args : String) : String {
         return buildString {
             append(route)

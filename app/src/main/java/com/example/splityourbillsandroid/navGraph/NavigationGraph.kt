@@ -15,6 +15,8 @@ import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
 import com.example.feature_space.presentation.screen.ShareSpaceScreen
 import com.example.feature_space.presentation.screen.SpaceDetailsScreen
 import com.example.feature_space.presentation.screen.SpacesScreen
+import com.example.feature_transaction.CreateNewTransactionScreen
+import com.example.feature_transaction.ManualBillSplitScreen
 import com.example.feature_transaction.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -125,6 +127,26 @@ fun NavigationGraph(
             route = NavigationItem.ContactPickerScreen.route,
         ) {
             ContactPickerScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                }
+            )
+        }
+
+        composable(
+            route = NavigationItem.ManualBillSplitScreen.route,
+        ) {
+            ManualBillSplitScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                }
+            )
+        }
+
+        composable(
+            route = NavigationItem.CreateNewTransactionScreen.route,
+        ) {
+            CreateNewTransactionScreen(
                 navigateTo = {
                     navController.navigate(it)
                 }
