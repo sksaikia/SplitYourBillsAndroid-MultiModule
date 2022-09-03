@@ -1,6 +1,11 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -57,8 +62,23 @@ dependencies {
     implementation(ComposeDependencies.uiCompose)
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
 
     testImplementation(TestDependencies.junit)
     androidTestImplementation(TestDependencies.androidxJunit)
     androidTestImplementation(TestDependencies.espresso)
+
+    implementation(HiltDependencies.androidHilt)
+    implementation(HiltDependencies.hiltViewModelLifecycle)
+    kapt(HiltDependencies.hiltCompiler)
+    kapt(HiltDependencies.androidCompiler)
+
+    implementation(RetrofitDependencies.retrofit)
+    implementation(RetrofitDependencies.gsonConverter)
+    implementation(RetrofitDependencies.okhttp)
+    implementation(RetrofitDependencies.loggingInterceptor)
+
+    implementation(HiltDependencies.hiltNavigation)
+
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 }
