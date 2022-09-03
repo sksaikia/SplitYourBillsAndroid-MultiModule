@@ -54,8 +54,5 @@ dependencies {
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
     implementation(ComposeDependencies.navigationCompose)
-
-
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-
+    implementation(ComposeDependencies.constraintLayoutCompose)
 }

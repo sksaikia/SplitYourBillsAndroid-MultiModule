@@ -11,6 +11,7 @@ object ComposeDependencies {
     const val toolingCompose = "androidx.compose.ui:ui-tooling-preview:${Versions.composeVersion}"
     const val uiCompose = "androidx.compose.ui:ui:${Versions.composeVersion}"
     const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
+    const val constraintLayoutCompose = "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
 }
 
 object AccompanistDependencies {
