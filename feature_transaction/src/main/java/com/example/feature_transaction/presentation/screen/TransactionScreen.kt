@@ -1,7 +1,6 @@
-package com.example.feature_transaction
+package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,8 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.design.UnifyButton
 import com.example.design.UnifyText
+import com.example.feature_transaction.R
+import com.example.feature_transaction.SpaceTrxCard
+import com.example.feature_transaction.TotalBalanceCard
 import com.example.navigation.NavigationItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")

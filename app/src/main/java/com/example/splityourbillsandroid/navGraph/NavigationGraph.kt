@@ -17,7 +17,7 @@ import com.example.feature_space.presentation.screen.SpaceDetailsScreen
 import com.example.feature_space.presentation.screen.SpacesScreen
 import com.example.feature_transaction.CreateNewTransactionScreen
 import com.example.feature_transaction.ManualBillSplitScreen
-import com.example.feature_transaction.TransactionScreen
+import com.example.feature_transaction.presentation.screen.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
