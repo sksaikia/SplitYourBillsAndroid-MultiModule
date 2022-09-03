@@ -104,8 +104,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
                 .padding(horizontal = 10.dp))
 
             UnifyText(
-                text =
-                mDate.value,
+                text = mDate.value,
                 modifier = Modifier
                 .align(Alignment.Start)
                 .padding(horizontal = 10.dp))
@@ -119,7 +118,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
             MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList())
 
             IconButton(onClick = {
-                showCalender = true
+                showCalender = !showCalender
             }) {
                 Icon(painter = painterResource(
                     id = com.example.common.R.drawable.ic_space ),
