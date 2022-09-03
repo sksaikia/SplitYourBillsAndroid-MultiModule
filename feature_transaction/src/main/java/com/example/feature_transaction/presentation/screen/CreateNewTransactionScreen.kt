@@ -1,6 +1,7 @@
 package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,6 +22,7 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -43,6 +45,8 @@ import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
+import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
+import kotlinx.coroutines.flow.collectLatest
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -52,11 +56,19 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 ) {
     val scaffoldState = rememberScaffoldState()
 
-    LaunchedEffect(key1 = true) {
-
-    }
-
     val allSpacesState = transactionViewModel.allSpacesState
+
+    LaunchedEffect(key1 = true) {
+        transactionViewModel.createNewTxnEventFlow.collectLatest { event ->
+            when(event) {
+                is CreateNewTxnEvent.ShowErrorToastForErrorInSpace -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.errorMessage
+                    )
+                }
+            }
+        }
+    }
 
     var spaceName by remember { mutableStateOf("") }
     var spaceDescription by remember { mutableStateOf("") }

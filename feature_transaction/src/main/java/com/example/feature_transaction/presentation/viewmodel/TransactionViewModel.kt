@@ -6,10 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
+import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +24,9 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     var allSpacesState by mutableStateOf(AllSpacesState())
+
+    private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
+    val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
 
     init {
         getAllSpaces(sessionManager.fetchUserId())
@@ -39,7 +45,7 @@ class TransactionViewModel @Inject constructor(
 
                     }
                     is Result.Error -> {
-
+                        _createNewTxnEventFlow.emit(CreateNewTxnEvent.ShowErrorToastForErrorInSpace("${result.message}"))
                     }
                 }
             }
