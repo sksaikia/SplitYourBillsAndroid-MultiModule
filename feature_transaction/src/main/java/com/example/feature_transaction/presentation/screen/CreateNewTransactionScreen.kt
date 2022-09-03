@@ -9,11 +9,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
@@ -44,6 +46,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.design.UnifyButton
 import com.example.design.UnifyButtonSmallType
+import com.example.design.UnifyDropDownMenu
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
@@ -80,8 +83,6 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
         }
     }
 
-    var spaceName by remember { mutableStateOf("") }
-    var spaceDescription by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("")}
 
     Scaffold(scaffoldState = scaffoldState) {
@@ -89,25 +90,42 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             UnifyEditText(headerText = "Title" , onValueChanged = {
-                spaceName = it
+
             })
             UnifyEditText(headerText = "Total Amount" , onValueChanged = {
-                spaceDescription = it
+
             })
             Spacer(modifier = Modifier.height(20.dp))
 
-//            UnifyEditText(headerText = "When" , onValueChanged = {
-//                date = mDate.toString()
-//            })
-            UnifyText(text = "When", modifier = Modifier
-                .align(Alignment.Start)
-                .padding(horizontal = 10.dp))
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column() {
+                    UnifyText(text = "When", modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(horizontal = 10.dp))
 
-            UnifyText(
-                text = mDate.value,
-                modifier = Modifier
-                .align(Alignment.Start)
-                .padding(horizontal = 10.dp))
+                    UnifyText(
+                        text = mDate.value,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                            .padding(horizontal = 10.dp))
+
+                }
+                IconButton(onClick = {
+                    showCalender = !showCalender
+                },
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
+                    Icon(painter = painterResource(
+                        id = com.example.common.R.drawable.ic_space ),
+                        contentDescription = "Calender",
+                        modifier = Modifier.width(30.dp).height(30.dp))
+                }
+
+                if (showCalender)
+                    Calender(mDate)
+
+            }
+
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -117,21 +135,9 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 
             MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList())
 
-            IconButton(onClick = {
-                showCalender = !showCalender
-            }) {
-                Icon(painter = painterResource(
-                    id = com.example.common.R.drawable.ic_space ),
-                    contentDescription = "Calender")
-            }
-
-            if (showCalender)
-                Calender(mDate)
-
-            Spacer(modifier = Modifier.height(20.dp))
             
             UnifyEditText(headerText = "Note" , onValueChanged = {
-                spaceDescription = it
+
             })
             
             Spacer(modifier = Modifier.height(20.dp))
@@ -188,7 +194,7 @@ fun MenuSample(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpac
             .padding(16.dp),
         contentAlignment = Alignment.CenterStart
     ) {
-        ComposeMenu(
+        UnifyDropDownMenu(
             menuItems = billingPeriodItems,
             menuExpandedState = billingPeriodExpanded,
             seletedIndex = selectedIndex,
@@ -206,89 +212,6 @@ fun MenuSample(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpac
     }
 }
 
-@Composable
-fun ComposeMenu(
-    menuItems: List<String>,
-    menuExpandedState: Boolean,
-    seletedIndex : Int,
-    updateMenuExpandStatus : () -> Unit,
-    onDismissMenuView : () -> Unit,
-    onMenuItemclick : (Int) -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.TopStart)
-            .padding(top = 10.dp)
-            .border(0.5.dp, MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
-            .clickable(
-                onClick = {
-                    updateMenuExpandStatus()
-                },
-            ),
-
-        ) {
-
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-
-            val (lable, iconView) = createRefs()
-
-            Text(
-                text = menuItems[seletedIndex],
-                color = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .constrainAs(lable) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(iconView.start)
-                        width = androidx.constraintlayout.compose.Dimension.fillToConstraints
-                    }
-            )
-
-            val displayIcon: Painter = painterResource(
-                id = com.example.common.R.drawable.ic_space
-            )
-
-            Icon(
-                painter = displayIcon,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(20.dp, 20.dp)
-                    .constrainAs(iconView) {
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                    },
-                tint = MaterialTheme.colors.onSurface
-            )
-
-            DropdownMenu(
-                expanded = menuExpandedState,
-                onDismissRequest = { onDismissMenuView() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colors.surface)
-            ) {
-                menuItems.forEachIndexed { index, title ->
-                    DropdownMenuItem(
-                        onClick = {
-                            if (index != 0) {
-                                onMenuItemclick(index)
-                            }
-                        }) {
-                        Text(text = title)
-                    }
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun Calender(mDate: MutableState<String>) {
