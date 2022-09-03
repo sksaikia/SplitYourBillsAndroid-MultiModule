@@ -1,16 +1,13 @@
-package com.example.feature_transaction
+package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
-import androidx.annotation.Dimension
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,22 +31,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension.Companion.fillToConstraints
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.design.UnifyButton
 import com.example.design.UnifyButtonSmallType
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
+import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
-import com.example.navigation.NavigationItem
-import kotlinx.coroutines.NonDisposableHandle.parent
-import kotlinx.coroutines.flow.collectLatest
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -62,6 +55,8 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
     LaunchedEffect(key1 = true) {
 
     }
+
+    val allSpacesState = transactionViewModel.allSpacesState
 
     var spaceName by remember { mutableStateOf("") }
     var spaceDescription by remember { mutableStateOf("") }
@@ -87,7 +82,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
                 .align(Alignment.Start)
                 .padding(horizontal = 10.dp))
 
-            MenuSample()
+            MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList())
 
             Spacer(modifier = Modifier.height(20.dp))
             
@@ -131,9 +126,13 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 }
 
 @Composable
-fun MenuSample(){
+fun MenuSample(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>) {
 
-    val billingPeriodItems = listOf("Billing Period", "Annual", "Monthly", "One-Time Payment")
+    val billingPeriodItems =  mutableListOf<String>("No Spaces selected")
+    spaceMembers.forEach {
+        billingPeriodItems.add(it.spaceDetailsResponse.spaceName)
+    }
+
 
     var billingPeriodExpanded by remember { mutableStateOf(false) }
 
