@@ -84,14 +84,20 @@ class SpaceViewModel @Inject constructor(
                 when(result) {
                     is Result.Success -> {
                         allSpacesState = allSpacesState.copy(
-                            getAllSpacesResponse = result.data
+                            getAllSpacesResponse = result.data,
+                            isLoading = false
                         )
                     }
                     is Result.Loading -> {
-
+                        allSpacesState = allSpacesState.copy(
+                            isLoading = true
+                        )
                     }
                     is Result.Error -> {
-
+                        allSpacesState = allSpacesState.copy(
+                            getAllSpacesResponse = null,
+                            isLoading = false
+                        )
                     }
                 }
             }
@@ -116,7 +122,10 @@ class SpaceViewModel @Inject constructor(
                             )
                         }
                         is Result.Error -> {
-
+                            singleSpaceState = singleSpaceState.copy(
+                                isLoading = false,
+                                data = null
+                            )
                         }
                     }
             }

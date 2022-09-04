@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,8 +45,12 @@ fun SpaceDetailsScreen(
     val specificSpaceDetails = spaceViewModel.singleSpaceState
     val scaffoldState = rememberScaffoldState()
 
+//    spaceViewModel.getSpecificSpaceBySpaceId(spaceId?.toInt() ?: 0)
 
-    spaceViewModel.getSpecificSpaceBySpaceId(spaceId?.toInt() ?: 0)
+    LaunchedEffect(key1 = true) {
+        spaceViewModel.getSpecificSpaceBySpaceId(spaceId?.toInt() ?: 0)
+
+    }
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(
@@ -67,6 +73,8 @@ fun SpaceDetailsScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.Start
         ) {
+            if (specificSpaceDetails.isLoading)
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             UnifyText(text = "Space Name", fontSize = 12.sp, fontWeight = FontWeight.Normal)
             Spacer(modifier = Modifier.height(6.dp))
             UnifyText(
