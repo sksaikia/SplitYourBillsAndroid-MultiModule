@@ -3,9 +3,6 @@ package com.example.feature_transaction.presentation.screen
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,13 +17,11 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -48,12 +43,12 @@ import com.example.design.UnifyButtonSmallType
 import com.example.design.UnifyDropDownMenu
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
+import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import kotlinx.coroutines.flow.collectLatest
 import java.util.*
-
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -68,7 +63,15 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
         mutableStateOf(false)
     }
 
-    var mDate = remember { mutableStateOf("") }
+    val mCalendar = Calendar.getInstance()
+
+    // Fetching current year, month and day
+    val year = mCalendar.get(Calendar.YEAR)
+    val month = mCalendar.get(Calendar.MONTH)
+    val day = mCalendar.get(Calendar.DAY_OF_MONTH)
+    val currentDate = "$day/$month/$year"
+
+    var mDate = remember { mutableStateOf(currentDate) }
 
     LaunchedEffect(key1 = true) {
         transactionViewModel.createNewTxnEventFlow.collectLatest { event ->
@@ -96,6 +99,10 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
             })
             Spacer(modifier = Modifier.height(20.dp))
 
+            if (allSpacesState.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally) )
+            }
+
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column() {
                     UnifyText(text = "When", modifier = Modifier
@@ -117,7 +124,9 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
                     Icon(painter = painterResource(
                         id = com.example.common.R.drawable.ic_space ),
                         contentDescription = "Calender",
-                        modifier = Modifier.width(30.dp).height(30.dp))
+                        modifier = Modifier
+                            .width(30.dp)
+                            .height(30.dp))
                 }
 
                 if (showCalender)
@@ -175,7 +184,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 }
 
 @Composable
-fun MenuSample(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>) {
+fun MenuSample(spaceMembers: List<SingleSpaceMemberResponse>) {
 
     val billingPeriodItems =  mutableListOf<String>("No Spaces selected")
     spaceMembers.forEach {

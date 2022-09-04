@@ -11,6 +11,7 @@ import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpac
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -38,11 +39,14 @@ class TransactionViewModel @Inject constructor(
                 when(result) {
                     is Result.Success -> {
                         allSpacesState = allSpacesState.copy(
-                            getAllSpacesResponse = result.data
+                            getAllSpacesResponse = result.data,
+                            isLoading = false
                         )
                     }
                     is Result.Loading -> {
-
+                        allSpacesState = allSpacesState.copy(
+                            isLoading = true
+                        )
                     }
                     is Result.Error -> {
                         _createNewTxnEventFlow.emit(CreateNewTxnEvent.ShowErrorToastForErrorInSpace("${result.message}"))

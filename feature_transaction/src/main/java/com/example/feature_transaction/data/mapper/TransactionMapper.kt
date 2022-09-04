@@ -1,5 +1,7 @@
 package com.example.feature_transaction.data.mapper
 
+import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
+import com.example.feature_transaction.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 
@@ -20,18 +22,18 @@ fun GetAllSpacesResponse.SpacesResponse.toDomainSpacesResponse ()
     )
 }
 
-fun getSpaceMembers(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>)
-        : List<com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse> {
-    val list = mutableListOf<com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>()
+fun getSpaceMembers(spaceMembers: List<SingleSpaceMemberResponse>)
+        : List<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse> {
+    val list = mutableListOf<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse>()
     spaceMembers.forEach {
         list.add(it.toDomainSingleSpaceMemberResponse())
     }
     return list
 }
 
-fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse()
-        : com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse {
-    return com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse(
+fun SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse()
+        : com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse {
+    return com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse(
         this.spaceMemberId,
         this.spaceId,
         this.personId,
@@ -43,9 +45,9 @@ fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.toDomainSingle
     )
 }
 
-fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails.toDomainUserDetails()
-        : com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails {
-    return com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails (
+fun SingleSpaceMemberResponse.UserDetails.toDomainUserDetails()
+        : com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse.UserDetails {
+    return com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse.UserDetails (
         this.phoneNo,
         this.username,
         this.userId
@@ -63,3 +65,26 @@ fun com.example.feature_transaction.data.remote.response.SpaceDetailsResponse.to
         this.active
     )
 }
+
+fun AllMembersForSpaceResponse.toDomainAllMembersForSpaceResponse() : com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse {
+    return com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse(
+        success = this.success,
+        data = this.data.toDomainAllmembersForSpaceResponse()
+    )
+}
+
+fun AllMembersForSpaceResponse.AllMembersForSpaceResponseData.toDomainAllmembersForSpaceResponse() : com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse.AllMembersForSpaceResponseData {
+    return com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse.AllMembersForSpaceResponseData(
+        totalMembers = this.totalMembers,
+        spaceMemberResponse = getSpaceMembers(this.spaceMemberResponse)
+    )
+}
+
+//fun getSpaceMembers(spaceMembers: List<SingleSpaceMemberResponse>)
+//        : List<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse> {
+//    val list = mutableListOf<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse>()
+//    spaceMembers.forEach {
+//        list.add(it.toDomainSingleSpaceMemberResponse())
+//    }
+//    return list
+//}
