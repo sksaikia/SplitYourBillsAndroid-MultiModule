@@ -7,9 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -62,11 +64,13 @@ class MainActivity : ComponentActivity() {
                             )
                         )
                     }
-                }) {
+                }
+                ) { innerPadding ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize().padding(
+                                PaddingValues(0.dp, 0.dp, 0.dp, innerPadding.calculateBottomPadding()))
                     ) {
                         //Add Splash Screen here
                         Log.d("FATAL", "onCreate: ${sessionManager.fetchAuthToken()}")

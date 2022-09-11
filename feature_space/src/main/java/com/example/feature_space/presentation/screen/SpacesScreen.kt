@@ -75,7 +75,6 @@ fun SpacesScreen(
         }
     },
         scaffoldState = scaffoldState,
-        modifier =  Modifier.padding(bottom = 50.dp)
 
     ) {
         Column(modifier = Modifier
