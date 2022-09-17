@@ -29,7 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.common.R
+import com.example.contact_picker.R
 import com.example.contact_picker.entity.Contact
 import com.example.contact_picker.util.PermissionUtils
 import com.example.contact_picker.viewModel.ContactsViewModel

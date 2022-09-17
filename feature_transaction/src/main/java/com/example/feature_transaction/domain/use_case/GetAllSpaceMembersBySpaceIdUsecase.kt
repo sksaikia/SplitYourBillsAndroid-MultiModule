@@ -6,11 +6,10 @@ import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
 
 class GetAllSpaceMembersBySpaceIdUsecase(
-    private val repository : TransactionRepository
+    private val repository: TransactionRepository
 ) {
 
-    suspend operator fun invoke(spaceId : Int) : Flow<Result<AllMembersForSpaceResponse>> {
+    suspend operator fun invoke(spaceId: Int): Flow<Result<AllMembersForSpaceResponse>> {
         return repository.getAllMembersBySpaceId(spaceId)
     }
-
 }

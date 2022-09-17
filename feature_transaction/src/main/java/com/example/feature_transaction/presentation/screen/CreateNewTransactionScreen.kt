@@ -1,7 +1,8 @@
-package com.example.feature_transaction.presentation.screen
+package com.example.feature_transaction.presentation.screen // ktlint-disable package-name
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.util.Log
 import android.widget.DatePicker
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,16 +12,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -32,8 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -44,7 +39,6 @@ import com.example.design.UnifyDropDownMenu
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
-import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import kotlinx.coroutines.flow.collectLatest
@@ -52,12 +46,15 @@ import java.util.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
-   transactionViewModel: TransactionViewModel = hiltViewModel()
+fun CreateNewTransactionScreen(
+    navigateTo: (String) -> Unit,
+    transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
 
     val allSpacesState = transactionViewModel.allSpacesState
+    val spaceMembersState = transactionViewModel.spaceMembersState
+    var spaceId by remember { mutableStateOf("") }
 
     var showCalender by remember {
         mutableStateOf(false)
@@ -75,7 +72,7 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
 
     LaunchedEffect(key1 = true) {
         transactionViewModel.createNewTxnEventFlow.collectLatest { event ->
-            when(event) {
+            when (event) {
                 is CreateNewTxnEvent.ShowErrorToastForErrorInSpace -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.errorMessage
@@ -85,112 +82,127 @@ fun CreateNewTransactionScreen(navigateTo : (String) -> Unit,
         }
     }
 
-    var date by remember { mutableStateOf("")}
+    var date by remember { mutableStateOf("") }
 
     Scaffold(scaffoldState = scaffoldState) {
-        Column(modifier = Modifier.verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            UnifyEditText(headerText = "Title" , onValueChanged = {
+        LazyColumn() {
+            item {
+                UnifyEditText(headerText = "Title", onValueChanged = {
+                })
+                UnifyEditText(headerText = "Total Amount", onValueChanged = {
+                })
+                Spacer(modifier = Modifier.height(20.dp))
 
-            })
-            UnifyEditText(headerText = "Total Amount" , onValueChanged = {
-
-            })
-            Spacer(modifier = Modifier.height(20.dp))
-
-            if (allSpacesState.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally) )
-            }
-
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column() {
-                    UnifyText(text = "When", modifier = Modifier
-                        .align(Alignment.Start)
-                        .padding(horizontal = 10.dp))
-
-                    UnifyText(
-                        text = mDate.value,
-                        modifier = Modifier
-                            .align(Alignment.Start)
-                            .padding(horizontal = 10.dp))
-
+                if (allSpacesState.isLoading) {
+                    CircularProgressIndicator()
                 }
-                IconButton(onClick = {
-                    showCalender = !showCalender
-                },
-                    modifier = Modifier.padding(horizontal = 10.dp)
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Column() {
+                        UnifyText(
+                            text = "When",
+                            modifier = Modifier
+                                .align(Alignment.Start)
+                                .padding(horizontal = 10.dp)
+                        )
+
+                        UnifyText(
+                            text = mDate.value,
+                            modifier = Modifier
+                                .align(Alignment.Start)
+                                .padding(horizontal = 10.dp)
+                        )
+                    }
+                    IconButton(
+                        onClick = {
+                            showCalender = !showCalender
+                        },
+                        modifier = Modifier.padding(horizontal = 10.dp)
                     ) {
-                    Icon(painter = painterResource(
-                        id = com.example.common.R.drawable.ic_space ),
-                        contentDescription = "Calender",
-                        modifier = Modifier
-                            .width(30.dp)
-                            .height(30.dp))
+                        Icon(
+                            painter = painterResource(
+                                id = com.example.common.R.drawable.ic_space
+                            ),
+                            contentDescription = "Calender",
+                            modifier = Modifier
+                                .width(30.dp)
+                                .height(30.dp)
+                        )
+                    }
+
+                    if (showCalender) {
+                        Calender(mDate)
+                    }
                 }
 
-                if (showCalender)
-                    Calender(mDate)
+                Spacer(modifier = Modifier.height(20.dp))
 
-            }
+                UnifyText(
+                    text = "Space",
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                )
 
+                MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList(), transactionViewModel)
 
-            Spacer(modifier = Modifier.height(20.dp))
+                UnifyEditText(headerText = "Note", onValueChanged = {
+                })
 
-            UnifyText(text = "Space", modifier = Modifier
-                .align(Alignment.Start)
-                .padding(horizontal = 10.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-            MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList())
+                UnifyText(
+                    text = "Select Contribution type",
+                    modifier =
+                    Modifier
+                        .padding(horizontal = 10.dp)
+                )
 
-            
-            UnifyEditText(headerText = "Note" , onValueChanged = {
+                val listOfTxnSplits = mutableListOf<String>(
+                    "Everyone paid equally",
+                    "You paid, split Equally",
+                    "Manually split the bill"
+                )
 
-            })
-            
-            Spacer(modifier = Modifier.height(20.dp))
-
-            UnifyText(text = "Select Contribution type", modifier =
-            Modifier
-                .align(Alignment.Start)
-                .padding(horizontal = 10.dp))
-
-            val listOfTxnSplits = mutableListOf<String>(
-                "Everyone paid equally", "You paid, split Equally",
-                "Manually split the bill"
-            )
-            
-            LazyRow(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly) {
-                
-                items(listOfTxnSplits.size) { i ->
-                    UnifyButtonSmallType(buttonText = listOfTxnSplits[i])
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    items(listOfTxnSplits.size) { i ->
+                        UnifyButtonSmallType(buttonText = listOfTxnSplits[i])
+                    }
                 }
-                
+
+                UnifyButton(buttonText = "Save TXN")
+
+                UnifyText(
+                    text = "All contributions",
+                    modifier =
+                    Modifier
+                        .padding(horizontal = 10.dp)
+                )
             }
-            
-            UnifyButton(buttonText = "Save TXN")
 
-            UnifyText(text = "All contributions", modifier =
-            Modifier
-                .align(Alignment.Start)
-                .padding(horizontal = 10.dp))
-
-
+            items(spaceMembersState?.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
+                val memberData = spaceMembersState?.allSpaceMembers?.data?.spaceMemberResponse
+                Log.d("FATAL", "total : ${spaceMembersState?.allSpaceMembers?.data?.totalMembers}")
+                UnifyText(text = "MASAKA")
+                Spacer(modifier = Modifier.height(10.dp))
+            }
         }
     }
 }
 
 @Composable
-fun MenuSample(spaceMembers: List<SingleSpaceMemberResponse>) {
-
-    val billingPeriodItems =  mutableListOf<String>("No Spaces selected")
+fun MenuSample(
+    spaceMembers: List<SingleSpaceMemberResponse>,
+    transactionViewModel: TransactionViewModel
+) {
+    val billingPeriodItems = mutableListOf<String>("No Spaces selected")
     spaceMembers.forEach {
         billingPeriodItems.add(it.spaceDetailsResponse.spaceName)
     }
-
 
     var billingPeriodExpanded by remember { mutableStateOf(false) }
 
@@ -212,14 +224,17 @@ fun MenuSample(spaceMembers: List<SingleSpaceMemberResponse>) {
             onDismissMenuView = {
                 billingPeriodExpanded = false
             },
-            onMenuItemclick = { index->
+            onMenuItemclick = { index ->
                 selectedIndex = index
+                val currentId = spaceMembers[selectedIndex - 1]
+                if (currentId.spaceId != 0) {
+                    transactionViewModel.getSpaceMembersBySpaceId(currentId.spaceId)
+                }
                 billingPeriodExpanded = false
             }
         )
     }
 }
-
 
 @Composable
 fun Calender(mDate: MutableState<String>) {
@@ -238,16 +253,17 @@ fun Calender(mDate: MutableState<String>) {
     // Declaring a string value to
     // store date in string format
 
-
     // Declaring DatePickerDialog and setting
     // initial values as current values (present year, month and day)
     val mDatePickerDialog = DatePickerDialog(
         localContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
-        }, year, month, day
+            mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
+        },
+        year,
+        month,
+        day
     )
 
     mDatePickerDialog.show()
-
 }

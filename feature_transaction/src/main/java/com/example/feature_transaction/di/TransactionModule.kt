@@ -4,6 +4,7 @@ import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.data.repository.TransactionRepositoryImpl
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
+import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,12 @@ class TransactionModule {
     @Singleton
     fun provideGetAllSpacesByUserIdUsecase(repository : TransactionRepository) : GetAllSpaceByUserIdUsecase {
         return GetAllSpaceByUserIdUsecase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllSpaceMembersBySpaceIdUsecase(repository : TransactionRepository) : GetAllSpaceMembersBySpaceIdUsecase {
+        return GetAllSpaceMembersBySpaceIdUsecase(repository)
     }
 
 }

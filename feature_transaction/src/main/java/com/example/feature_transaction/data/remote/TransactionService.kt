@@ -9,9 +9,8 @@ import retrofit2.http.Query
 interface TransactionService {
 
     @GET("spaces/member/getallspaces")
-    suspend fun getAllSpacesByUserId(@Query(value = "userId") userId : Int) : GetAllSpacesResponse
+    suspend fun getAllSpacesByUserId(@Query(value = "userId") userId: Int): GetAllSpacesResponse
 
     @GET("spaces/member/{spaceId}")
-    suspend fun getAllMembersForSpecificSpaceId(@Path(value = "spaceId") spaceId : Int) : AllMembersForSpaceResponse
-
+    suspend fun getAllMembersForSpecificSpaceId(@Path(value = "spaceId") spaceId: Int): AllMembersForSpaceResponse
 }
