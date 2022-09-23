@@ -184,9 +184,9 @@ fun CreateNewTransactionScreen(
                 )
             }
 
-            items(spaceMembersState?.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
-                val memberData = spaceMembersState?.allSpaceMembers?.data?.spaceMemberResponse
-                Log.d("FATAL", "total : ${spaceMembersState?.allSpaceMembers?.data?.totalMembers}")
+            items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
+                val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse
+                Log.d("FATAL", "total : ${spaceMembersState.allSpaceMembers?.data?.totalMembers}")
                 UnifyText(text = "MASAKA")
                 Spacer(modifier = Modifier.height(10.dp))
             }

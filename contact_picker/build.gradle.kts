@@ -66,4 +66,5 @@ dependencies {
     kapt(HiltDependencies.androidCompiler)
 
     implementation(HiltDependencies.hiltNavigation)
+    implementation("com.google.accompanist:accompanist-permissions:0.21.1-beta")
 }
