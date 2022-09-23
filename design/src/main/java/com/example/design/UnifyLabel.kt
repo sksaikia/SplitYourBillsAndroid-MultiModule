@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A)) {
+fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A), modifier: Modifier = Modifier) {
     Surface(
         color = color,
         shape = RectangleShape,
         elevation = 5.dp,
-        modifier = Modifier.width(60.dp)
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

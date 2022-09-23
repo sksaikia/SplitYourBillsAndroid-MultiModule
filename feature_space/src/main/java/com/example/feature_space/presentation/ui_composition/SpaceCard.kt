@@ -52,8 +52,8 @@ fun SpaceCard(
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    UnifyText(spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
-                    UnifyLabel(date)
+                    UnifyText(modifier = Modifier.weight(0.6f), text = spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, shouldSetMaxLines = true)
+                    UnifyLabel(modifier = Modifier.weight(0.4f), text =  date)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 UnifyChip(date)
@@ -63,8 +63,7 @@ fun SpaceCard(
                     fontSize = 14.sp,
                     fontColor = Color.Green,
                     fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold,
-                    shouldSetMaxLines = true
+                    fontWeight = FontWeight.Bold
                 )
             }
         }

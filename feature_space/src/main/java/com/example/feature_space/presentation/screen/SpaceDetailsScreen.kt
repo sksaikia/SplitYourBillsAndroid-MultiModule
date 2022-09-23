@@ -169,8 +169,8 @@ fun SpaceDetailsScreen(
                     UnifyButton(buttonText = "Save Details", onClickButton = {
                         spaceViewModel.onEditSpaceEvent(
                             EditSpaceEvent.OnSaveSpaceDetails(
-                                if (spaceName=="") specificSpaceDetailsState.data?.spacesResponse?.spaceName!! else spaceName,
-                                if (spaceDescription=="") specificSpaceDetailsState.data?.spacesResponse?.spaceDescription!! else spaceDescription,
+                                if (spaceName == "") specificSpaceDetailsState.data?.spacesResponse?.spaceName!! else spaceName,
+                                if (spaceDescription == "") specificSpaceDetailsState.data?.spacesResponse?.spaceDescription!! else spaceDescription,
                                 Integer.parseInt(spaceId)
                             )
                         )
