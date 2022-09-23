@@ -4,6 +4,7 @@ import com.example.feature_space.data.remote.SpaceService
 import com.example.feature_space.data.repository.SpaceRepositoryImpl
 import com.example.feature_space.domain.repository.SpacesRepository
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
+import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import dagger.Module
@@ -44,6 +45,12 @@ object SpaceModule {
     @Singleton
     fun provideGetSpecificSpaceDetailsBySpaceId(repository : SpacesRepository) : GetSpecificSpaceDetailsBySpaceIdUseCase {
         return GetSpecificSpaceDetailsBySpaceIdUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideEditSpaceUsecase(repository : SpacesRepository) : EditSpaceUseCase {
+        return EditSpaceUseCase(repository)
     }
 
 

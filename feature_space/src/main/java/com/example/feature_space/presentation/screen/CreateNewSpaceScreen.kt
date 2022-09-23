@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -33,15 +32,14 @@ import kotlinx.coroutines.flow.collectLatest
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CreateNewSpaceScreen(
-    navigateTo : (String) -> Unit,
+    navigateTo: (String) -> Unit,
     spaceViewModel: SpaceViewModel = hiltViewModel()
 ) {
-
     val scaffoldState = rememberScaffoldState()
 
     LaunchedEffect(key1 = true) {
         spaceViewModel.createSpaceEventFlow.collectLatest { event ->
-            when(event) {
+            when (event) {
                 is CreateSpaceEvent.ShowErrorToast -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.errorMessage
@@ -56,42 +54,45 @@ fun CreateNewSpaceScreen(
         }
     }
 
-    var spaceName by remember { mutableStateOf("")}
-    var spaceDescription by remember { mutableStateOf("")}
+    var spaceName by remember { mutableStateOf("") }
+    var spaceDescription by remember { mutableStateOf("") }
 
     Scaffold(scaffoldState = scaffoldState) {
-        Column(modifier = Modifier.fillMaxSize(),
+        Column(
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            UnifyEditText(headerText = "Name" , onValueChanged = {
+            UnifyEditText(headerText = "Name", onValueChanged = {
                 spaceName = it
             })
-            UnifyEditText(headerText = "Description (Optional)" , onValueChanged = {
+            UnifyEditText(headerText = "Description (Optional)", onValueChanged = {
                 spaceDescription = it
             })
             Spacer(modifier = Modifier.height(20.dp))
             UnifyText(
                 text = "Note: Once you have created a space, you will be able to invite other people too.... ",
-                modifier = Modifier.padding(horizontal = 20.dp))
+                modifier = Modifier.padding(horizontal = 20.dp)
+            )
             Spacer(modifier = Modifier.height(20.dp))
 
-            Row(modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly) {
-                UnifyButton(buttonText = "Invite Members" , {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                UnifyButton(buttonText = "Invite Members", {
                     navigateTo(
                         NavigationItem.ContactPickerScreen.route
                     )
                 })
 
-                UnifyButton(buttonText = "Save Space" , {
+                UnifyButton(buttonText = "Save Space", {
                     spaceViewModel.onCreateNewSpaceEvent(
                         CreateSpaceEvent.OnCreateSpaceClick(spaceName, spaceDescription)
                     )
-                    //TODO for testing
-                  //  navigateTo(NavigationItem.ShareSpaceScreen.route)
+                    // TODO for testing
+                    //  navigateTo(NavigationItem.ShareSpaceScreen.route)
                 })
             }
-
         }
     }
 }

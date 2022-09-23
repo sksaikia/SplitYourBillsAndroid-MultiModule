@@ -19,21 +19,19 @@ import javax.inject.Singleton
 
 @Singleton
 class SpaceRepositoryImpl @Inject constructor(
-    private val api : SpaceService
+    private val api: SpaceService
 ) : SpacesRepository, RemoteDataSource() {
 
-    override suspend fun createNewSpace(createSpaceBody: CreateSpaceBody)
-        : Flow<Result<CreateSpaceResponse>> {
+    override suspend fun createNewSpace(createSpaceBody: CreateSpaceBody): Flow<Result<CreateSpaceResponse>> {
         return flow {
             emit(Result.Loading(isLoading = true))
-            //Domain to Data
+            // Domain to Data
             safeApiCall({
-                val response =  api.createNewSpace(createSpaceBody.convertToCreateSpaceBodyData())
+                val response = api.createNewSpace(createSpaceBody.convertToCreateSpaceBodyData())
                 emit(Result.Success(data = response.convertToCreateSpaceResponseBodyData()))
             }, { exception ->
                 emit(Result.Error(exception))
             })
-
         }
     }
 
@@ -41,7 +39,7 @@ class SpaceRepositoryImpl @Inject constructor(
         return flow {
             emit(Result.Loading(isLoading = true))
 
-            safeApiCall( {
+            safeApiCall({
                 val response = api.getAllSpacesByUserId(userId)
                 emit(Result.Success(data = response.toDomainGetAllSpacesResponse()))
             }, { exception ->
@@ -60,7 +58,25 @@ class SpaceRepositoryImpl @Inject constructor(
             }, { exception ->
                 emit(Result.Error(exception))
             })
+        }
+    }
 
+    override suspend fun editSpaceBySpaceId(
+        createSpaceBody: CreateSpaceBody,
+        spaceId: Int
+    ): Flow<Result<CreateSpaceResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+
+            safeApiCall({
+                val response = api.editSpaceDetailsById(
+                    createSpaceBody.convertToCreateSpaceBodyData(),
+                    spaceId
+                )
+                emit(Result.Success(data = response.convertToCreateSpaceResponseBodyData()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
         }
     }
 }

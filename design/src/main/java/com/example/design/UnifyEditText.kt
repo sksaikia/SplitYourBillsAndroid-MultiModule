@@ -1,6 +1,5 @@
 package com.example.design
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,17 +20,16 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun UnifyEditText(
-    headerText : String,
-    editText : String = "",
-    textColor : Color = Color.Black,
-    onValueChanged : (String) -> Unit = {}
+    headerText: String,
+    editText: String = "",
+    textColor: Color = Color.Black,
+    onValueChanged: (String) -> Unit = {}
 ) {
-
     Column(modifier = Modifier.fillMaxWidth()) {
         var text by remember { mutableStateOf(editText) }
-        
+
         Spacer(modifier = Modifier.height(10.dp))
-        UnifyText(text = headerText, fontSize = 12.sp , modifier = Modifier.padding(horizontal = 16.dp))
+        UnifyText(text = headerText, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 16.dp))
 
         TextField(
             value = text,
@@ -46,12 +44,10 @@ fun UnifyEditText(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
-            ),
+            )
 
         )
 
-        Divider(thickness = 1.dp , color = Color.Black , modifier = Modifier.padding(horizontal = 20.dp))
+        Divider(thickness = 1.dp, color = Color.Black, modifier = Modifier.padding(horizontal = 20.dp))
     }
-
-
 }

@@ -9,13 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface SpacesRepository {
 
-    suspend fun createNewSpace(createSpaceBody: CreateSpaceBody)
-        : Flow<Result<CreateSpaceResponse>>
+    suspend fun createNewSpace(createSpaceBody: CreateSpaceBody): Flow<Result<CreateSpaceResponse>>
 
-    suspend fun getAllSpacesByUserId(userId : Int)
-        : Flow<Result<GetAllSpacesResponse>>
+    suspend fun getAllSpacesByUserId(userId: Int): Flow<Result<GetAllSpacesResponse>>
 
-    suspend fun getSpecificSpaceBySpaceId(spaceId : Int)
-        : Flow<Result<SingleSpaceDetailsResponse>>
+    suspend fun getSpecificSpaceBySpaceId(spaceId: Int): Flow<Result<SingleSpaceDetailsResponse>>
 
+    suspend fun editSpaceBySpaceId(createSpaceBody: CreateSpaceBody, spaceId: Int): Flow<Result<CreateSpaceResponse>>
 }

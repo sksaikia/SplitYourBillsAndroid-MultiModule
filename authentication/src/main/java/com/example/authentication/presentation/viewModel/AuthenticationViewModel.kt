@@ -37,15 +37,15 @@ class AuthenticationViewModel @Inject constructor(
     val registrationEventFlow = _registrationEventFlow.asSharedFlow()
 
     fun onRegistrationEvent(event: RegistrationEvent) {
-        when(event) {
+        when (event) {
             is RegistrationEvent.OnUserRegistrationClick -> {
                 registerUser(event.userName, event.phoneNo, event.password)
             }
         }
     }
 
-    fun onLoginEvent(event : LoginEvent) {
-        when(event) {
+    fun onLoginEvent(event: LoginEvent) {
+        when (event) {
             is LoginEvent.OnUserLoginClick -> {
                 loginUser(event.phoneNo, event.password)
             }
@@ -54,15 +54,14 @@ class AuthenticationViewModel @Inject constructor(
 
     init {
 //        registerUser("Test 1", "1231234569", "password")
-   //     Correct User DEtails
-  //      loginUser("1234567893", "test")
+        //     Correct User DEtails
+        //      loginUser("1234567893", "test")
         //     INCorrect User DEtails
-    //        loginUser("1234567893", "test2")
+        //        loginUser("1234567893", "test2")
     }
 
-    private fun registerUser(userName : String,phoneNo : String,password : String) {
+    private fun registerUser(userName: String, phoneNo: String, password: String) {
         viewModelScope.launch {
-
             if (userName.isEmpty()) {
                 _registrationEventFlow.emit(RegistrationEvent.ShowErrorToast("Username can not be empty"))
                 return@launch
@@ -79,8 +78,8 @@ class AuthenticationViewModel @Inject constructor(
             }
 
             registrationUseCase(RegistrationBody(userName, password, phoneNo))
-                .collect{ result ->
-                    when(result) {
+                .collect { result ->
+                    when (result) {
                         is Result.Success -> {
                             result.data?.let { registrationResponse ->
                                 registrationState = registrationState.copy(
@@ -101,7 +100,7 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
-    private fun loginUser(phoneNo : String, password : String) {
+    private fun loginUser(phoneNo: String, password: String) {
         viewModelScope.launch {
             if (phoneNo.isEmpty()) {
                 _loginEventFlow.emit(LoginEvent.ShowErrorToast("Phone No can not be empty"))
@@ -112,9 +111,8 @@ class AuthenticationViewModel @Inject constructor(
                 return@launch
             }
 
-
-            loginUseCase(phoneNo, password).collect{ result ->
-                when(result) {
+            loginUseCase(phoneNo, password).collect { result ->
+                when (result) {
                     is Result.Success -> {
                         result.data?.let { loginResponse ->
                             Log.d("FATAL", "loginUser: $loginResponse")
@@ -122,7 +120,6 @@ class AuthenticationViewModel @Inject constructor(
                                 loginResponse = loginResponse
                             )
                             with(sessionManager) {
-
                                 this.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
                                 this.saveUserId(loginResponse.loginData.userDetailsResponse.userId)
                                 this.savePhoneNo(loginResponse.loginData.userDetailsResponse.phoneNo)
@@ -134,7 +131,7 @@ class AuthenticationViewModel @Inject constructor(
                     }
                     is Result.Error -> {
                         _loginEventFlow.emit(LoginEvent.ShowErrorToast("${result.message}"))
-                        Log.d("FATAL", "loginUser: ERROR : ${result.message}" )
+                        Log.d("FATAL", "loginUser: ERROR : ${result.message}")
                     }
                     is Result.Loading -> {
                         loginState = loginState.copy(isLoading = result.isLoading)
@@ -143,7 +140,4 @@ class AuthenticationViewModel @Inject constructor(
             }
         }
     }
-
-
-
 }

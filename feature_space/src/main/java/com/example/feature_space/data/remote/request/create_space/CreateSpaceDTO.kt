@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CreateSpaceDTO(
     @SerializedName("spaceName")
-    val spaceName : String,
+    val spaceName: String,
     @SerializedName("spaceDescription")
-    val spaceDescription : String,
+    val spaceDescription: String
 )

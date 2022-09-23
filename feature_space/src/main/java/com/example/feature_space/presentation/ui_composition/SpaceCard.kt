@@ -23,14 +23,13 @@ import com.example.design.UnifyChip
 import com.example.design.UnifyLabel
 import com.example.design.UnifyText
 
-
 @Composable
 fun SpaceCard(
-    spaceName : String ,
-    date : String,
-    otherUserCount : Int,
-    amount : Int,
-    modifier : Modifier = Modifier
+    spaceName: String,
+    date: String,
+    otherUserCount: Int,
+    amount: Int,
+    modifier: Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -38,19 +37,19 @@ fun SpaceCard(
             .padding(8.dp),
         elevation = 12.dp
     ) {
-        Box(modifier = Modifier
-            .padding(
-                start = 16.dp,
-                top = 8.dp,
-                end = 8.dp,
-                bottom = 8.dp
-            )
+        Box(
+            modifier = Modifier
+                .padding(
+                    start = 16.dp,
+                    top = 8.dp,
+                    end = 8.dp,
+                    bottom = 8.dp
+                )
         ) {
-
             Column(modifier = Modifier.fillMaxSize()) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     UnifyText(spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
@@ -59,15 +58,15 @@ fun SpaceCard(
                 Spacer(modifier = Modifier.height(10.dp))
                 UnifyChip(date)
                 Spacer(modifier = Modifier.height(10.dp))
-                UnifyText(text = "+ ₹ ${amount}",
+                UnifyText(
+                    text = "+ ₹ $amount",
                     fontSize = 14.sp,
                     fontColor = Color.Green,
                     fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    shouldSetMaxLines = true
                 )
             }
         }
     }
 }
-
-
