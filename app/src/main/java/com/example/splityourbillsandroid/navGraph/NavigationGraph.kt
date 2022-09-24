@@ -91,11 +91,21 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.CreateNewSpaceScreen.route
+            route = NavigationItem.CreateNewSpaceScreen.route + "/{contacts}",
+            arguments = listOf(
+                navArgument("contacts") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = true
+                }
+            )
         ) {
-            CreateNewSpaceScreen(navigateTo = {
-                navController.navigate(it)
-            }, navController)
+            CreateNewSpaceScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                },
+                contactList = it.arguments?.getString("contacts")
+            )
         }
 
         composable(
@@ -129,8 +139,7 @@ fun NavigationGraph(
             ContactPickerScreen(
                 navigateTo = {
                     navController.navigate(it)
-                },
-                navController = navController
+                }
             )
         }
 

@@ -67,4 +67,5 @@ dependencies {
 
     implementation(HiltDependencies.hiltNavigation)
     implementation("com.google.accompanist:accompanist-permissions:0.21.1-beta")
+    implementation("com.google.code.gson:gson:2.8.2")
 }

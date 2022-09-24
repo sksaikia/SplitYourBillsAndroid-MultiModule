@@ -1,6 +1,7 @@
 package com.example.feature_space.presentation.screen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,18 +22,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.contact_picker.entity.ListOfContact
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
 import com.example.navigation.NavigationItem
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CreateNewSpaceScreen(
     navigateTo: (String) -> Unit,
+    contactList: String? = "",
     spaceViewModel: SpaceViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -52,6 +59,17 @@ fun CreateNewSpaceScreen(
                 }
             }
         }
+    }
+
+    try {
+        if (!contactList.equals("A")) {
+            val obj =  GsonBuilder().create()
+                .fromJson<ListOfContact>(contactList,
+                    ListOfContact::class.java)
+            Log.d("Eren", "CreateNewSpaceScreen: ${obj.list.size}")
+        }
+    } catch (e: Exception) {
+        Log.d("Eren", "CreateNewSpaceScreen: $e")
     }
 
     var spaceName by remember { mutableStateOf("") }

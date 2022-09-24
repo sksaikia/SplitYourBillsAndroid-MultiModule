@@ -51,7 +51,9 @@ fun SpacesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navigateTo(NavigationItem.CreateNewSpaceScreen.route)
+                    navigateTo(NavigationItem.CreateNewSpaceScreen.withArgs(
+                        "A"
+                    ))
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {

@@ -35,12 +35,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.example.contact_picker.R
 import com.example.contact_picker.entity.Contact
+import com.example.contact_picker.entity.ListOfContact
 import com.example.contact_picker.viewModel.ContactsViewModel
 import com.example.design.UnifyButton
 import com.example.design.UnifyText
 import com.example.navigation.NavigationItem
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.gson.Gson
 
 var mapOfContacts = HashMap<Contact, Boolean>()
 
@@ -48,7 +50,7 @@ var mapOfContacts = HashMap<Contact, Boolean>()
 @Composable
 fun ContactPickerScreen(
     navigateTo: (String) -> Unit,
-    navigateBackToScreenRoute: String = NavigationItem.CreateNewSpaceScreen.route,
+    navigateBackToScreenRoute: NavigationItem = NavigationItem.CreateNewSpaceScreen,
     contactsViewModel: ContactsViewModel = hiltViewModel()
 ) {
     val contactsState = contactsViewModel.contactsState
@@ -60,7 +62,8 @@ fun ContactPickerScreen(
     )
 
     val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(key1 = lifecycleOwner,
+    DisposableEffect(
+        key1 = lifecycleOwner,
         effect = {
             val observer = LifecycleEventObserver { _, event ->
                 if (event == Lifecycle.Event.ON_START) {
@@ -72,12 +75,13 @@ fun ContactPickerScreen(
             onDispose {
                 lifecycleOwner.lifecycle.removeObserver(observer)
             }
-
-        })
+        }
+    )
 
 //    hideErrorText()
-    if(permissionState.allPermissionsGranted)
+    if (permissionState.allPermissionsGranted) {
         contactsViewModel.fetchContactList(LocalContext.current.contentResolver)
+    }
 
     val listOfContacts = mutableListOf<Contact>()
 
@@ -94,12 +98,12 @@ fun ContactPickerScreen(
                     }
                 }
                 mapOfContacts.clear()
-                listOfContacts.forEach {
-                    Log.d("Levi", "ContactPickerScreen: $it")
-                }
-
+                val contactList = ListOfContact(listOfContacts)
+                val jsonContactList = Gson().toJson(contactList)
                 navigateTo(
-                    navigateBackToScreenRoute
+                    navigateBackToScreenRoute.withArgs(
+                        jsonContactList
+                    )
                 )
 
                 listOfContacts.clear()
