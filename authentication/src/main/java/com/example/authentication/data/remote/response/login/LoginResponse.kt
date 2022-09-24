@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
     @SerializedName("success")
-    val success : Boolean,
+    val success: Boolean,
     @SerializedName("data")
-    val loginData : LoginData
+    val loginData: LoginData
 ) {
     data class LoginData(
         @SerializedName("jwt")

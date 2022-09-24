@@ -1,12 +1,10 @@
 package com.example.feature_transaction
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -19,7 +17,7 @@ import com.example.design.UnifyText
 
 @Composable
 fun TotalBalanceCard(
-    amount : String = "0",
+    amount: String = "0",
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -33,13 +31,12 @@ fun TotalBalanceCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
             UnifyText(text = "Total Balance", fontSize = 12.sp, fontWeight = FontWeight.Thin)
             Spacer(modifier = Modifier.height(5.dp))
-            UnifyText(text = amount , fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            UnifyText(text = amount, fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
-
     }
 }

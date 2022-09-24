@@ -4,42 +4,42 @@ import com.google.gson.annotations.SerializedName
 
 data class SingleSpaceMemberResponse(
     @SerializedName("spaceMemberId")
-    val spaceMemberId : Int,
+    val spaceMemberId: Int,
     @SerializedName("spaceId")
-    val spaceId : Int,
+    val spaceId: Int,
     @SerializedName("personId")
-    val personId : Int,
+    val personId: Int,
     @SerializedName("userDetails")
-    val userDetails : UserDetails?,
+    val userDetails: UserDetails?,
     @SerializedName("inviteId")
-    val inviteId : Int,
+    val inviteId: Int,
     @SerializedName("lastUpdated")
-    val lastUpdated : String,
+    val lastUpdated: String,
     @SerializedName("joined")
-    val joined : Boolean,
+    val joined: Boolean,
     @SerializedName("spaceResponse")
-    val spaceDetailsResponse : SpaceDetailsResponse?,
+    val spaceDetailsResponse: SpaceDetailsResponse?,
     @SerializedName("invite")
-    val invite : InviteDetails? = null
+    val invite: InviteDetails? = null
 ) {
     data class UserDetails(
         @SerializedName("phoneNo")
-        val phoneNo : String,
+        val phoneNo: String,
         @SerializedName("username")
-        val username : String,
+        val username: String,
         @SerializedName("userId")
-        val userId : Int,
+        val userId: Int
     )
     data class InviteDetails(
         @SerializedName("inviteId")
-        val inviteID : Int ,
+        val inviteID: Int,
         @SerializedName("spaceId")
-        val spaceId : Int,
+        val spaceId: Int,
         @SerializedName("phoneNo")
-        val phoneNo : String,
+        val phoneNo: String,
         @SerializedName("inviteName")
-        val inviteNaem : String,
+        val inviteNaem: String,
         @SerializedName("lastUpdated")
-        val lastUpdated : String
+        val lastUpdated: String
     )
 }

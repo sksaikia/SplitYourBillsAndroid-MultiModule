@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class RegistrationResponse(
     @SerializedName("success")
-    val success : Boolean,
+    val success: Boolean,
     @SerializedName("message")
-    val message : String,
+    val message: String,
     @SerializedName("code")
-    val code : String,
+    val code: String
 )

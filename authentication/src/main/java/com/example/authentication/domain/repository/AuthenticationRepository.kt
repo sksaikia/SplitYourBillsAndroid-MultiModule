@@ -9,9 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationRepository {
 
-    suspend fun registerUser(registrationBody: RegistrationBody)
-        : Flow<Result<RegistrationResponse>>
+    suspend fun registerUser(registrationBody: RegistrationBody): Flow<Result<RegistrationResponse>>
 
-    suspend fun loginUser(loginBody : LoginBody)
-        : Flow<Result<LoginResponse>>
+    suspend fun loginUser(loginBody: LoginBody): Flow<Result<LoginResponse>>
 }

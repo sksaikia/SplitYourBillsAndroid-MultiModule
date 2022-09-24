@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class GetSpecificSpaceDetailsBySpaceIdUseCase(
     private val repository: SpacesRepository
 ) {
-    suspend operator fun invoke(spaceId : Int) : Flow<Result<SingleSpaceDetailsResponse>> {
+    suspend operator fun invoke(spaceId: Int): Flow<Result<SingleSpaceDetailsResponse>> {
         return repository.getSpecificSpaceBySpaceId(spaceId)
     }
 }

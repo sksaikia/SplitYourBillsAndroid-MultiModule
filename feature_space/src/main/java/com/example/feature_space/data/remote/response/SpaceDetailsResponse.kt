@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class SpaceDetailsResponse(
     @SerializedName("spaceId")
-    val spaceId : Int,
+    val spaceId: Int,
     @SerializedName("personId")
-    val personId : Int,
+    val personId: Int,
     @SerializedName("spaceName")
-    val spaceName : String,
+    val spaceName: String,
     @SerializedName("spaceDescription")
-    val spaceDescription : String,
+    val spaceDescription: String,
     @SerializedName("lastUpdated")
-    val lastUpdated : String,
+    val lastUpdated: String,
     @SerializedName("active")
-    val active : Boolean
+    val active: Boolean
 )

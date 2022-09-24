@@ -20,38 +20,37 @@ object SpaceModule {
 
     @Provides
     @Singleton
-    fun provideSpaceService(retrofit : Retrofit) : SpaceService = retrofit.create(
-        SpaceService::class.java)
+    fun provideSpaceService(retrofit: Retrofit): SpaceService = retrofit.create(
+        SpaceService::class.java
+    )
 
     @Provides
     @Singleton
-    fun provideSpaceRepository(api : SpaceService) : SpacesRepository {
+    fun provideSpaceRepository(api: SpaceService): SpacesRepository {
         return SpaceRepositoryImpl(api)
     }
 
     @Provides
     @Singleton
-    fun provideCreateSpaceUsecase(repository : SpacesRepository) : CreateSpaceUseCase {
+    fun provideCreateSpaceUsecase(repository: SpacesRepository): CreateSpaceUseCase {
         return CreateSpaceUseCase(repository)
     }
 
     @Provides
     @Singleton
-    fun provideGetAllSpacesByUserIdUsecase(repository : SpacesRepository) : GetAllSpaceByUserIdUsecase {
+    fun provideGetAllSpacesByUserIdUsecase(repository: SpacesRepository): GetAllSpaceByUserIdUsecase {
         return GetAllSpaceByUserIdUsecase(repository)
     }
 
     @Provides
     @Singleton
-    fun provideGetSpecificSpaceDetailsBySpaceId(repository : SpacesRepository) : GetSpecificSpaceDetailsBySpaceIdUseCase {
+    fun provideGetSpecificSpaceDetailsBySpaceId(repository: SpacesRepository): GetSpecificSpaceDetailsBySpaceIdUseCase {
         return GetSpecificSpaceDetailsBySpaceIdUseCase(repository)
     }
 
     @Provides
     @Singleton
-    fun provideEditSpaceUsecase(repository : SpacesRepository) : EditSpaceUseCase {
+    fun provideEditSpaceUsecase(repository: SpacesRepository): EditSpaceUseCase {
         return EditSpaceUseCase(repository)
     }
-
-
 }

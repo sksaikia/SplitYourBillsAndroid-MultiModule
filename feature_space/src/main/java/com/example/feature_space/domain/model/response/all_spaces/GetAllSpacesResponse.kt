@@ -3,31 +3,30 @@ package com.example.feature_space.domain.model.response.all_spaces
 import com.example.feature_space.domain.model.response.SpaceDetailsResponse
 
 data class GetAllSpacesResponse(
-    val success : Boolean,
-    val spacesResponse : SpacesResponse
+    val success: Boolean,
+    val spacesResponse: SpacesResponse
 ) {
     data class SpacesResponse(
-        val totalMembers : Int,
-        val spaceMembers : List<SingleSpaceMemberResponse>
+        val totalMembers: Int,
+        val spaceMembers: List<SingleSpaceMemberResponse>
     ) {
         data class SingleSpaceMemberResponse(
-            val spaceMemberId : Int,
-            val spaceId : Int,
-            val personId : Int,
-            val userDetails : UserDetails,
-            val inviteId : Int,
+            val spaceMemberId: Int,
+            val spaceId: Int,
+            val personId: Int,
+            val userDetails: UserDetails,
+            val inviteId: Int,
 //            @SerializedName("invite")
 //            val invite : Int,
-            val lastUpdated : String,
-            val joined : Boolean,
-            val spaceDetailsResponse : SpaceDetailsResponse
+            val lastUpdated: String,
+            val joined: Boolean,
+            val spaceDetailsResponse: SpaceDetailsResponse
         ) {
             data class UserDetails(
-                val phoneNo : String,
-                val username : String,
-                val userId : Int,
+                val phoneNo: String,
+                val username: String,
+                val userId: Int
             )
         }
     }
 }
-

@@ -24,9 +24,8 @@ fun AuthenticationSelectionScreen(navigateTo: (String) -> Unit) {
         UnifyText(text = "Split Your Bills", fontSize = 36.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-
             UnifyButton(buttonText = "Login", {
-                //Tested with sample arg
+                // Tested with sample arg
                 navigateTo(NavigationItem.LoginScreen.route)
             })
 

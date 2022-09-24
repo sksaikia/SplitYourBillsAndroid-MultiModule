@@ -161,7 +161,6 @@ class SpaceViewModel @Inject constructor(
                             editSpaceResponse = result.data
                         )
                         _editSpaceEventFlow.emit(EditSpaceEvent.ShowSuccessToast("Space Details is updated"))
-
                     }
                     is Result.Error -> {
                         editSpaceState = editSpaceState.copy(

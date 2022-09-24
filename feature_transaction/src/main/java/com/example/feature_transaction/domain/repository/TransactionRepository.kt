@@ -6,10 +6,7 @@ import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
 
 interface TransactionRepository {
-    suspend fun getAllSpacesByUserId(userId : Int)
-            : Flow<Result<GetAllSpacesResponse>>
+    suspend fun getAllSpacesByUserId(userId: Int): Flow<Result<GetAllSpacesResponse>>
 
-    suspend fun getAllMembersBySpaceId(spaceid : Int)
-            : Flow<Result<AllMembersForSpaceResponse>>
-
+    suspend fun getAllMembersBySpaceId(spaceid: Int): Flow<Result<AllMembersForSpaceResponse>>
 }

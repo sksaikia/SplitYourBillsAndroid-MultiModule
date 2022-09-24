@@ -9,7 +9,7 @@ class GetAllSpaceByUserIdUsecase(
     private val repository: SpacesRepository
 ) {
 
-    suspend operator fun invoke(userId : Int) : Flow<Result<GetAllSpacesResponse>> {
+    suspend operator fun invoke(userId: Int): Flow<Result<GetAllSpacesResponse>> {
         return repository.getAllSpacesByUserId(userId)
     }
 }

@@ -7,24 +7,22 @@ import com.example.feature_space.domain.model.response.SpaceDetailsResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
 import com.example.feature_space.domain.model.response.space_details.SingleSpaceDetailsResponse
 
-fun CreateSpaceBody.convertToCreateSpaceBodyData() : CreateSpaceDTO {
+fun CreateSpaceBody.convertToCreateSpaceBodyData(): CreateSpaceDTO {
     return CreateSpaceDTO(
         this.spaceName,
         this.spaceDescription
     )
 }
 
-fun com.example.feature_space.data.remote.response.create_space.CreateSpaceResponse.convertToCreateSpaceResponseBodyData()
-    : CreateSpaceResponse {
+fun com.example.feature_space.data.remote.response.create_space.CreateSpaceResponse.convertToCreateSpaceResponseBodyData(): CreateSpaceResponse {
     return CreateSpaceResponse(
-        success =  this.success,
+        success = this.success,
         data = this.data.toSpaceDetailsResponseDomain()
     )
 }
 
-fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toSpaceDetailsResponseDomain()
-    : SpaceDetailsResponse {
-    return SpaceDetailsResponse (
+fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toSpaceDetailsResponseDomain(): SpaceDetailsResponse {
+    return SpaceDetailsResponse(
         this.spaceId,
         this.personId,
         this.spaceName,
@@ -34,25 +32,21 @@ fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toSpaceD
     )
 }
 
-
-fun GetAllSpacesResponse.toDomainGetAllSpacesResponse()
-    : com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse {
+fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse {
     return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse(
         this.success,
         spacesResponse = this.spacesResponse.toDomainSpacesResponse()
     )
 }
 
-fun GetAllSpacesResponse.SpacesResponse.toDomainSpacesResponse ()
-    : com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse {
-    return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse (
+fun GetAllSpacesResponse.SpacesResponse.toDomainSpacesResponse(): com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse {
+    return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse(
         totalMembers = this.totalMembers,
         spaceMembers = getSpaceMembers(this.spaceMembers)
     )
 }
 
-fun getSpaceMembers(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>)
-    : List<com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse> {
+fun getSpaceMembers(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>): List<com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse> {
     val list = mutableListOf<com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse>()
     spaceMembers.forEach {
         list.add(it.toDomainSingleSpaceMemberResponse())
@@ -60,8 +54,7 @@ fun getSpaceMembers(spaceMembers: List<GetAllSpacesResponse.SpacesResponse.Singl
     return list
 }
 
-fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse()
-    : com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse {
+fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse(): com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse {
     return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse(
         this.spaceMemberId,
         this.spaceId,
@@ -74,16 +67,15 @@ fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.toDomainSingle
     )
 }
 
-fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails.toDomainUserDetails()
-    : com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails {
-    return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails (
+fun GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails.toDomainUserDetails(): com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails {
+    return com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse.SpacesResponse.SingleSpaceMemberResponse.UserDetails(
         this.phoneNo,
         this.username,
         this.userId
     )
 }
 
-fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toDomainSpaceDetailsResponse() : SpaceDetailsResponse {
+fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toDomainSpaceDetailsResponse(): SpaceDetailsResponse {
     return SpaceDetailsResponse(
         this.spaceId,
         this.personId,
@@ -94,20 +86,16 @@ fun com.example.feature_space.data.remote.response.SpaceDetailsResponse.toDomain
     )
 }
 
-
-fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.toDomainSingleSpaceMemberResponse()
-: SingleSpaceDetailsResponse {
-
+fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.toDomainSingleSpaceMemberResponse(): SingleSpaceDetailsResponse {
     return SingleSpaceDetailsResponse(
         success = this.success,
         spacesResponse = this.spacesResponse.toDomainSingleSpaceDetail()
     )
 }
 
-fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.SingleSpaceDetail.toDomainSingleSpaceDetail()
-    : SingleSpaceDetailsResponse.SingleSpaceDetail {
+fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.SingleSpaceDetail.toDomainSingleSpaceDetail(): SingleSpaceDetailsResponse.SingleSpaceDetail {
     return SingleSpaceDetailsResponse.SingleSpaceDetail(
-        spaceId = this.spaceId ,
+        spaceId = this.spaceId,
         personId = this.personId,
         spaceName = this.spaceName,
         spaceDescription = this.spaceDescription,
@@ -117,8 +105,10 @@ fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDeta
     )
 }
 
-fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.SingleSpaceDetail.UserResponse.toDomainUserResponse() : SingleSpaceDetailsResponse.SingleSpaceDetail.UserResponse {
+fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse.SingleSpaceDetail.UserResponse.toDomainUserResponse(): SingleSpaceDetailsResponse.SingleSpaceDetail.UserResponse {
     return SingleSpaceDetailsResponse.SingleSpaceDetail.UserResponse(
-        phoneNo, username, userId
+        phoneNo,
+        username,
+        userId
     )
 }

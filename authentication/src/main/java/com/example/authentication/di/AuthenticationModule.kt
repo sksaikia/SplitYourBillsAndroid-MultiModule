@@ -16,29 +16,29 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AuthenticationModule {
 
-    //Does custom scopes work on hilt
+    // Does custom scopes work on hilt
     @Provides
     @Singleton
-    fun provideAuthenticationService(retrofit : Retrofit) : AuthenticationService = retrofit.create(
-        AuthenticationService::class.java)
+    fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService = retrofit.create(
+        AuthenticationService::class.java
+    )
 
     @Provides
     @Singleton
-    fun provideRegistrationUseCase(repository: AuthenticationRepository) : RegistrationUseCase {
+    fun provideRegistrationUseCase(repository: AuthenticationRepository): RegistrationUseCase {
         return RegistrationUseCase(repository)
     }
 
-    //TODO move this to @binds method
+    // TODO move this to @binds method
     @Provides
     @Singleton
-    fun provideAuthenticationRepository(api : AuthenticationService) : AuthenticationRepository {
+    fun provideAuthenticationRepository(api: AuthenticationService): AuthenticationRepository {
         return AuthenticationRepositoryImpl(api)
     }
 
     @Provides
     @Singleton
-    fun provideLoginUseCase(repository: AuthenticationRepository) : LoginUseCase {
+    fun provideLoginUseCase(repository: AuthenticationRepository): LoginUseCase {
         return LoginUseCase(repository)
     }
-
 }

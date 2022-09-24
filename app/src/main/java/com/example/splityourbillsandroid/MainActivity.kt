@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.getValue
@@ -20,9 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.design.UnifyBottomNavigation
-import com.example.design.UnifyToolBar
 import com.example.navigation.NavigationItem
 import com.example.session.SessionManager
 import com.example.splityourbillsandroid.navGraph.NavigationGraph
@@ -52,35 +48,37 @@ class MainActivity : ComponentActivity() {
 //
 //                navController.addOnDestinationChangedListener(listener)
 
-                Scaffold( bottomBar = {
-                    if (isVisibleBT) {
-                        UnifyBottomNavigation(
-                            navController = navController,
-                            items = listOf(
-                                NavigationItem.SpacesScreen,
-                                NavigationItem.HomeScreen,
-                                NavigationItem.TransactionScreen,
-                                NavigationItem.ProfileScreen
+                Scaffold(
+                    bottomBar = {
+                        if (isVisibleBT) {
+                            UnifyBottomNavigation(
+                                navController = navController,
+                                items = listOf(
+                                    NavigationItem.SpacesScreen,
+                                    NavigationItem.HomeScreen,
+                                    NavigationItem.TransactionScreen,
+                                    NavigationItem.ProfileScreen
+                                )
                             )
-                        )
+                        }
                     }
-                }
                 ) { innerPadding ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxSize().padding(
-                                PaddingValues(0.dp, 0.dp, 0.dp, innerPadding.calculateBottomPadding()))
+                            PaddingValues(0.dp, 0.dp, 0.dp, innerPadding.calculateBottomPadding())
+                        )
                     ) {
-                        //Add Splash Screen here
+                        // Add Splash Screen here
                         Log.d("FATAL", "onCreate: ${sessionManager.fetchAuthToken()}")
                         val authToken = sessionManager.fetchAuthToken()
-                        if (authToken == null)
+                        if (authToken == null) {
                             NavigationGraph(
                                 navController,
                                 NavigationItem.AuthenticationSelectionScreen.route
                             )
-                        else {
+                        } else {
                             isVisibleBT = true
                             NavigationGraph(navController, NavigationItem.SpacesScreen.route)
                         }

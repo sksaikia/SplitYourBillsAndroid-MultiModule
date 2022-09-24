@@ -36,8 +36,11 @@ class TransactionRepositoryImpl @Inject constructor(
 
             safeApiCall({
                 val response = api.getAllMembersForSpecificSpaceId(spaceid)
-                Log.d("FATAL", "getSpaceMembersBySpaceId: Repository  : ${response.data?.totalMembers} and " +
-                        "${response.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
+                Log.d(
+                    "FATAL",
+                    "getSpaceMembersBySpaceId: Repository  : ${response.data?.totalMembers} and " +
+                        "${response.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}"
+                )
                 emit(Result.Success(data = response.toDomainAllMembersForSpaceResponse()))
             }, { exception ->
                 emit(Result.Error(exception))

@@ -7,13 +7,11 @@ import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
 
 class EditSpaceUseCase(
-    private val repository : SpacesRepository
+    private val repository: SpacesRepository
 ) {
 
-    suspend operator fun invoke(spaceName : String, spaceDescription : String, spaceId : Int)
-        : Flow<Result<CreateSpaceResponse>> {
+    suspend operator fun invoke(spaceName: String, spaceDescription: String, spaceId: Int): Flow<Result<CreateSpaceResponse>> {
         val createSpaceBody = CreateSpaceBody(spaceName, spaceDescription)
-        return repository.editSpaceBySpaceId(createSpaceBody,spaceId)
+        return repository.editSpaceBySpaceId(createSpaceBody, spaceId)
     }
-
 }

@@ -4,33 +4,33 @@ import com.google.gson.annotations.SerializedName
 
 data class SingleSpaceDetailsResponse(
     @SerializedName("success")
-    val success : Boolean,
+    val success: Boolean,
     @SerializedName("data")
-    val spacesResponse : SingleSpaceDetail
+    val spacesResponse: SingleSpaceDetail
 ) {
     data class SingleSpaceDetail(
         @SerializedName("spaceId")
-        val spaceId : Long,
+        val spaceId: Long,
         @SerializedName("personId")
-        val personId : Long,
+        val personId: Long,
         @SerializedName("spaceName")
-        val spaceName : String,
+        val spaceName: String,
         @SerializedName("spaceDescription")
-        val spaceDescription : String,
+        val spaceDescription: String,
         @SerializedName("lastUpdated")
-        val lastUpdated : String,
+        val lastUpdated: String,
         @SerializedName("active")
-        val active : Boolean,
+        val active: Boolean,
         @SerializedName("userResponse")
-        val userResponse : UserResponse,
+        val userResponse: UserResponse
     ) {
         data class UserResponse(
             @SerializedName("phoneNo")
-            val phoneNo : String,
+            val phoneNo: String,
             @SerializedName("username")
-            val username : String,
+            val username: String,
             @SerializedName("userId")
-            val userId : Long,
+            val userId: Long
         )
     }
 }

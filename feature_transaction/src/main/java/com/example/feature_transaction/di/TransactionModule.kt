@@ -17,26 +17,25 @@ import javax.inject.Singleton
 class TransactionModule {
     @Provides
     @Singleton
-    fun provideSpaceService(retrofit : Retrofit) : TransactionService = retrofit.create(
-        TransactionService::class.java)
+    fun provideSpaceService(retrofit: Retrofit): TransactionService = retrofit.create(
+        TransactionService::class.java
+    )
 
     @Provides
     @Singleton
-    fun provideSpaceRepository(api : TransactionService) : TransactionRepository {
+    fun provideSpaceRepository(api: TransactionService): TransactionRepository {
         return TransactionRepositoryImpl(api)
     }
 
-
     @Provides
     @Singleton
-    fun provideGetAllSpacesByUserIdUsecase(repository : TransactionRepository) : GetAllSpaceByUserIdUsecase {
+    fun provideGetAllSpacesByUserIdUsecase(repository: TransactionRepository): GetAllSpaceByUserIdUsecase {
         return GetAllSpaceByUserIdUsecase(repository)
     }
 
     @Provides
     @Singleton
-    fun provideGetAllSpaceMembersBySpaceIdUsecase(repository : TransactionRepository) : GetAllSpaceMembersBySpaceIdUsecase {
+    fun provideGetAllSpaceMembersBySpaceIdUsecase(repository: TransactionRepository): GetAllSpaceMembersBySpaceIdUsecase {
         return GetAllSpaceMembersBySpaceIdUsecase(repository)
     }
-
 }

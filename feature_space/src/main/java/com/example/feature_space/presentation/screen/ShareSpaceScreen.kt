@@ -17,10 +17,12 @@ import com.example.design.UnifyText
 import com.example.navigation.NavigationItem
 
 @Composable
-fun ShareSpaceScreen(navigateTo : (String) -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(horizontal = 20.dp, vertical = 20.dp)) {
+fun ShareSpaceScreen(navigateTo: (String) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp, vertical = 20.dp)
+    ) {
         UnifyText(text = "Space has been created. 6 members has been added.")
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -28,7 +30,7 @@ fun ShareSpaceScreen(navigateTo : (String) -> Unit) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             UnifyButton(buttonText = "Add a transaction")
             Spacer(modifier = Modifier.width(20.dp))
-            UnifyButton(buttonText = "Go to Spaces" , {
+            UnifyButton(buttonText = "Go to Spaces", {
                 navigateTo(NavigationItem.SpacesScreen.route)
             })
         }

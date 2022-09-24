@@ -15,14 +15,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesContext(@ApplicationContext context : Context)
-        : Context = context
+    fun providesContext(@ApplicationContext context: Context): Context =
+        context
 
     @Provides
     @Singleton
-    fun providesSessionManager(@ApplicationContext context: Context)
-        : SessionManager {
+    fun providesSessionManager(@ApplicationContext context: Context): SessionManager {
         return SessionManager(context)
     }
-
 }

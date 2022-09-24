@@ -10,8 +10,7 @@ class RegistrationUseCase(
     private val repository: AuthenticationRepository
 ) {
 
-    suspend operator fun invoke(registrationBody : RegistrationBody) : Flow<Result<RegistrationResponse>>{
+    suspend operator fun invoke(registrationBody: RegistrationBody): Flow<Result<RegistrationResponse>> {
         return repository.registerUser(registrationBody)
     }
-
 }

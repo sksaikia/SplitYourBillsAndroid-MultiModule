@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginDTO(
     @SerializedName("password")
-    val password : String,
+    val password: String,
     @SerializedName("phoneNo")
-    val phoneNo : String
+    val phoneNo: String
 )

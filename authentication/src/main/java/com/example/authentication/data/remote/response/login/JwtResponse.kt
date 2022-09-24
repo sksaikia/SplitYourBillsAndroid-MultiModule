@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class JwtResponse(
     @SerializedName("accessToken")
-    val accessToken : String,
+    val accessToken: String,
     @SerializedName("tokenType")
-    val tokenType : String
+    val tokenType: String
 )

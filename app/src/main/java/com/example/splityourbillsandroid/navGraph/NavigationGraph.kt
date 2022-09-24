@@ -15,8 +15,8 @@ import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
 import com.example.feature_space.presentation.screen.ShareSpaceScreen
 import com.example.feature_space.presentation.screen.SpaceDetailsScreen
 import com.example.feature_space.presentation.screen.SpacesScreen
-import com.example.feature_transaction.presentation.screen.CreateNewTransactionScreen
 import com.example.feature_transaction.ManualBillSplitScreen
+import com.example.feature_transaction.presentation.screen.CreateNewTransactionScreen
 import com.example.feature_transaction.presentation.screen.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -26,14 +26,14 @@ import com.google.accompanist.navigation.animation.composable
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    startLocation : String
+    startLocation: String
 ) {
     AnimatedNavHost(
         navController = navController,
         startDestination = startLocation
     ) {
         composable(
-            route = NavigationItem.AuthenticationSelectionScreen.route,
+            route = NavigationItem.AuthenticationSelectionScreen.route
         ) {
             AuthenticationSelectionScreen(
                 navigateTo = {
@@ -109,7 +109,7 @@ fun NavigationGraph(
         composable(
             route = NavigationItem.SpaceDetailsScreen.route + "/{spaceId}",
             arguments = listOf(
-                navArgument("spaceId"){
+                navArgument("spaceId") {
                     type = NavType.StringType
                     defaultValue = "0"
                 }
@@ -124,7 +124,7 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.ContactPickerScreen.route,
+            route = NavigationItem.ContactPickerScreen.route
         ) {
             ContactPickerScreen(
                 navigateTo = {
@@ -135,7 +135,7 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.ManualBillSplitScreen.route,
+            route = NavigationItem.ManualBillSplitScreen.route
         ) {
             ManualBillSplitScreen(
                 navigateTo = {
@@ -145,7 +145,7 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.CreateNewTransactionScreen.route,
+            route = NavigationItem.CreateNewTransactionScreen.route
         ) {
             CreateNewTransactionScreen(
                 navigateTo = {
@@ -153,6 +153,5 @@ fun NavigationGraph(
                 }
             )
         }
-
     }
 }

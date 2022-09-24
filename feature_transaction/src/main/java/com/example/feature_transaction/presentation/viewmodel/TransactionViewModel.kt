@@ -69,8 +69,11 @@ class TransactionViewModel @Inject constructor(
                             allSpaceMembers = result.data,
                             isLoading = false
                         )
-                        Log.d("FATAL", "getSpaceMembersBySpaceId: View Model : ${result.data?.data?.totalMembers} and " +
-                                "${result.data?.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
+                        Log.d(
+                            "FATAL",
+                            "getSpaceMembersBySpaceId: View Model : ${result.data?.data?.totalMembers} and " +
+                                "${result.data?.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}"
+                        )
                     }
                     is Result.Loading -> {
                         spaceMembersState = spaceMembersState.copy(

@@ -33,12 +33,11 @@ fun LoginScreen(
     authenticationViewModel: AuthenticationViewModel = hiltViewModel(),
     name: String?
 ) {
-
     val scaffoldState = rememberScaffoldState()
 
     LaunchedEffect(key1 = true) {
         authenticationViewModel.loginEventFlow.collectLatest { event ->
-            when(event) {
+            when (event) {
                 is LoginEvent.NavigateToHome -> {
                     navigateTo(NavigationItem.HomeScreen.route)
                 }
@@ -51,19 +50,21 @@ fun LoginScreen(
         }
     }
 
-
     var state = authenticationViewModel.loginState
     var phoneNo by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    
+
     Scaffold(scaffoldState = scaffoldState) {
-        Column(modifier = Modifier.fillMaxSize() , verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             UnifyText(text = "Split Your Bills", fontSize = 36.sp)
             Spacer(modifier = Modifier.height(10.dp))
             UnifyText(text = "Login", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(30.dp))
-            UnifyEditText(headerText = "Phone No." , onValueChanged = {
+            UnifyEditText(headerText = "Phone No.", onValueChanged = {
                 phoneNo = it
             })
             Spacer(modifier = Modifier.height(20.dp))
@@ -77,6 +78,4 @@ fun LoginScreen(
             })
         }
     }
-    
-
 }

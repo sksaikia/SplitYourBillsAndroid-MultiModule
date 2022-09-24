@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CreateSpaceResponse(
     @SerializedName("success")
-    val success : Boolean,
+    val success: Boolean,
     @SerializedName("data")
-    val data : SpaceDetailsResponse
+    val data: SpaceDetailsResponse
 )

@@ -9,14 +9,14 @@ import com.example.authentication.data.remote.response.registration.Registration
 import com.example.authentication.domain.model.request.login.LoginBody
 import com.example.authentication.domain.model.request.registration.RegistrationBody
 
-fun RegistrationResponse.toRegistration() : com.example.authentication.domain.model.response.registration.RegistrationResponse {
+fun RegistrationResponse.toRegistration(): com.example.authentication.domain.model.response.registration.RegistrationResponse {
     return com.example.authentication.domain.model.response.registration.RegistrationResponse(
         this.success,
         this.message,
         this.code
     )
 }
-fun RegistrationBody.toRegistrationDto() : RegistrationDTO {
+fun RegistrationBody.toRegistrationDto(): RegistrationDTO {
     return RegistrationDTO(
         this.name,
         this.password,
@@ -24,28 +24,28 @@ fun RegistrationBody.toRegistrationDto() : RegistrationDTO {
     )
 }
 
-fun LoginResponse.toLogin() : com.example.authentication.domain.model.response.login.LoginResponse {
+fun LoginResponse.toLogin(): com.example.authentication.domain.model.response.login.LoginResponse {
     return com.example.authentication.domain.model.response.login.LoginResponse(
         this.success,
         this.loginData.toLoginData()
     )
 }
 
-fun LoginBody.toLoginDto() : LoginDTO {
+fun LoginBody.toLoginDto(): LoginDTO {
     return LoginDTO(
         this.password,
         this.phoneNo
     )
 }
 
-fun JwtResponse.toJwtResponse() : com.example.authentication.domain.model.response.login.JwtResponse {
+fun JwtResponse.toJwtResponse(): com.example.authentication.domain.model.response.login.JwtResponse {
     return com.example.authentication.domain.model.response.login.JwtResponse(
         this.accessToken,
         this.tokenType
     )
 }
 
-fun UserDetailsResponse.toUserDetailsResponse() : com.example.authentication.domain.model.response.login.UserDetailsResponse {
+fun UserDetailsResponse.toUserDetailsResponse(): com.example.authentication.domain.model.response.login.UserDetailsResponse {
     return com.example.authentication.domain.model.response.login.UserDetailsResponse(
         this.phoneNo,
         this.username,
@@ -53,7 +53,7 @@ fun UserDetailsResponse.toUserDetailsResponse() : com.example.authentication.dom
     )
 }
 
-fun LoginResponse.LoginData.toLoginData() : com.example.authentication.domain.model.response.login.LoginResponse.LoginData {
+fun LoginResponse.LoginData.toLoginData(): com.example.authentication.domain.model.response.login.LoginResponse.LoginData {
     return com.example.authentication.domain.model.response.login.LoginResponse.LoginData(
         this.jwtResponse.toJwtResponse(),
         this.userDetailsResponse.toUserDetailsResponse()

@@ -28,27 +28,29 @@ import com.example.navigation.NavigationItem
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TransactionScreen(navigateTo : (String) -> Unit) {
+fun TransactionScreen(navigateTo: (String) -> Unit) {
     val scaffoldState = rememberScaffoldState()
 
-  //  val allSpacesState = spaceViewModel.allSpacesState
+    //  val allSpacesState = spaceViewModel.allSpacesState
 
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(
-            onClick = {
-                navigateTo(NavigationItem.CreateNewTransactionScreen.route)
-            },
-            backgroundColor = MaterialTheme.colors.primary
-        ) {
-            Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
-        }
-    },
-        scaffoldState = scaffoldState,
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navigateTo(NavigationItem.CreateNewTransactionScreen.route)
+                },
+                backgroundColor = MaterialTheme.colors.primary
+            ) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
+            }
+        },
+        scaffoldState = scaffoldState
 
     ) {
-        Column(modifier = Modifier
-            .fillMaxSize()) {
-
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             TotalBalanceCard(amount = "₹ 5000.00")
 
 //            Row {
@@ -57,7 +59,7 @@ fun TransactionScreen(navigateTo : (String) -> Unit) {
 //            }
 
             val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
-                Triple("Total In" , "10000", R.drawable.trx_in),
+                Triple("Total In", "10000", R.drawable.trx_in),
                 Triple("Total Out", "5000", R.drawable.trx_out)
             )
 
@@ -81,9 +83,6 @@ fun TransactionScreen(navigateTo : (String) -> Unit) {
             )
 
             Spacer(modifier = Modifier.height(10.dp))
-
-
-
         }
     }
 }
