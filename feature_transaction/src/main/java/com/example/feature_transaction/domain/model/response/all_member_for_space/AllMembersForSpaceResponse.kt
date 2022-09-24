@@ -2,16 +2,12 @@ package com.example.feature_transaction.domain.model.response.all_member_for_spa
 
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 
-
 data class AllMembersForSpaceResponse(
-    var success : Boolean,
-    var data : AllMembersForSpaceResponseData,
+    var success: Boolean,
+    var data: AllMembersForSpaceResponseData
 ) {
     data class AllMembersForSpaceResponseData(
-        var totalMembers : Int,
-        var spaceMemberResponse : List<SingleSpaceMemberResponse>
+        var totalMembers: Int?,
+        var spaceMemberResponse: List<SingleSpaceMemberResponse>
     )
 }
-
-
-

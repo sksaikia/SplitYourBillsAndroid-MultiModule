@@ -95,7 +95,7 @@ fun NavigationGraph(
         ) {
             CreateNewSpaceScreen(navigateTo = {
                 navController.navigate(it)
-            })
+            }, navController)
         }
 
         composable(
@@ -129,7 +129,8 @@ fun NavigationGraph(
             ContactPickerScreen(
                 navigateTo = {
                     navController.navigate(it)
-                }
+                },
+                navController = navController
             )
         }
 

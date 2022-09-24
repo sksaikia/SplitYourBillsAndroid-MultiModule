@@ -53,6 +53,7 @@ android {
 dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DESIGN))
+    implementation(project(Modules.LIBRARY_CONTACT_PICKER))
 
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.lifecycleRuntimeKtx)

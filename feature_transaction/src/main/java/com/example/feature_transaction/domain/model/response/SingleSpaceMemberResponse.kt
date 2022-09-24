@@ -6,11 +6,11 @@ data class SingleSpaceMemberResponse(
     val spaceMemberId : Int,
     val spaceId : Int,
     val personId : Int,
-    val userDetails : UserDetails,
+    val userDetails : UserDetails?,
     val inviteId : Int,
     val lastUpdated : String,
     val joined : Boolean,
-    val spaceDetailsResponse : SpaceDetailsResponse,
+    val spaceDetailsResponse : SpaceDetailsResponse?,
     val inviteDetails : InviteDetails? = null,
 ) {
     data class UserDetails(

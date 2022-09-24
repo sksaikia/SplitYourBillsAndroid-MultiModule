@@ -1,5 +1,6 @@
 package com.example.feature_transaction.presentation.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -68,6 +69,8 @@ class TransactionViewModel @Inject constructor(
                             allSpaceMembers = result.data,
                             isLoading = false
                         )
+                        Log.d("FATAL", "getSpaceMembersBySpaceId: View Model : ${result.data?.data?.totalMembers} and " +
+                                "${result.data?.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
                     }
                     is Result.Loading -> {
                         spaceMembersState = spaceMembersState.copy(

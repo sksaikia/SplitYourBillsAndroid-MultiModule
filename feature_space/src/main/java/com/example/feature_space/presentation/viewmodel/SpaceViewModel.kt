@@ -48,7 +48,7 @@ class SpaceViewModel @Inject constructor(
     private val _editSpaceEventFlow = MutableSharedFlow<EditSpaceEvent>()
     val editSpaceEventFlow = _editSpaceEventFlow.asSharedFlow()
 
-    init {
+    fun getAllSpaces() {
         getAllSpaces(sessionManager.fetchUserId())
     }
 

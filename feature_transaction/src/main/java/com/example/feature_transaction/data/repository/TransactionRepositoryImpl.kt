@@ -1,5 +1,6 @@
 package com.example.feature_transaction.data.repository
 
+import android.util.Log
 import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_transaction.data.remote.TransactionService
@@ -13,14 +14,14 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class TransactionRepositoryImpl @Inject constructor(
-    private val api : TransactionService
+    private val api: TransactionService
 ) : TransactionRepository, RemoteDataSource() {
 
     override suspend fun getAllSpacesByUserId(userId: Int): Flow<Result<GetAllSpacesResponse>> {
         return flow {
             emit(Result.Loading(isLoading = true))
 
-            safeApiCall( {
+            safeApiCall({
                 val response = api.getAllSpacesByUserId(userId)
                 emit(Result.Success(data = response.toDomainGetAllSpacesResponse()))
             }, { exception ->
@@ -35,11 +36,12 @@ class TransactionRepositoryImpl @Inject constructor(
 
             safeApiCall({
                 val response = api.getAllMembersForSpecificSpaceId(spaceid)
+                Log.d("FATAL", "getSpaceMembersBySpaceId: Repository  : ${response.data?.totalMembers} and " +
+                        "${response.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
                 emit(Result.Success(data = response.toDomainAllMembersForSpaceResponse()))
             }, { exception ->
                 emit(Result.Error(exception))
             })
-
         }
     }
 }

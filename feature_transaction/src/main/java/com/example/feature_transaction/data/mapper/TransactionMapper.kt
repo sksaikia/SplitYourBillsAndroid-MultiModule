@@ -37,11 +37,11 @@ fun SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse()
         this.spaceMemberId,
         this.spaceId,
         this.personId,
-        this.userDetails.toDomainUserDetails(),
+        this.userDetails?.toDomainUserDetails(),
         this.inviteId,
         this.lastUpdated,
         this.joined,
-        this.spaceDetailsResponse.toSpaceDetailsResponseDomain()
+        this.spaceDetailsResponse?.toSpaceDetailsResponseDomain()
     )
 }
 

@@ -10,7 +10,7 @@ data class SingleSpaceMemberResponse(
     @SerializedName("personId")
     val personId : Int,
     @SerializedName("userDetails")
-    val userDetails : UserDetails,
+    val userDetails : UserDetails?,
     @SerializedName("inviteId")
     val inviteId : Int,
     @SerializedName("lastUpdated")
@@ -18,7 +18,7 @@ data class SingleSpaceMemberResponse(
     @SerializedName("joined")
     val joined : Boolean,
     @SerializedName("spaceResponse")
-    val spaceDetailsResponse : SpaceDetailsResponse,
+    val spaceDetailsResponse : SpaceDetailsResponse?,
     @SerializedName("invite")
     val invite : InviteDetails? = null
 ) {

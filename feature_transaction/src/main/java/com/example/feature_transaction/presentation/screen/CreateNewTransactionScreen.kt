@@ -186,7 +186,7 @@ fun CreateNewTransactionScreen(
 
             items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
                 val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse
-                Log.d("FATAL", "total : ${spaceMembersState.allSpaceMembers?.data?.totalMembers}")
+                Log.d("FATAL", "total : ${spaceMembersState.allSpaceMembers?.data?.totalMembers} and ${spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
                 UnifyText(text = "MASAKA")
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -201,7 +201,7 @@ fun MenuSample(
 ) {
     val billingPeriodItems = mutableListOf<String>("No Spaces selected")
     spaceMembers.forEach {
-        billingPeriodItems.add(it.spaceDetailsResponse.spaceName)
+        billingPeriodItems.add(it.spaceDetailsResponse?.spaceName ?: "")
     }
 
     var billingPeriodExpanded by remember { mutableStateOf(false) }

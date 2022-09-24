@@ -18,13 +18,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.design.UnifyButton
 import com.example.design.UnifyText
 import com.example.feature_space.R
 import com.example.feature_space.presentation.ui_composition.SpaceCard
@@ -42,6 +42,10 @@ fun SpacesScreen(
     val scaffoldState = rememberScaffoldState()
 
     val allSpacesState = spaceViewModel.allSpacesState
+
+    LaunchedEffect(key1 = true) {
+        spaceViewModel.getAllSpaces()
+    }
 
     Scaffold(
         floatingActionButton = {
