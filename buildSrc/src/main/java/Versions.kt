@@ -21,4 +21,6 @@ object Versions {
     const val loggingInterceptorVersion = "5.0.0-alpha.3"
     const val hiltNavigation = "1.0.0-alpha03"
     const val composeConstraintLayout = "1.0.1"
+    const val accompanistPermissions = "0.21.1-beta"
+    const val gsonVersion = "2.8.2"
 }

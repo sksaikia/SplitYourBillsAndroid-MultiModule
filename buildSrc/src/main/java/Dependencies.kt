@@ -3,6 +3,7 @@ object CoreDependencies {
     const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycleRunTimeKtx}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val materialDesign = "com.google.android.material:material:${Versions.materialDesign}"
+    const val gsonDependency = "com.google.code.gson:gson:${Versions.gsonVersion}"
 }
 
 object ComposeDependencies {
@@ -16,6 +17,7 @@ object ComposeDependencies {
 
 object AccompanistDependencies {
     const val navigationAnimation = "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanistVersion}"
+    const val permissions = "com.google.accompanist:accompanist-permissions:${Versions.accompanistPermissions}"
 }
 
 object TestDependencies {
