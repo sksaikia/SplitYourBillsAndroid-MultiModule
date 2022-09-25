@@ -5,10 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.feature_space.domain.model.request.add_members.AddMembersBody
+import com.example.feature_space.domain.usecase.AddMembersToSpaceUseCase
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
+import com.example.feature_space.presentation.viewmodel.add_members.AddMembersEvent
+import com.example.feature_space.presentation.viewmodel.add_members.AddMembersState
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
@@ -31,6 +35,7 @@ class SpaceViewModel @Inject constructor(
     private val getAllSpaceByUserIdUsecase: GetAllSpaceByUserIdUsecase,
     private val getSpecificSpaceDetailsBySpaceIdUseCase: GetSpecificSpaceDetailsBySpaceIdUseCase,
     private val editSpaceUseCase: EditSpaceUseCase,
+    private val addMembersToSpaceUseCase: AddMembersToSpaceUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
@@ -38,6 +43,7 @@ class SpaceViewModel @Inject constructor(
     var allSpacesState by mutableStateOf(AllSpacesState())
     var singleSpaceState by mutableStateOf(SingleSpaceState())
     var editSpaceState by mutableStateOf(EditSpaceState())
+    var allMembersState by mutableStateOf(AddMembersState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
@@ -47,6 +53,9 @@ class SpaceViewModel @Inject constructor(
 
     private val _editSpaceEventFlow = MutableSharedFlow<EditSpaceEvent>()
     val editSpaceEventFlow = _editSpaceEventFlow.asSharedFlow()
+
+    private val _addMembersEventFlow = MutableSharedFlow<AddMembersEvent>()
+    val addMembersEventFlow = _addMembersEventFlow.asSharedFlow()
 
     fun getAllSpaces() {
         getAllSpaces(sessionManager.fetchUserId())
@@ -79,7 +88,7 @@ class SpaceViewModel @Inject constructor(
                             )
 
                             // TODO as of now Navigate to Share Space
-                            _createSpaceEventFlow.emit(CreateSpaceEvent.ShowSuccessToast("Space is created with id ${createSpaceResponse.data.spaceId}"))
+                            _createSpaceEventFlow.emit(CreateSpaceEvent.ShowSuccessToast("Space is created with id ${createSpaceResponse.data.spaceId}", createSpaceResponse.data.spaceId.toString()))
                         }
                     }
                     is Result.Error -> {
@@ -176,6 +185,35 @@ class SpaceViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun addMembersToSpace(addedMembersBody: List<AddMembersBody>) {
+        viewModelScope.launch {
+            addMembersToSpaceUseCase(addedMembersBody)
+                .collectLatest { result ->
+                    when(result) {
+                        is com.example.network.Result.Success -> {
+                            allMembersState = allMembersState.copy(
+                                isLoading = false,
+                                response = result.data
+                            )
+                            _addMembersEventFlow.emit(AddMembersEvent.ShowSuccessToast("Successfully added members "))
+                        }
+
+                        is com.example.network.Result.Error -> {
+                            allMembersState = allMembersState.copy(
+                                isLoading = false,
+                                response = null
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            allMembersState = allMembersState.copy(
+                                isLoading = true
+                            )
+                        }
+                    }
+                }
         }
     }
 }

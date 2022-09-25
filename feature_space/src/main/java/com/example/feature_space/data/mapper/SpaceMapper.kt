@@ -1,7 +1,10 @@
 package com.example.feature_space.data.mapper
 
+import com.example.feature_space.data.remote.request.add_members.AddMembersDTO
 import com.example.feature_space.data.remote.request.create_space.CreateSpaceDTO
+import com.example.feature_space.data.remote.response.add_members.AddMembersResponse
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.SpaceDetailsResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
@@ -110,5 +113,40 @@ fun com.example.feature_space.data.remote.response.space_details.SingleSpaceDeta
         phoneNo,
         username,
         userId
+    )
+}
+
+fun List<AddMembersBody>.toDataAddMembersBody() : ArrayList<AddMembersDTO> {
+    val list = ArrayList<AddMembersDTO>()
+    this.forEach {
+        val curr = it.toSingleAddMembersBody()
+        list.add(curr)
+    }
+
+    return list
+
+}
+
+fun AddMembersBody.toSingleAddMembersBody() : AddMembersDTO {
+    return AddMembersDTO(
+        this.spaceId,
+        this.inviteName,
+        this.phoneNo
+    )
+}
+
+fun AddMembersResponse.toDomainAddMembersResponse() : com.example.feature_space.domain.model.response.add_members.AddMembersResponse {
+    return com.example.feature_space.domain.model.response.add_members.AddMembersResponse(
+        success = this.success,
+        data = this.data.toDomainAddMembersCountResponse()
+    )
+}
+
+fun AddMembersResponse.AddMembersCountResponse.toDomainAddMembersCountResponse() : com.example.feature_space.domain.model.response.add_members.AddMembersResponse.AddMembersCountResponse {
+    return com.example.feature_space.domain.model.response.add_members.AddMembersResponse.AddMembersCountResponse(
+        this.registeredUsers,
+        this.invitedUsers,
+        this.errors,
+        this.ignored
     )
 }

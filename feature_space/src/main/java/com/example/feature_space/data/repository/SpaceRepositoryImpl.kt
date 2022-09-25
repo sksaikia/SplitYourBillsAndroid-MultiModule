@@ -2,10 +2,14 @@ package com.example.feature_space.data.repository
 
 import com.example.feature_space.data.mapper.convertToCreateSpaceBodyData
 import com.example.feature_space.data.mapper.convertToCreateSpaceResponseBodyData
+import com.example.feature_space.data.mapper.toDataAddMembersBody
+import com.example.feature_space.data.mapper.toDomainAddMembersResponse
 import com.example.feature_space.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_space.data.mapper.toDomainSingleSpaceMemberResponse
 import com.example.feature_space.data.remote.SpaceService
+import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
+import com.example.feature_space.domain.model.response.add_members.AddMembersResponse
 import com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
 import com.example.feature_space.domain.model.response.space_details.SingleSpaceDetailsResponse
@@ -77,6 +81,21 @@ class SpaceRepositoryImpl @Inject constructor(
             }, { exception ->
                 emit(Result.Error(exception))
             })
+        }
+    }
+
+    override suspend fun addMembersToSpace(addedMembersBody: List<AddMembersBody>): Flow<Result<AddMembersResponse>> {
+        return flow { emit(Result.Loading(isLoading = true))
+
+            safeApiCall(
+                {
+                    val response = api.addMembersToSpaces(addedMembersBody.toDataAddMembersBody())
+                    emit(com.example.network.Result.Success(data = response.toDomainAddMembersResponse()))
+                },
+                { exception ->
+                    emit(Result.Error(exception))
+                }
+            )
         }
     }
 }

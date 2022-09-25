@@ -3,6 +3,7 @@ package com.example.feature_space.di
 import com.example.feature_space.data.remote.SpaceService
 import com.example.feature_space.data.repository.SpaceRepositoryImpl
 import com.example.feature_space.domain.repository.SpacesRepository
+import com.example.feature_space.domain.usecase.AddMembersToSpaceUseCase
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
@@ -52,5 +53,11 @@ object SpaceModule {
     @Singleton
     fun provideEditSpaceUsecase(repository: SpacesRepository): EditSpaceUseCase {
         return EditSpaceUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddMembersToSpaceUsecase(repository: SpacesRepository): AddMembersToSpaceUseCase {
+        return AddMembersToSpaceUseCase(repository)
     }
 }
