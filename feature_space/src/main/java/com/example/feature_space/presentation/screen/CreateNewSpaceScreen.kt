@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -48,6 +49,7 @@ fun CreateNewSpaceScreen(
     var addedMembersList = mutableListOf<AddMembersBody>()
 
     var createSpaceState = spaceViewModel.createSpaceState
+    var allMembersState = spaceViewModel.allMembersState
 
     LaunchedEffect(key1 = true) {
         spaceViewModel.createSpaceEventFlow.collectLatest { event ->
@@ -95,7 +97,15 @@ fun CreateNewSpaceScreen(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             item {
+
+                if (allMembersState.isLoading) {
+                    CircularProgressIndicator()
+                } else if (allMembersState.response != null) {
+                    navigateTo(NavigationItem.ShareSpaceScreen.route)
+                }
+
                 UnifyEditText(headerText = "Name", onValueChanged = {
                     spaceName = it
                 })
