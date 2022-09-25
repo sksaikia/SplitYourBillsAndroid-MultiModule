@@ -22,7 +22,7 @@ data class SingleSpaceMemberResponse(
         val inviteID: Int,
         val spaceId: Int,
         val phoneNo: String,
-        val inviteNaem: String,
+        val inviteName: String,
         val lastUpdated: String
     )
 }

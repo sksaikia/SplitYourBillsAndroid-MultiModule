@@ -36,7 +36,18 @@ fun SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse(): com.example.f
         this.inviteId,
         this.lastUpdated,
         this.joined,
-        this.spaceDetailsResponse?.toSpaceDetailsResponseDomain()
+        this.spaceDetailsResponse?.toSpaceDetailsResponseDomain(),
+        this.invite?.toInviteDetailsDomain()
+    )
+}
+
+private fun SingleSpaceMemberResponse.InviteDetails?.toInviteDetailsDomain(): com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse.InviteDetails {
+    return com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse.InviteDetails(
+        this?.inviteID ?: 0,
+        this?.spaceId ?: 0,
+        this?.phoneNo ?: "",
+        this?.inviteName ?: "",
+        this?.lastUpdated ?: ""
     )
 }
 

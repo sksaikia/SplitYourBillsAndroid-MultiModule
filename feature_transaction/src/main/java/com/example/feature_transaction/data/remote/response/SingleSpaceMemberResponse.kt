@@ -38,7 +38,7 @@ data class SingleSpaceMemberResponse(
         @SerializedName("phoneNo")
         val phoneNo: String,
         @SerializedName("inviteName")
-        val inviteNaem: String,
+        val inviteName: String,
         @SerializedName("lastUpdated")
         val lastUpdated: String
     )

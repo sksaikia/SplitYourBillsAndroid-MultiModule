@@ -38,6 +38,7 @@ import com.example.design.UnifyButtonSmallType
 import com.example.design.UnifyDropDownMenu
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
+import com.example.feature_space.presentation.ui_composition.UserCard
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
@@ -185,9 +186,12 @@ fun CreateNewTransactionScreen(
             }
 
             items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
-                val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse
-                Log.d("FATAL", "total : ${spaceMembersState.allSpaceMembers?.data?.totalMembers} and ${spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}")
-                UnifyText(text = "MASAKA")
+                val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
+                if (memberData?.userDetails == null) {
+                    UserCard(name = memberData?.inviteDetails?.inviteName ?: "")
+                } else {
+                    UserCard(name = memberData.userDetails.username ?: "")
+                }
                 Spacer(modifier = Modifier.height(10.dp))
             }
         }
