@@ -15,7 +15,9 @@ import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +34,24 @@ class TransactionViewModel @Inject constructor(
 
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
+
+    private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10,{0}))
+    val individualContributionValues = _individualContributionValues.asStateFlow()
+
+    private val _currentContributionValue = MutableStateFlow<Int>(0)
+    val currentContributionValue = _currentContributionValue.asStateFlow()
+
+    fun setIndividualContriDetail(index: Int, value: Int) {
+        _individualContributionValues.value[index] = value
+        setCurrentContributionValue(_individualContributionValues.value)
+    }
+
+    private fun setCurrentContributionValue(list : List<Int>) {
+        _currentContributionValue.value = 0
+        list.forEach {
+            _currentContributionValue.value += it
+        }
+    }
 
     init {
         getAllSpaces(sessionManager.fetchUserId())

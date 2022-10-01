@@ -1,4 +1,4 @@
-package com.example.feature_space.presentation.ui_composition
+package com.example.compositions
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,22 +10,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.design.UnifyEditTextWithoutHeader
 import com.example.design.UnifyText
 
 @Composable
-fun UserCard(
+fun UserEditableCard(
     name: String = "",
     phoneNo: String = "",
+    onValueChanged : (String)-> Unit = {},
     modifier: Modifier = Modifier,
-    shouldShowContributionAmount: Boolean = false,
     amount: Int = 0
 ) {
     Row(
         modifier = modifier.padding(horizontal = 20.dp).fillMaxWidth().padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         UnifyText(
             modifier = Modifier
@@ -42,9 +41,11 @@ fun UserCard(
         Spacer(modifier = modifier.width(20.dp))
         UnifyText(text = name)
         Spacer(modifier = modifier.width(100.dp))
-        if (shouldShowContributionAmount) {
-            UnifyText(text = amount.toString(), fontWeight = FontWeight.Bold)
-        }
+        UnifyText(text = "$")
+        UnifyEditTextWithoutHeader(
+            editText = amount.toString(),
+            onValueChanged = onValueChanged
+        )
     }
 }
 

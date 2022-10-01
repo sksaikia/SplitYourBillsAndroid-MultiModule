@@ -188,9 +188,9 @@ fun CreateNewTransactionScreen(
             items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
                 val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
                 if (memberData?.userDetails == null) {
-                    UserCard(name = memberData?.inviteDetails?.inviteName ?: "")
+                    UserCard(name = memberData?.inviteDetails?.inviteName ?: "", shouldShowContributionAmount = true, amount = 100)
                 } else {
-                    UserCard(name = memberData.userDetails.username ?: "")
+                    UserCard(name = memberData.userDetails.username ?: "", shouldShowContributionAmount = true, amount = 100)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
             }

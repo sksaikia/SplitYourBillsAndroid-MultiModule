@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 items = listOf(
                                     NavigationItem.SpacesScreen,
-                                    NavigationItem.HomeScreen,
+                                    NavigationItem.ManualBillSplitScreen,
                                     NavigationItem.TransactionScreen,
                                     NavigationItem.ProfileScreen
                                 )
