@@ -27,7 +27,7 @@ fun SpaceTrxCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier.padding(10.dp),
+        modifier = modifier.padding(10.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 12.dp
     ) {
