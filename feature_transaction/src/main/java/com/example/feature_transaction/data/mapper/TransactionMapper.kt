@@ -9,8 +9,11 @@ import com.example.feature_transaction.data.remote.response.all_members_for_spac
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
+import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
+import com.example.feature_transaction.data.remote.response.get_txn_list.TransactionDetailsResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
+import com.example.feature_transaction.domain.model.response.get_txn_list.ListOfTransactionDetails
 
 fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse {
     return com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse(
@@ -152,5 +155,33 @@ fun AddTxnListResponse.AddTxnListDetails.convertToAddTxnListDetails(): com.examp
         this.success,
         this.failure,
         this.ignored
+    )
+}
+
+fun GetTxnListResponse.toDomainGetTxnDetailsResponse(): com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse {
+    return com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse(
+        this.success,
+        this.data.convertToListOfTxnDetails()
+    )
+}
+
+fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTransactionDetails.convertToListOfTxnDetails(): ListOfTransactionDetails{
+    return ListOfTransactionDetails(
+        this.totalTransactions,
+        this.transactionDetailsResponse.toDomainTransactionDetailsResponse()
+    )
+}
+
+fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example.feature_transaction.domain.model.response.get_txn_list.TransactionDetailsResponse {
+    return com.example.feature_transaction.domain.model.response.get_txn_list.TransactionDetailsResponse(
+        this.trasnactionDetailId,
+        this.transactionId,
+        this.transaction.convertToDomainCreatedTransactionResponse(),
+        this.personId,
+        this.userDetails?.toDomainUserDetails(),
+        this.inviteId,
+        this.inviteDetails?.toInviteDetailsDomain(),
+        this.amount,
+        this.lastUpdated
     )
 }

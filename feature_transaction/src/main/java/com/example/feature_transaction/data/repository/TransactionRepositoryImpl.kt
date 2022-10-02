@@ -8,6 +8,7 @@ import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceRes
 import com.example.feature_transaction.data.mapper.toDomainCreateTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainDeleteTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
+import com.example.feature_transaction.data.mapper.toDomainGetTxnDetailsResponse
 import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
@@ -15,6 +16,7 @@ import com.example.feature_transaction.domain.model.response.add_txn_list.AddTxn
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
+import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.RemoteDataSource
 import com.example.network.Result
@@ -88,6 +90,30 @@ class TransactionRepositoryImpl @Inject constructor(
             safeApiCall({
                 val response = api.addTxnList(txnList.toAddTxnListDTO())
                 emit(Result.Success(data = response.toDomainAddTxnListResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun getTxnDetailsByUserId(userId: Int): Flow<Result<GetTxnListResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.getTxnListForUserId(userId)
+                emit(Result.Success(data = response.toDomainGetTxnDetailsResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun getTxnDetailsByInviteId(inviteId: Int): Flow<Result<GetTxnListResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.getTxnListForInviteId(inviteId)
+                emit(Result.Success(data = response.toDomainGetTxnDetailsResponse()))
             }, { exception ->
                 emit(Result.Error(exception))
             })

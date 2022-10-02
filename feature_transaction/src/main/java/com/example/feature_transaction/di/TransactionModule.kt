@@ -8,6 +8,8 @@ import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
 import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
+import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByInviteIdUseCase
+import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByUserIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,5 +60,17 @@ class TransactionModule {
     @Singleton
     fun provideAddTxnListUseCase(repository: TransactionRepository): AddTxnListUseCase {
         return AddTxnListUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllTxnDetailsByUserIdUseCase(repository: TransactionRepository): GetAllTxnDetailsByUserIdUseCase {
+        return GetAllTxnDetailsByUserIdUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllTxnDetailsByInviteIdUseCase(repository: TransactionRepository): GetAllTxnDetailsByInviteIdUseCase {
+        return GetAllTxnDetailsByInviteIdUseCase(repository)
     }
 }

@@ -7,6 +7,7 @@ import com.example.feature_transaction.data.remote.response.all_members_for_spac
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
+import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -30,4 +31,10 @@ interface TransactionService {
 
     @POST("transaction/details/add")
     suspend fun addTxnList(@Body txnList: AddTxnListDTO): AddTxnListResponse
+
+    @GET("transaction/details/invites")
+    suspend fun getTxnListForInviteId(@Query(value = "userInviteId") userInviteId: Int): GetTxnListResponse
+
+    @GET("transaction/details/user")
+    suspend fun getTxnListForUserId(@Query(value = "userId") userId: Int): GetTxnListResponse
 }
