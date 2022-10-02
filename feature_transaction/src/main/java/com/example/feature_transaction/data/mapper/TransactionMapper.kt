@@ -1,11 +1,12 @@
 package com.example.feature_transaction.data.mapper
 
-import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionBody
+import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionDTO
 import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
+import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 
 fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse {
@@ -109,5 +110,20 @@ fun CreateTransactionResponse.CreatedTransactionResponse.convertToDomainCreatedT
         this.transactionName,
         this.transactionDescription,
         this.lastUpdated
+    )
+}
+
+fun DeleteTransactionResponse.toDomainDeleteTransactionResponse(): com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse {
+    return com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse(
+        this.success,
+        data = this.data.convertToDeletedTransactionResponse()
+    )
+}
+
+fun DeleteTransactionResponse.DeletedTransactionResponse.convertToDeletedTransactionResponse(): com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse.DeletedTransactionResponse {
+    return com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse.DeletedTransactionResponse(
+        this.success,
+        this.message,
+        this.code
     )
 }

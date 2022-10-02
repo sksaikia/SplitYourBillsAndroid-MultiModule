@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
+import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
@@ -28,6 +29,7 @@ class TransactionViewModel @Inject constructor(
     private val getAllSpaceByUserIdUsecase: GetAllSpaceByUserIdUsecase,
     private val getAllSpaceMembersBySpaceIdUsecase: GetAllSpaceMembersBySpaceIdUsecase,
     private val createTransactionUseCase: CreateTransactionUseCase,
+    private val deleteTransactionUseCase: DeleteTransactionUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 

@@ -4,9 +4,10 @@ import android.util.Log
 import com.example.feature_transaction.data.mapper.toCreateTransactionDTO
 import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceResponse
 import com.example.feature_transaction.data.mapper.toDomainCreateTransactionResponse
+import com.example.feature_transaction.data.mapper.toDomainDeleteTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_transaction.data.remote.TransactionService
-import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionBody
+import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
@@ -54,13 +55,25 @@ class TransactionRepositoryImpl @Inject constructor(
 
     override suspend fun createTransaction(createTransactionBody: CreateTransactionBody): Flow<Result<CreateTransactionResponse>> {
         return flow {
-            emit(com.example.network.Result.Loading(isLoading = true))
+            emit(Result.Loading(isLoading = true))
 
             safeApiCall({
-                  val response = api.createTransaction(createTransactionBody.toCreateTransactionDTO())
-                emit(com.example.network.Result.Success(data = response.toDomainCreateTransactionResponse()))
-            },{ exception ->
-                emit(com.example.network.Result.Error(exception))
+                val response = api.createTransaction(createTransactionBody.toCreateTransactionDTO())
+                emit(Result.Success(data = response.toDomainCreateTransactionResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun deleteTransactionById(transactionId: Int): Flow<Result<com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.deleteTransactionById(transactionId)
+                emit(Result.Success(data = response.toDomainDeleteTransactionResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
             })
         }
     }

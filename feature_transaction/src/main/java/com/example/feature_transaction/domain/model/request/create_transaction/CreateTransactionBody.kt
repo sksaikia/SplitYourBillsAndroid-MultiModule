@@ -1,4 +1,4 @@
-package com.example.feature_transaction.data.remote.request.create_transaction
+package com.example.feature_transaction.domain.model.request.create_transaction
 
 
 data class CreateTransactionBody(

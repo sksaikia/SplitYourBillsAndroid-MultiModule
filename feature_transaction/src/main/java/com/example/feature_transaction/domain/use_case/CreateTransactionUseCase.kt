@@ -1,7 +1,6 @@
 package com.example.feature_transaction.domain.use_case
 
-import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionBody
-import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.Result

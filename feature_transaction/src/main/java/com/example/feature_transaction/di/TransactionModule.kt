@@ -4,6 +4,7 @@ import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.data.repository.TransactionRepositoryImpl
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
+import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import dagger.Module
@@ -44,5 +45,11 @@ class TransactionModule {
     @Singleton
     fun provideCreateTransactionUsecase(repository: TransactionRepository): CreateTransactionUseCase {
         return CreateTransactionUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteTransactionUsecase(repository: TransactionRepository): DeleteTransactionUseCase {
+        return DeleteTransactionUseCase(repository)
     }
 }
