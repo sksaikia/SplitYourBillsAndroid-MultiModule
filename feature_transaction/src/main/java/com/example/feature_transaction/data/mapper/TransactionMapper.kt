@@ -1,8 +1,11 @@
 package com.example.feature_transaction.data.mapper
 
+import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionBody
+import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionDTO
 import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 
 fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse {
@@ -84,11 +87,27 @@ fun AllMembersForSpaceResponse.AllMembersForSpaceResponseData.toDomainAllmembers
     )
 }
 
-// fun getSpaceMembers(spaceMembers: List<SingleSpaceMemberResponse>)
-//        : List<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse> {
-//    val list = mutableListOf<com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse>()
-//    spaceMembers.forEach {
-//        list.add(it.toDomainSingleSpaceMemberResponse())
-//    }
-//    return list
-// }
+fun CreateTransactionBody.toCreateTransactionDTO(): CreateTransactionDTO {
+    return CreateTransactionDTO(
+        this.spaceId,
+        this.transactionName,
+        this.transactionDescription
+    )
+}
+
+fun CreateTransactionResponse.toDomainCreateTransactionResponse(): com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse {
+    return com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse(
+        this.success,
+        data = this.data.convertToDomainCreatedTransactionResponse()
+    )
+}
+
+fun CreateTransactionResponse.CreatedTransactionResponse.convertToDomainCreatedTransactionResponse(): com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse.CreatedTransactionResponse {
+    return com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse.CreatedTransactionResponse(
+        this.transactionId,
+        this.spaceId,
+        this.transactionName,
+        this.transactionDescription,
+        this.lastUpdated
+    )
+}

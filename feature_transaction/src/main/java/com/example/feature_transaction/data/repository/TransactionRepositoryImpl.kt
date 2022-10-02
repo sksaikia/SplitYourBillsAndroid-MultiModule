@@ -1,11 +1,15 @@
 package com.example.feature_transaction.data.repository
 
 import android.util.Log
+import com.example.feature_transaction.data.mapper.toCreateTransactionDTO
 import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceResponse
+import com.example.feature_transaction.data.mapper.toDomainCreateTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_transaction.data.remote.TransactionService
+import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.RemoteDataSource
 import com.example.network.Result
@@ -44,6 +48,19 @@ class TransactionRepositoryImpl @Inject constructor(
                 emit(Result.Success(data = response.toDomainAllMembersForSpaceResponse()))
             }, { exception ->
                 emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun createTransaction(createTransactionBody: CreateTransactionBody): Flow<Result<CreateTransactionResponse>> {
+        return flow {
+            emit(com.example.network.Result.Loading(isLoading = true))
+
+            safeApiCall({
+                  val response = api.createTransaction(createTransactionBody.toCreateTransactionDTO())
+                emit(com.example.network.Result.Success(data = response.toDomainCreateTransactionResponse()))
+            },{ exception ->
+                emit(com.example.network.Result.Error(exception))
             })
         }
     }
