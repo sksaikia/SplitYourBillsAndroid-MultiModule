@@ -1,13 +1,16 @@
 package com.example.feature_transaction.data.mapper
 
+import com.example.feature_transaction.data.remote.request.add_txn_list.AddTxnListDTO
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionDTO
 import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
+import com.example.feature_transaction.data.remote.response.add_txn_list.AddTxnListResponse
 import com.example.feature_transaction.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
+import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 
 fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse {
     return com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse(
@@ -125,5 +128,29 @@ fun DeleteTransactionResponse.DeletedTransactionResponse.convertToDeletedTransac
         this.success,
         this.message,
         this.code
+    )
+}
+
+fun AddTxnListBody.toAddTxnListDTO(): AddTxnListDTO {
+    return AddTxnListDTO(
+        this.transactionId,
+        this.personId,
+        this.inviteId,
+        this.amount
+    )
+}
+
+fun AddTxnListResponse.toDomainAddTxnListResponse(): com.example.feature_transaction.domain.model.response.add_txn_list.AddTxnListResponse {
+    return com.example.feature_transaction.domain.model.response.add_txn_list.AddTxnListResponse(
+        this.success,
+        this.data.convertToAddTxnListDetails()
+    )
+}
+
+fun AddTxnListResponse.AddTxnListDetails.convertToAddTxnListDetails(): com.example.feature_transaction.domain.model.response.add_txn_list.AddTxnListResponse.AddTxnListDetails {
+    return com.example.feature_transaction.domain.model.response.add_txn_list.AddTxnListResponse.AddTxnListDetails(
+        this.success,
+        this.failure,
+        this.ignored
     )
 }

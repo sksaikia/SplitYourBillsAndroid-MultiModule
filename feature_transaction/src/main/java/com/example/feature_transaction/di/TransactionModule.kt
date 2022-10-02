@@ -3,6 +3,7 @@ package com.example.feature_transaction.di
 import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.data.repository.TransactionRepositoryImpl
 import com.example.feature_transaction.domain.repository.TransactionRepository
+import com.example.feature_transaction.domain.use_case.AddTxnListUseCase
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
 import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
@@ -51,5 +52,11 @@ class TransactionModule {
     @Singleton
     fun provideDeleteTransactionUsecase(repository: TransactionRepository): DeleteTransactionUseCase {
         return DeleteTransactionUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddTxnListUseCase(repository: TransactionRepository): AddTxnListUseCase {
+        return AddTxnListUseCase(repository)
     }
 }

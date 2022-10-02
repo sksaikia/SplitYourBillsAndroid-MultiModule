@@ -1,6 +1,8 @@
 package com.example.feature_transaction.domain.repository
 
+import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
+import com.example.feature_transaction.domain.model.response.add_txn_list.AddTxnListResponse
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
@@ -16,4 +18,6 @@ interface TransactionRepository {
     suspend fun createTransaction(createTransactionBody: CreateTransactionBody): Flow<Result<CreateTransactionResponse>>
 
     suspend fun deleteTransactionById(transactionId: Int): Flow<Result<DeleteTransactionResponse>>
+
+    suspend fun addTxnList(txnList: AddTxnListBody): Flow<Result<AddTxnListResponse>>
 }

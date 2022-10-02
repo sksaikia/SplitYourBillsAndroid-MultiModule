@@ -1,6 +1,8 @@
 package com.example.feature_transaction.data.remote
 
+import com.example.feature_transaction.data.remote.request.add_txn_list.AddTxnListDTO
 import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionDTO
+import com.example.feature_transaction.data.remote.response.add_txn_list.AddTxnListResponse
 import com.example.feature_transaction.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
@@ -25,4 +27,7 @@ interface TransactionService {
 
     @DELETE("transaction")
     suspend fun deleteTransactionById(@Query(value = "transactionId") transactionId: Int): DeleteTransactionResponse
+
+    @POST("transaction/details/add")
+    suspend fun addTxnList(@Body txnList: AddTxnListDTO): AddTxnListResponse
 }
