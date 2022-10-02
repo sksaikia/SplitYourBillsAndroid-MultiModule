@@ -2,7 +2,6 @@ package com.example.feature_transaction.presentation.screen // ktlint-disable pa
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.util.Log
 import android.widget.DatePicker
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -175,8 +174,10 @@ fun CreateNewTransactionScreen(
                     }
                 }
 
-                UnifyButton(buttonText = "Save TXN")
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
 
+                    UnifyButton(buttonText = "Save TXN")
+                }
                 UnifyText(
                     text = "All contributions",
                     modifier =
