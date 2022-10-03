@@ -37,4 +37,8 @@ interface TransactionService {
 
     @GET("transaction/details/user")
     suspend fun getTxnListForUserId(@Query(value = "userId") userId: Int): GetTxnListResponse
+
+    @GET("transaction/details/single/txn")
+    suspend fun getTxnListForTxnId(@Query(value = "txnId") txnId: Int): GetTxnListResponse
+
 }

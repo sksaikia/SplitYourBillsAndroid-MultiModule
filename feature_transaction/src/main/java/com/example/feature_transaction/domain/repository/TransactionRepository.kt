@@ -25,4 +25,6 @@ interface TransactionRepository {
     suspend fun getTxnDetailsByUserId(userId: Int): Flow<Result<GetTxnListResponse>>
 
     suspend fun getTxnDetailsByInviteId(inviteId: Int): Flow<Result<GetTxnListResponse>>
+
+    suspend fun getTxnDetailsByTxnId(txnId: Int): Flow<Result<GetTxnListResponse>>
 }

@@ -119,4 +119,16 @@ class TransactionRepositoryImpl @Inject constructor(
             })
         }
     }
+
+    override suspend fun getTxnDetailsByTxnId(txnId: Int): Flow<Result<GetTxnListResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.getTxnListForTxnId(txnId)
+                emit(Result.Success(data = response.toDomainGetTxnDetailsResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
 }
