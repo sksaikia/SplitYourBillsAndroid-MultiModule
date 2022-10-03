@@ -9,6 +9,7 @@ import com.example.feature_transaction.data.remote.response.all_members_for_spac
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
+import com.example.feature_transaction.data.remote.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.TransactionDetailsResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
@@ -183,5 +184,12 @@ fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example
         this.inviteDetails?.toInviteDetailsDomain(),
         this.amount,
         this.lastUpdated
+    )
+}
+
+fun GetSingleTxnDetailsResponse.toDomainGetSingleTxnDetails(): com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse {
+    return com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse(
+        this.success,
+        this.data.toDomainTransactionDetailsResponse()
     )
 }

@@ -8,6 +8,7 @@ import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceRes
 import com.example.feature_transaction.data.mapper.toDomainCreateTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainDeleteTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
+import com.example.feature_transaction.data.mapper.toDomainGetSingleTxnDetails
 import com.example.feature_transaction.data.mapper.toDomainGetTxnDetailsResponse
 import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
@@ -16,6 +17,7 @@ import com.example.feature_transaction.domain.model.response.add_txn_list.AddTxn
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
+import com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.RemoteDataSource
@@ -126,6 +128,18 @@ class TransactionRepositoryImpl @Inject constructor(
             safeApiCall({
                 val response = api.getTxnListForTxnId(txnId)
                 emit(Result.Success(data = response.toDomainGetTxnDetailsResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun getTxnDetailsByTxnDetailsId(txnId: Int): Flow<Result<GetSingleTxnDetailsResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.getTxnListForTxnDetailsId(txnId)
+                emit(Result.Success(data = response.toDomainGetSingleTxnDetails()))
             }, { exception ->
                 emit(Result.Error(exception))
             })
