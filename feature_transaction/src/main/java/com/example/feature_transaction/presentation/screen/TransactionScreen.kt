@@ -45,7 +45,7 @@ fun TransactionScreen(navigateTo: (String) -> Unit) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
             }
         },
-        scaffoldState = scaffoldState
+        scaffoldState = scaffoldState,
 
     ) {
         LazyColumn(

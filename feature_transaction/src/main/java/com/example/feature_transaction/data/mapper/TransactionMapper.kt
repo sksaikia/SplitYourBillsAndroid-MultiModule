@@ -9,6 +9,7 @@ import com.example.feature_transaction.data.remote.response.all_members_for_spac
 import com.example.feature_transaction.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.data.remote.response.delete_transaction.DeleteTransactionResponse
+import com.example.feature_transaction.data.remote.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.TransactionDetailsResponse
@@ -191,5 +192,13 @@ fun GetSingleTxnDetailsResponse.toDomainGetSingleTxnDetails(): com.example.featu
     return com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse(
         this.success,
         this.data.toDomainTransactionDetailsResponse()
+    )
+}
+
+fun DeleteTxnDetailsResponse.toDomainDeleteTxnDetailsResponse(): com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse {
+    return com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse(
+        this.success,
+        this.message,
+        this.code
     )
 }

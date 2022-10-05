@@ -7,6 +7,7 @@ import com.example.feature_transaction.domain.model.response.all_member_for_spac
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
 import com.example.feature_transaction.domain.model.response.delete_transaction.DeleteTransactionResponse
+import com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
 import com.example.network.Result
@@ -30,4 +31,6 @@ interface TransactionRepository {
     suspend fun getTxnDetailsByTxnId(txnId: Int): Flow<Result<GetTxnListResponse>>
 
     suspend fun getTxnDetailsByTxnDetailsId(txnId: Int): Flow<Result<GetSingleTxnDetailsResponse>>
+
+    suspend fun deleteTxnDetailsByTxnDetailsId(txnDetailsId: Int): Flow<Result<DeleteTxnDetailsResponse>>
 }

@@ -7,6 +7,7 @@ import com.example.feature_transaction.data.mapper.toDomainAddTxnListResponse
 import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceResponse
 import com.example.feature_transaction.data.mapper.toDomainCreateTransactionResponse
 import com.example.feature_transaction.data.mapper.toDomainDeleteTransactionResponse
+import com.example.feature_transaction.data.mapper.toDomainDeleteTxnDetailsResponse
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_transaction.data.mapper.toDomainGetSingleTxnDetails
 import com.example.feature_transaction.data.mapper.toDomainGetTxnDetailsResponse
@@ -17,6 +18,7 @@ import com.example.feature_transaction.domain.model.response.add_txn_list.AddTxn
 import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse
+import com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
@@ -140,6 +142,18 @@ class TransactionRepositoryImpl @Inject constructor(
             safeApiCall({
                 val response = api.getTxnListForTxnDetailsId(txnId)
                 emit(Result.Success(data = response.toDomainGetSingleTxnDetails()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun deleteTxnDetailsByTxnDetailsId(txnDetailsId: Int): Flow<Result<DeleteTxnDetailsResponse>> {
+        return flow {
+            emit(Result.Loading(isLoading = true))
+            safeApiCall({
+                val response = api.deleteTxnDetailsByTxnDetailsId(txnDetailsId)
+                emit(Result.Success(data = response.toDomainDeleteTxnDetailsResponse()))
             }, { exception ->
                 emit(Result.Error(exception))
             })
