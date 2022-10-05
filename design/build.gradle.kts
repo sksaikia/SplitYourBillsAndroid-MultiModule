@@ -56,5 +56,4 @@ dependencies {
     implementation(ComposeDependencies.navigationCompose)
     implementation(ComposeDependencies.constraintLayoutCompose)
 
-    implementation("com.github.Gurupreet:FontAwesomeCompose:1.1.0")
 }

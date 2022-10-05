@@ -1,5 +1,6 @@
 package com.example.navigation
 
+import androidx.compose.runtime.Composable
 import com.example.common.R
 
 
