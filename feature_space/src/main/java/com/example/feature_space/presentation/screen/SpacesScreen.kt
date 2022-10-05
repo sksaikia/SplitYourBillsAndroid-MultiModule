@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,20 +85,23 @@ fun SpacesScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            UnifySwipeButton(onSwiped = {
-                 swipeButtonState.value = SwipeButtonState.SWIPED
-                 coroutineScope.launch {
-                     delay(1000)
-                     swipeButtonState.value = SwipeButtonState.COLLAPSED
-                 }
-            }, swipeButtonState = swipeButtonState.value,
+            UnifySwipeButton(
+                onSwiped = {
+                    swipeButtonState.value = SwipeButtonState.SWIPED
+                    coroutineScope.launch {
+                        delay(2000)
+                        swipeButtonState.value = SwipeButtonState.COLLAPSED
+                    }
+                },
+                swipeButtonState = swipeButtonState.value,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
                     .height(60.dp),
                 iconPadding = PaddingValues(4.dp),
-                shape = CircleShape,) {
-//
+                shape = CircleShape
+            ) {
+                UnifyText(text = "TATAKAE", fontColor = Color.White)
             }
             TotalBalanceCard(amount = "₹ 5000.00")
 
