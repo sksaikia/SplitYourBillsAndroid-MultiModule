@@ -12,7 +12,7 @@ import com.example.feature_transaction.data.remote.response.delete_transaction.D
 import com.example.feature_transaction.data.remote.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
-import com.example.feature_transaction.data.remote.response.get_txn_list.TransactionDetailsResponse
+import com.example.feature_transaction.data.remote.response.single_txn_details.TransactionDetailsResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.response.get_txn_list.ListOfTransactionDetails
@@ -174,8 +174,8 @@ fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTran
     )
 }
 
-fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example.feature_transaction.domain.model.response.get_txn_list.TransactionDetailsResponse {
-    return com.example.feature_transaction.domain.model.response.get_txn_list.TransactionDetailsResponse(
+fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse {
+    return com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse(
         this.trasnactionDetailId,
         this.transactionId,
         this.transaction.convertToDomainCreatedTransactionResponse(),

@@ -53,8 +53,8 @@ class TransactionRepositoryImpl @Inject constructor(
                 val response = api.getAllMembersForSpecificSpaceId(spaceid)
                 Log.d(
                     "FATAL",
-                    "getSpaceMembersBySpaceId: Repository  : ${response.data?.totalMembers} and " +
-                        "${response.data?.spaceMemberResponse?.getOrNull(0)?.spaceId}"
+                    "getSpaceMembersBySpaceId: Repository  : ${response.data.totalMembers} and " +
+                        "${response.data.spaceMemberResponse.getOrNull(0)?.spaceId}"
                 )
                 emit(Result.Success(data = response.toDomainAllMembersForSpaceResponse()))
             }, { exception ->
@@ -154,6 +154,18 @@ class TransactionRepositoryImpl @Inject constructor(
             safeApiCall({
                 val response = api.deleteTxnDetailsByTxnDetailsId(txnDetailsId)
                 emit(Result.Success(data = response.toDomainDeleteTxnDetailsResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun updateTxnDetailsByTxnDetailsId(txnDetailsId: Int, txnBody: AddTxnListBody): Flow<Result<GetSingleTxnDetailsResponse>> {
+        return flow { emit(com.example.network.Result.Loading(isLoading = true))
+
+            safeApiCall({
+                val response = api.updateSingleTxnDetail(txnDetailsId, txnBody.toAddTxnListDTO())
+                emit(Result.Success(data = response.toDomainGetSingleTxnDetails()))
             }, { exception ->
                 emit(Result.Error(exception))
             })

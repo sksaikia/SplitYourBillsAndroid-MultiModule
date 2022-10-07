@@ -14,6 +14,7 @@ import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecas
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
+import com.example.feature_transaction.domain.use_case.UpdateSingleTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
@@ -38,6 +39,7 @@ class TransactionViewModel @Inject constructor(
     private val getAllTxnDetailsByTxnIdUseCase: GetAllTxnDetailsByTxnIdUseCase,
     private val getSingleTxnDetailsByTxnDetailsIdUsecase: GetSingleTxnDetailsByTxnDetailsIdUsecase,
     private val deleteTransactionDetailsByTxnDetailsIdUseCase: DeleteTransactionDetailsByTxnDetailsIdUseCase,
+    private val updateSingleTxnDetailsByTxnIdUseCase: UpdateSingleTxnDetailsByTxnIdUseCase,
     sessionManager: SessionManager
 ) : ViewModel() {
 

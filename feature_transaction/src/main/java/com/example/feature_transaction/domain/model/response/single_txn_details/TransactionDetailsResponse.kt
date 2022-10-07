@@ -1,4 +1,4 @@
-package com.example.feature_transaction.domain.model.response.get_txn_list
+package com.example.feature_transaction.domain.model.response.single_txn_details
 
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.domain.model.response.create_transaction.CreateTransactionResponse

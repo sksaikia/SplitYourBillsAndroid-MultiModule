@@ -14,6 +14,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -48,5 +49,8 @@ interface TransactionService {
 
     @DELETE("transaction/details")
     suspend fun deleteTxnDetailsByTxnDetailsId(@Query(value = "txnDetailsId") txnDetailsId: Int): DeleteTxnDetailsResponse
+
+    @PUT("/transaction/details")
+    suspend fun updateSingleTxnDetail(@Query(value = "txnDetailsId") txnDetailsId: Int, @Body txnList: AddTxnListDTO): GetSingleTxnDetailsResponse
 
 }

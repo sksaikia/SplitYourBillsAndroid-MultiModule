@@ -1,4 +1,4 @@
-package com.example.feature_transaction.data.remote.response.get_txn_list
+package com.example.feature_transaction.data.remote.response.single_txn_details
 
 import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.data.remote.response.create_transaction.CreateTransactionResponse
