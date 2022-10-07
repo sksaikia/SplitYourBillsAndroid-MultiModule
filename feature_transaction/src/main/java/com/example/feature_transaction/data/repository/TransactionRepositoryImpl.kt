@@ -1,7 +1,8 @@
 package com.example.feature_transaction.data.repository
 
 import android.util.Log
-import com.example.feature_transaction.data.mapper.toAddTxnListDTO
+import com.example.feature_transaction.data.mapper.toAddTxnDTO
+import com.example.feature_transaction.data.mapper.toAddTxnSingleDTO
 import com.example.feature_transaction.data.mapper.toCreateTransactionDTO
 import com.example.feature_transaction.data.mapper.toDomainAddTxnListResponse
 import com.example.feature_transaction.data.mapper.toDomainAllMembersForSpaceResponse
@@ -88,11 +89,11 @@ class TransactionRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addTxnList(txnList: AddTxnListBody): Flow<Result<AddTxnListResponse>> {
+    override suspend fun addTxnList(txnList: List<AddTxnListBody>): Flow<Result<AddTxnListResponse>> {
         return flow {
             emit(Result.Loading(isLoading = true))
             safeApiCall({
-                val response = api.addTxnList(txnList.toAddTxnListDTO())
+                val response = api.addTxnList(txnList.toAddTxnDTO())
                 emit(Result.Success(data = response.toDomainAddTxnListResponse()))
             }, { exception ->
                 emit(Result.Error(exception))
@@ -164,7 +165,7 @@ class TransactionRepositoryImpl @Inject constructor(
         return flow { emit(com.example.network.Result.Loading(isLoading = true))
 
             safeApiCall({
-                val response = api.updateSingleTxnDetail(txnDetailsId, txnBody.toAddTxnListDTO())
+                val response = api.updateSingleTxnDetail(txnDetailsId, txnBody.toAddTxnSingleDTO())
                 emit(Result.Success(data = response.toDomainGetSingleTxnDetails()))
             }, { exception ->
                 emit(Result.Error(exception))

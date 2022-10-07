@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.use_case.AddTxnListUseCase
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
@@ -16,6 +17,7 @@ import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpace
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
 import com.example.feature_transaction.domain.use_case.UpdateSingleTxnDetailsByTxnIdUseCase
+import com.example.feature_transaction.presentation.viewmodel.add_txn_details_list.AddTxnDetailsListEvent
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
@@ -49,6 +51,9 @@ class TransactionViewModel @Inject constructor(
 
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
+
+    private val _addTxnDetailsListEvent = MutableSharedFlow<AddTxnDetailsListEvent>()
+    val addTxnDetailsListEvent = _addTxnDetailsListEvent.asSharedFlow()
 
     private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10, { 0 }))
     val individualContributionValues = _individualContributionValues.asStateFlow()
@@ -172,6 +177,30 @@ class TransactionViewModel @Inject constructor(
                         _transactionId.value = result.data?.data?.transactionId ?: 0
                         _createNewTxnEventFlow.emit(
                             CreateNewTxnEvent.ShowErrorToastForErrorInTransactionCreation(
+                                "${result.message}"
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun addAllTxnList(txnList: List<AddTxnListBody>){
+        viewModelScope.launch {
+            addTxnListUseCase(txnList).collectLatest { result ->
+                when(result) {
+                    is com.example.network.Result.Success -> {
+                        _addTxnDetailsListEvent.emit(
+                            AddTxnDetailsListEvent.SuccessForAddTxnDetailsList
+                        )
+                    }
+                    is com.example.network.Result.Loading -> {
+
+                    }
+                    is com.example.network.Result.Error -> {
+                        _addTxnDetailsListEvent.emit(
+                            AddTxnDetailsListEvent.ShowErrorToast(
                                 "${result.message}"
                             )
                         )

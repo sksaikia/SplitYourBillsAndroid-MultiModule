@@ -23,7 +23,7 @@ interface TransactionRepository {
 
     suspend fun deleteTransactionById(transactionId: Int): Flow<Result<DeleteTransactionResponse>>
 
-    suspend fun addTxnList(txnList: AddTxnListBody): Flow<Result<AddTxnListResponse>>
+    suspend fun addTxnList(txnList: List<AddTxnListBody>): Flow<Result<AddTxnListResponse>>
 
     suspend fun getTxnDetailsByUserId(userId: Int): Flow<Result<GetTxnListResponse>>
 

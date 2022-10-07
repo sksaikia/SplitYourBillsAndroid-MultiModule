@@ -1,7 +1,6 @@
 package com.example.feature_transaction.data.mapper
 
 import com.example.feature_transaction.data.remote.request.add_txn_list.AddTxnListDTO
-import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.data.remote.request.create_transaction.CreateTransactionDTO
 import com.example.feature_transaction.data.remote.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.data.remote.response.add_txn_list.AddTxnListResponse
@@ -15,6 +14,7 @@ import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnL
 import com.example.feature_transaction.data.remote.response.single_txn_details.TransactionDetailsResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
+import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.model.response.get_txn_list.ListOfTransactionDetails
 
 fun GetAllSpacesResponse.toDomainGetAllSpacesResponse(): com.example.feature_transaction.domain.model.response.all_spaces.GetAllSpacesResponse {
@@ -136,7 +136,14 @@ fun DeleteTransactionResponse.DeletedTransactionResponse.convertToDeletedTransac
     )
 }
 
-fun AddTxnListBody.toAddTxnListDTO(): AddTxnListDTO {
+fun List<AddTxnListBody>.toAddTxnDTO(): List<AddTxnListDTO> {
+    val list = mutableListOf<AddTxnListDTO>()
+    this.forEach { list.add(it.toAddTxnSingleDTO())
+    }
+    return list
+}
+
+fun AddTxnListBody.toAddTxnSingleDTO(): AddTxnListDTO {
     return AddTxnListDTO(
         this.transactionId,
         this.personId,
@@ -167,7 +174,7 @@ fun GetTxnListResponse.toDomainGetTxnDetailsResponse(): com.example.feature_tran
     )
 }
 
-fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTransactionDetails.convertToListOfTxnDetails(): ListOfTransactionDetails{
+fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTransactionDetails.convertToListOfTxnDetails(): ListOfTransactionDetails {
     return ListOfTransactionDetails(
         this.totalTransactions,
         this.transactionDetailsResponse.toDomainTransactionDetailsResponse()

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,8 +23,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compositions.UserEditableCard
 import com.example.design.UnifyText
+import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
-import com.example.navigation.NavigationItem
+import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
 
 @Composable
 fun ManualBillSplitScreen(
@@ -77,10 +79,13 @@ fun totalAmount(
     navigateTo: (String) -> Unit,
     transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
+    val spaceMembersState = transactionViewModel.spaceMembersState
     val individualContributionValuesList =
         transactionViewModel.individualContributionValues.collectAsState()
     val currentContributionAmount = transactionViewModel.currentContributionValue.collectAsState()
     val totalAmount = transactionViewModel.amount.collectAsState()
+    val transactionId = transactionViewModel.transactionId.collectAsState()
+
     Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
 
     Row(
@@ -115,7 +120,13 @@ fun totalAmount(
                 modifier = Modifier.clickable {
                     Log.d("EREN", "totalAmount: ${individualContributionValuesList.value}")
                     if (currentContributionAmount.value == totalAmount.value) {
-                        navigateTo(NavigationItem.TransactionScreen.route)
+                        val list =  createRequestBodyForSavingTxnLists(
+                            spaceMembersState,
+                            individualContributionValuesList,
+                            transactionId
+                        )
+                        transactionViewModel.addAllTxnList(list)
+                        //     navigateTo(NavigationItem.TransactionScreen.route)
                     } else {
                         // TODO show Toaster
                     }
@@ -123,4 +134,20 @@ fun totalAmount(
             )
         }
     }
+}
+
+fun createRequestBodyForSavingTxnLists(
+    spaceMembersState: SpaceMembersState,
+    individualContributionValuesList: State<MutableList<Int>>,
+    transactionId: State<Int>
+): MutableList<AddTxnListBody> {
+    val list = mutableListOf<AddTxnListBody>()
+    var i = 0
+    spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.forEach {
+        list.add(AddTxnListBody(transactionId.value,it.personId,it.inviteId,
+            individualContributionValuesList.value[i]
+        ))
+        i++
+    }
+    return list
 }

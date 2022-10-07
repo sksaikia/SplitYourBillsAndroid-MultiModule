@@ -12,7 +12,7 @@ class AddTxnListUseCase(
     private val repository: TransactionRepository
 ) {
 
-    suspend operator fun invoke(addTxnListBody: AddTxnListBody)
+    suspend operator fun invoke(addTxnListBody: List<AddTxnListBody>)
     : Flow<Result<AddTxnListResponse>> {
         return repository.addTxnList(addTxnListBody)
     }

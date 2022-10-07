@@ -33,7 +33,7 @@ interface TransactionService {
     suspend fun deleteTransactionById(@Query(value = "transactionId") transactionId: Int): DeleteTransactionResponse
 
     @POST("transaction/details/add")
-    suspend fun addTxnList(@Body txnList: AddTxnListDTO): AddTxnListResponse
+    suspend fun addTxnList(@Body txnList: List<AddTxnListDTO>): AddTxnListResponse
 
     @GET("transaction/details/invites")
     suspend fun getTxnListForInviteId(@Query(value = "userInviteId") userInviteId: Int): GetTxnListResponse
