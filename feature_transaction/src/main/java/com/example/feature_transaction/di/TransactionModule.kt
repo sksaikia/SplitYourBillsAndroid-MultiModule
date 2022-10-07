@@ -5,13 +5,14 @@ import com.example.feature_transaction.data.repository.TransactionRepositoryImpl
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.feature_transaction.domain.use_case.AddTxnListUseCase
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
+import com.example.feature_transaction.domain.use_case.DeleteTransactionDetailsByTxnDetailsIdUseCase
 import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByInviteIdUseCase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByUserIdUseCase
-import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsId
+import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,7 +85,13 @@ class TransactionModule {
 
     @Provides
     @Singleton
-    fun provideGetSingleTxnDetailsByTxnDetailsId(repository: TransactionRepository): GetSingleTxnDetailsByTxnDetailsId {
-        return GetSingleTxnDetailsByTxnDetailsId(repository)
+    fun provideGetSingleTxnDetailsByTxnDetailsIdUseCase(repository: TransactionRepository): GetSingleTxnDetailsByTxnDetailsIdUsecase {
+        return GetSingleTxnDetailsByTxnDetailsIdUsecase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteTransactionDetailsByTxnDetailsIdUseCase(repository: TransactionRepository): DeleteTransactionDetailsByTxnDetailsIdUseCase {
+        return DeleteTransactionDetailsByTxnDetailsIdUseCase(repository)
     }
 }

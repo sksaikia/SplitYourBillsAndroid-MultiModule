@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_transaction.domain.use_case.AddTxnListUseCase
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
+import com.example.feature_transaction.domain.use_case.DeleteTransactionDetailsByTxnDetailsIdUseCase
 import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
-import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsId
+import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
@@ -35,8 +36,9 @@ class TransactionViewModel @Inject constructor(
     private val deleteTransactionUseCase: DeleteTransactionUseCase,
     private val addTxnListUseCase: AddTxnListUseCase,
     private val getAllTxnDetailsByTxnIdUseCase: GetAllTxnDetailsByTxnIdUseCase,
-    private val getSingleTxnDetailsByTxnDetailsId: GetSingleTxnDetailsByTxnDetailsId,
-    private val sessionManager: SessionManager
+    private val getSingleTxnDetailsByTxnDetailsIdUsecase: GetSingleTxnDetailsByTxnDetailsIdUsecase,
+    private val deleteTransactionDetailsByTxnDetailsIdUseCase: DeleteTransactionDetailsByTxnDetailsIdUseCase,
+    sessionManager: SessionManager
 ) : ViewModel() {
 
     var allSpacesState by mutableStateOf(AllSpacesState())

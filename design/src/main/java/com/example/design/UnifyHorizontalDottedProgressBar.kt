@@ -41,13 +41,13 @@ fun UnifyHorizontalDottedProgressBar() {
 fun DrawCanvas(state: Float, color: Color) {
     Canvas(
         modifier = Modifier
-            .fillMaxWidth().height(60.dp),
+            .fillMaxWidth().height(60.dp)
     ) {
         val radius = (6.dp).value
         val padding = (6.dp).value
 
         for (i in 1..5) {
-            if (i-1 == state.toInt()) {
+            if (i - 1 == state.toInt()) {
                 drawCircle(
                     radius = radius * 2,
                     brush = SolidColor(color),
@@ -67,6 +67,5 @@ fun DrawCanvas(state: Float, color: Color) {
                 )
             }
         }
-
     }
 }
