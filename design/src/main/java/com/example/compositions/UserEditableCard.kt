@@ -35,7 +35,7 @@ fun UserEditableCard(
                         radius = 60f
                     )
                 },
-            text = getShortName(name),
+            text = getShortName(name).uppercase(),
             fontColor = Color.White
         )
         Spacer(modifier = modifier.width(20.dp))

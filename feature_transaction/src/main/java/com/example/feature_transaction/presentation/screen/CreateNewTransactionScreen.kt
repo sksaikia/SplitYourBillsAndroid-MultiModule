@@ -185,7 +185,7 @@ fun CreateNewTransactionScreen(
 
                 val listOfTxnSplits = mutableListOf<String>(
                     "Everyone paid equally",
- //                   "You paid, split Equally",
+                    //                   "You paid, split Equally",
                     "Manually split the bill"
                 )
 
@@ -198,7 +198,9 @@ fun CreateNewTransactionScreen(
                     items(listOfTxnSplits.size) { i ->
                         UnifyButtonSmallType(buttonText = listOfTxnSplits[i], onClickButton = {
                             if (listOfTxnSplits[i] == "Manually split the bill") {
-                                navigateTo(NavigationItem.ManualBillSplitScreen.route)
+                                navigateTo(NavigationItem.ManualBillSplitScreen.withArgs(
+                                    spaceId.value.toString()
+                                ))
                             }
                         })
                     }
@@ -210,7 +212,9 @@ fun CreateNewTransactionScreen(
                 ) {
                     UnifyButton(buttonText = "Save TXN", onClickButton = {
                         transactionViewModel.createANewTransaction(
-                            spaceId.value.toInt(), txnName, txnDescription
+                            spaceId.value.toInt(),
+                            txnName,
+                            txnDescription
                         )
                     })
                 }
@@ -229,15 +233,15 @@ fun CreateNewTransactionScreen(
                     UserCard(
                         name = memberData?.inviteDetails?.inviteName ?: "",
                         shouldShowContributionAmount = true,
-                        amount = transactionViewModel.amount.value
-                                / (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                        amount = transactionViewModel.amount.value /
+                            (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
                     )
                 } else {
                     UserCard(
                         name = memberData.userDetails.username,
                         shouldShowContributionAmount = true,
-                        amount = transactionViewModel.amount.value
-                                / (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                        amount = transactionViewModel.amount.value /
+                            (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))

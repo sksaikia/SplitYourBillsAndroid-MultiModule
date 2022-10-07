@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -27,20 +28,46 @@ import com.example.navigation.NavigationItem
 @Composable
 fun ManualBillSplitScreen(
     navigateTo: (String) -> Unit,
+    spaceId: String? = "0",
     transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
+    val spaceMembersState = transactionViewModel.spaceMembersState
+
+    LaunchedEffect(true) {
+        transactionViewModel.getSpaceMembersBySpaceId(spaceId?.toInt() ?: 0)
+    }
+
     LazyColumn() {
         item {
             totalAmount(navigateTo)
         }
-        items(9) { i ->
-            UserEditableCard("AA 1", onValueChanged = {
-                if (it.isEmpty()) {
-                    transactionViewModel.setIndividualContriDetail(i, 0)
-                } else {
-                    transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
-                }
-            })
+        items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
+            val memberData =
+                spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
+
+            if (memberData?.userDetails == null) {
+                UserEditableCard(
+                    name = memberData?.inviteDetails?.inviteName ?: "",
+                    onValueChanged = {
+                        if (it.isEmpty()) {
+                            transactionViewModel.setIndividualContriDetail(i, 0)
+                        } else {
+                            transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
+                        }
+                    }
+                )
+            } else {
+                UserEditableCard(
+                    name = memberData.userDetails.username,
+                    onValueChanged = {
+                        if (it.isEmpty()) {
+                            transactionViewModel.setIndividualContriDetail(i, 0)
+                        } else {
+                            transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
+                        }
+                    }
+                )
+            }
         }
     }
 }

@@ -144,12 +144,19 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.ManualBillSplitScreen.route
+            route = NavigationItem.ManualBillSplitScreen.route + "/{spaceId}",
+            arguments = listOf(
+                navArgument("spaceId") {
+                    type = NavType.StringType
+                    defaultValue = "0"
+                }
+            )
         ) {
             ManualBillSplitScreen(
                 navigateTo = {
                     navController.navigate(it)
-                }
+                },
+                spaceId = it.arguments?.getString("spaceId")
             )
         }
 
