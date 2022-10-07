@@ -1,4 +1,4 @@
-package com.example.feature_space.presentation.ui_composition
+package com.example.compositions
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.design.UnifyText
@@ -48,34 +47,4 @@ fun UserCard(
     }
 }
 
-fun getShortName(name: String): String {
-    val words = name.split("\\p{Space}".toRegex()).toTypedArray()
-    return if (words.isEmpty()) {
-        ""
-    } else if (words.size == 1) {
-        words[0].toCharArray().getOrNull(0).toString()
-    } else if (words.size == 2) {
-        words[0].toCharArray().getOrNull(0).toString() + words[1].toCharArray().getOrNull(0)
-            .toString()
-    } else {
-        words[0].toCharArray().getOrNull(0).toString() + words[words.size - 1].toCharArray()
-            .getOrNull(0).toString()
-    }
-}
 
-fun getRandomColor(): Color {
-    val colorList = listOf<Color>(
-        Color.Green,
-        Color.Red,
-        Color.Gray,
-        Color.Magenta,
-        Color.Yellow
-    )
-    val state = rand(0, 4)
-    return colorList[state]
-}
-
-fun rand(start: Int, end: Int): Int {
-    require(start <= end) { "Illegal Argument" }
-    return (Math.random() * (end - start + 1)).toInt() + start
-}

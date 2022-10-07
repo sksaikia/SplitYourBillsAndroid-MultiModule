@@ -49,18 +49,30 @@ class TransactionViewModel @Inject constructor(
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
 
-    private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10,{0}))
+    private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10, { 0 }))
     val individualContributionValues = _individualContributionValues.asStateFlow()
 
     private val _currentContributionValue = MutableStateFlow<Int>(0)
     val currentContributionValue = _currentContributionValue.asStateFlow()
+
+    private val _amount = MutableStateFlow<Int>(0)
+    val amount = _amount.asStateFlow()
+
+    fun setAmount(currentAmount: String) {
+        try {
+            _amount.value = currentAmount.toInt()
+            Log.d("LEVI", "setAmount: ${_amount.value}")
+        } catch (e: Exception) {
+            _amount.value = 0
+        }
+    }
 
     fun setIndividualContriDetail(index: Int, value: Int) {
         _individualContributionValues.value[index] = value
         setCurrentContributionValue(_individualContributionValues.value)
     }
 
-    private fun setCurrentContributionValue(list : List<Int>) {
+    private fun setCurrentContributionValue(list: List<Int>) {
         _currentContributionValue.value = 0
         list.forEach {
             _currentContributionValue.value += it

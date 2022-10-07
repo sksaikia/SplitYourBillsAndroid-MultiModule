@@ -28,7 +28,7 @@ import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
-import com.example.feature_space.presentation.ui_composition.UserCard
+import com.example.compositions.UserCard
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
 import com.example.navigation.NavigationItem

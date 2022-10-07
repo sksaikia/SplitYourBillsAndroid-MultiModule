@@ -1,4 +1,4 @@
-package com.example.feature_transaction
+package com.example.feature_transaction.presentation.screen
 
 import android.util.Log
 import androidx.compose.foundation.border
@@ -29,11 +29,9 @@ fun ManualBillSplitScreen(
     navigateTo: (String) -> Unit,
     transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
-    val totalTxnAmount = 800
-
     LazyColumn() {
         item {
-            totalAmount(totalTxnAmount, navigateTo)
+            totalAmount(navigateTo)
         }
         items(9) { i ->
             UserEditableCard("AA 1", onValueChanged = {
@@ -49,13 +47,14 @@ fun ManualBillSplitScreen(
 
 @Composable
 fun totalAmount(
-    totalTxnAmount: Int,
     navigateTo: (String) -> Unit,
     transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
     val individualContributionValuesList =
         transactionViewModel.individualContributionValues.collectAsState()
     val currentContributionAmount = transactionViewModel.currentContributionValue.collectAsState()
+    val totalAmount = transactionViewModel.amount.collectAsState()
+    Log.d("LEVI", "totalAmount: ${totalAmount.value}")
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)
@@ -71,7 +70,7 @@ fun totalAmount(
                 fontWeight = FontWeight.ExtraBold
             )
             UnifyText(
-                text = "/ $totalTxnAmount",
+                text = "/ ${totalAmount.value}",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold
             )
@@ -83,12 +82,12 @@ fun totalAmount(
         ) {
             UnifyText(
                 text = "Save",
-                fontColor = if (currentContributionAmount.value == totalTxnAmount) Color.Blue else Color.Gray,
+                fontColor = if (currentContributionAmount.value == totalAmount.value) Color.Blue else Color.Gray,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
                 modifier = Modifier.clickable {
                     Log.d("EREN", "totalAmount: ${individualContributionValuesList.value}")
-                    if (currentContributionAmount.value == totalTxnAmount) {
+                    if (currentContributionAmount.value == totalAmount.value) {
                         navigateTo(NavigationItem.TransactionScreen.route)
                     } else {
                         // TODO show Toaster

@@ -32,15 +32,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.compositions.UserCard
 import com.example.design.UnifyButton
 import com.example.design.UnifyButtonSmallType
 import com.example.design.UnifyDropDownMenu
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
-import com.example.feature_space.presentation.ui_composition.UserCard
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
+import com.example.navigation.NavigationItem
 import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
@@ -59,6 +60,9 @@ fun CreateNewTransactionScreen(
     var showCalender by remember {
         mutableStateOf(false)
     }
+
+    var txnName by remember { mutableStateOf("") }
+    var txnDescription by remember { mutableStateOf("") }
 
     val mCalendar = Calendar.getInstance()
 
@@ -88,8 +92,10 @@ fun CreateNewTransactionScreen(
         LazyColumn() {
             item {
                 UnifyEditText(headerText = "Title", onValueChanged = {
+                    txnName = it
                 })
                 UnifyEditText(headerText = "Total Amount", onValueChanged = {
+                    transactionViewModel.setAmount(it)
                 })
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -97,7 +103,10 @@ fun CreateNewTransactionScreen(
                     CircularProgressIndicator()
                 }
 
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Column() {
                         UnifyText(
                             text = "When",
@@ -143,9 +152,14 @@ fun CreateNewTransactionScreen(
                         .padding(horizontal = 10.dp)
                 )
 
-                MenuSample(allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers ?: emptyList(), transactionViewModel)
+                MenuSample(
+                    allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers
+                        ?: emptyList(),
+                    transactionViewModel
+                )
 
                 UnifyEditText(headerText = "Note", onValueChanged = {
+                    txnDescription = it
                 })
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -159,7 +173,7 @@ fun CreateNewTransactionScreen(
 
                 val listOfTxnSplits = mutableListOf<String>(
                     "Everyone paid equally",
-                    "You paid, split Equally",
+ //                   "You paid, split Equally",
                     "Manually split the bill"
                 )
 
@@ -170,12 +184,18 @@ fun CreateNewTransactionScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     items(listOfTxnSplits.size) { i ->
-                        UnifyButtonSmallType(buttonText = listOfTxnSplits[i])
+                        UnifyButtonSmallType(buttonText = listOfTxnSplits[i], onClickButton = {
+                            if (listOfTxnSplits[i] == "Manually split the bill") {
+                                navigateTo(NavigationItem.ManualBillSplitScreen.route)
+                            }
+                        })
                     }
                 }
 
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
                     UnifyButton(buttonText = "Save TXN")
                 }
                 UnifyText(
@@ -187,11 +207,22 @@ fun CreateNewTransactionScreen(
             }
 
             items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
-                val memberData = spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
+                val memberData =
+                    spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
                 if (memberData?.userDetails == null) {
-                    UserCard(name = memberData?.inviteDetails?.inviteName ?: "", shouldShowContributionAmount = true, amount = 100)
+                    UserCard(
+                        name = memberData?.inviteDetails?.inviteName ?: "",
+                        shouldShowContributionAmount = true,
+                        amount = transactionViewModel.amount.value
+                                / (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                    )
                 } else {
-                    UserCard(name = memberData.userDetails.username ?: "", shouldShowContributionAmount = true, amount = 100)
+                    UserCard(
+                        name = memberData.userDetails.username,
+                        shouldShowContributionAmount = true,
+                        amount = transactionViewModel.amount.value
+                                / (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                    )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
             }
