@@ -22,6 +22,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,7 +56,8 @@ fun CreateNewTransactionScreen(
 
     val allSpacesState = transactionViewModel.allSpacesState
     val spaceMembersState = transactionViewModel.spaceMembersState
-    var spaceId by remember { mutableStateOf("") }
+
+    val spaceId = transactionViewModel.spaceId.collectAsState()
 
     var showCalender by remember {
         mutableStateOf(false)
@@ -80,6 +82,16 @@ fun CreateNewTransactionScreen(
                 is CreateNewTxnEvent.ShowErrorToastForErrorInSpace -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.errorMessage
+                    )
+                }
+                is CreateNewTxnEvent.ShowErrorToastForErrorInTransactionCreation -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.errorMessage
+                    )
+                }
+                is CreateNewTxnEvent.SuccessCreateTransaction -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = "Successfully Created the Transaction"
                     )
                 }
             }
@@ -196,7 +208,11 @@ fun CreateNewTransactionScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    UnifyButton(buttonText = "Save TXN")
+                    UnifyButton(buttonText = "Save TXN", onClickButton = {
+                        transactionViewModel.createANewTransaction(
+                            spaceId.value.toInt(), txnName, txnDescription
+                        )
+                    })
                 }
                 UnifyText(
                     text = "All contributions",
@@ -264,6 +280,7 @@ fun MenuSample(
                 selectedIndex = index
                 val currentId = spaceMembers[selectedIndex - 1]
                 if (currentId.spaceId != 0) {
+                    transactionViewModel.setSpaceId(currentId.spaceId)
                     transactionViewModel.getSpaceMembersBySpaceId(currentId.spaceId)
                 }
                 billingPeriodExpanded = false

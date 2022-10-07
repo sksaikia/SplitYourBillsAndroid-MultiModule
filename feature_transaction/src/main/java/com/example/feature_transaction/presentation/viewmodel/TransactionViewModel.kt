@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
 import com.example.feature_transaction.domain.use_case.AddTxnListUseCase
 import com.example.feature_transaction.domain.use_case.CreateTransactionUseCase
 import com.example.feature_transaction.domain.use_case.DeleteTransactionDetailsByTxnDetailsIdUseCase
@@ -58,10 +59,20 @@ class TransactionViewModel @Inject constructor(
     private val _amount = MutableStateFlow<Int>(0)
     val amount = _amount.asStateFlow()
 
+    private val _transactionId = MutableStateFlow<Int>(0)
+    val transactionId = _transactionId.asStateFlow()
+
+    private val _spaceId = MutableStateFlow<Int>(0)
+    val spaceId = _spaceId.asStateFlow()
+
+    fun setSpaceId(spaceId: Int) {
+        _spaceId.value = spaceId
+    }
+
     fun setAmount(currentAmount: String) {
         try {
             _amount.value = currentAmount.toInt()
-            Log.d("LEVI", "setAmount: ${_amount.value}")
+            Log.d("LEVI", "ViewModel setAmount: ${_amount.value}")
         } catch (e: Exception) {
             _amount.value = 0
         }
@@ -99,7 +110,11 @@ class TransactionViewModel @Inject constructor(
                         )
                     }
                     is Result.Error -> {
-                        _createNewTxnEventFlow.emit(CreateNewTxnEvent.ShowErrorToastForErrorInSpace("${result.message}"))
+                        _createNewTxnEventFlow.emit(
+                            CreateNewTxnEvent.ShowErrorToastForErrorInSpace(
+                                "${result.message}"
+                            )
+                        )
                     }
                 }
             }
@@ -131,6 +146,35 @@ class TransactionViewModel @Inject constructor(
                             isLoading = false
                         )
                         // Show Error Toast
+                    }
+                }
+            }
+        }
+    }
+
+    fun createANewTransaction(
+        spaceId: Int,
+        transactionName: String,
+        transactionDescription: String
+    ) {
+        val body = CreateTransactionBody(spaceId, transactionName, transactionDescription)
+        viewModelScope.launch {
+            createTransactionUseCase.invoke(body).collectLatest { result ->
+                when (result) {
+                    is com.example.network.Result.Success -> {
+                        _transactionId.value = result.data?.data?.transactionId ?: 0
+                        _createNewTxnEventFlow.emit(CreateNewTxnEvent.SuccessCreateTransaction)
+                    }
+                    is com.example.network.Result.Loading -> {
+                        _transactionId.value = result.data?.data?.transactionId ?: 0
+                    }
+                    is com.example.network.Result.Error -> {
+                        _transactionId.value = result.data?.data?.transactionId ?: 0
+                        _createNewTxnEventFlow.emit(
+                            CreateNewTxnEvent.ShowErrorToastForErrorInTransactionCreation(
+                                "${result.message}"
+                            )
+                        )
                     }
                 }
             }

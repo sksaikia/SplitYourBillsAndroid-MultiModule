@@ -35,7 +35,7 @@ fun ManualBillSplitScreen(
         }
         items(9) { i ->
             UserEditableCard("AA 1", onValueChanged = {
-                if (it.isNullOrEmpty()) {
+                if (it.isEmpty()) {
                     transactionViewModel.setIndividualContriDetail(i, 0)
                 } else {
                     transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
@@ -54,7 +54,7 @@ fun totalAmount(
         transactionViewModel.individualContributionValues.collectAsState()
     val currentContributionAmount = transactionViewModel.currentContributionValue.collectAsState()
     val totalAmount = transactionViewModel.amount.collectAsState()
-    Log.d("LEVI", "totalAmount: ${totalAmount.value}")
+    Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)
