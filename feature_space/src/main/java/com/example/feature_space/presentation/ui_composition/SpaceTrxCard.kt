@@ -1,5 +1,6 @@
 package com.example.feature_space.presentation.ui_composition
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,7 @@ fun SpaceTrxCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 UnifyText(text = headerText, fontSize = 12.sp, fontWeight = FontWeight.Thin)
-                Icon(painterResource(id = icon), contentDescription = "")
+                Image(painterResource(id = icon), contentDescription = "")
             }
             Spacer(modifier = Modifier.height(5.dp))
             UnifyText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)

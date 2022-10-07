@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design.UnifyText
 import com.example.feature_transaction.R
-import com.example.feature_transaction.SpaceTrxCard
+import com.example.feature_transaction.presentation.ui_compositions.SpaceTrxCard
 import com.example.feature_transaction.TotalBalanceCard
 import com.example.feature_transaction.presentation.ui_compositions.TransactionHomeComponent
 import com.example.navigation.NavigationItem
