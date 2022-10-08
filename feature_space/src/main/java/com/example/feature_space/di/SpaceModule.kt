@@ -6,6 +6,7 @@ import com.example.feature_space.domain.repository.SpacesRepository
 import com.example.feature_space.domain.usecase.AddMembersToSpaceUseCase
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.EditSpaceUseCase
+import com.example.feature_space.domain.usecase.GetAllMembersForSpaceIdUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import dagger.Module
@@ -59,5 +60,11 @@ object SpaceModule {
     @Singleton
     fun provideAddMembersToSpaceUsecase(repository: SpacesRepository): AddMembersToSpaceUseCase {
         return AddMembersToSpaceUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllMembersForSpaceIdUseCase(repository: SpacesRepository): GetAllMembersForSpaceIdUseCase {
+        return GetAllMembersForSpaceIdUseCase(repository)
     }
 }

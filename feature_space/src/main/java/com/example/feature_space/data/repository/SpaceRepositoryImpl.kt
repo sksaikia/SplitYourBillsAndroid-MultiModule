@@ -7,6 +7,7 @@ import com.example.feature_space.data.mapper.toDomainAddMembersResponse
 import com.example.feature_space.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_space.data.mapper.toDomainSingleSpaceMemberResponse
 import com.example.feature_space.data.remote.SpaceService
+import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.add_members.AddMembersResponse
@@ -96,6 +97,19 @@ class SpaceRepositoryImpl @Inject constructor(
                     emit(Result.Error(exception))
                 }
             )
+        }
+    }
+
+    override suspend fun getAllMembersForSpaceId(spaceId: Int): Flow<Result<TxnDetailsBySpaceResponse>> {
+        return flow {
+            emit(com.example.network.Result.Loading(isLoading = true))
+
+            safeApiCall({
+               val response = api.getAllMembersForSpaceId(spaceId)
+            },{ exception ->
+                emit(com.example.network.Result.Error(exception))
+            })
+
         }
     }
 }

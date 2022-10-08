@@ -9,6 +9,7 @@ import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.usecase.AddMembersToSpaceUseCase
 import com.example.feature_space.domain.usecase.CreateSpaceUseCase
 import com.example.feature_space.domain.usecase.EditSpaceUseCase
+import com.example.feature_space.domain.usecase.GetAllMembersForSpaceIdUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersEvent
@@ -36,6 +37,7 @@ class SpaceViewModel @Inject constructor(
     private val getSpecificSpaceDetailsBySpaceIdUseCase: GetSpecificSpaceDetailsBySpaceIdUseCase,
     private val editSpaceUseCase: EditSpaceUseCase,
     private val addMembersToSpaceUseCase: AddMembersToSpaceUseCase,
+    private val getAllMembersForSpaceIdUseCase: GetAllMembersForSpaceIdUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 

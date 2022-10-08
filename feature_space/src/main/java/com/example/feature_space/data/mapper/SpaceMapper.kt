@@ -4,6 +4,9 @@ import com.example.feature_space.data.remote.request.add_members.AddMembersDTO
 import com.example.feature_space.data.remote.request.create_space.CreateSpaceDTO
 import com.example.feature_space.data.remote.response.add_members.AddMembersResponse
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_space.data.remote.response.txn_details_by_space.SingleTxnDetailResponse
+import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailResponse
+import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.SpaceDetailsResponse
@@ -149,4 +152,42 @@ fun AddMembersResponse.AddMembersCountResponse.toDomainAddMembersCountResponse()
         this.errors,
         this.ignored
     )
+}
+
+fun TxnDetailsBySpaceResponse.toDomainTxnDetailsBySpaceResponse() : com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailsBySpaceResponse {
+    return com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailsBySpaceResponse(
+        this.success,
+        this.data.convertTxnDetailToDomain()
+    )
+}
+
+fun TxnDetailResponse.convertTxnDetailToDomain() : com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailResponse {
+    return com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailResponse(
+        this.totalTransactions,
+        this.txnDetails.convertToSingleTxnDetailResponseList()
+    )
+}
+
+fun List<SingleTxnDetailResponse>.convertToSingleTxnDetailResponseList(): List<com.example.feature_space.domain.model.response.txn_details_by_space.SingleTxnDetailResponse> {
+    val list = ArrayList<com.example.feature_space.domain.model.response.txn_details_by_space.SingleTxnDetailResponse>()
+    this.forEach {
+        list.add(
+            com.example.feature_space.domain.model.response.txn_details_by_space.SingleTxnDetailResponse(
+                it.transactionDetailId,
+                it.transactionId,
+                it.amount,
+                it.personId,
+                it.inviteId,
+                it.lastUpdated,
+                it.spaceId,
+                it.transactionName,
+                it.transactionDescription,
+                it.spaceName,
+                it.spaceDescription,
+                it.userName,
+                it.inviteName
+            )
+        )
+    }
+    return list
 }

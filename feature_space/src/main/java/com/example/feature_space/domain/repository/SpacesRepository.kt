@@ -1,5 +1,6 @@
 package com.example.feature_space.domain.repository
 
+import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.add_members.AddMembersResponse
@@ -20,4 +21,6 @@ interface SpacesRepository {
     suspend fun editSpaceBySpaceId(createSpaceBody: CreateSpaceBody, spaceId: Int): Flow<Result<CreateSpaceResponse>>
 
     suspend fun addMembersToSpace(addedMembersBody: List<AddMembersBody>): Flow<Result<AddMembersResponse>>
+
+    suspend fun getAllMembersForSpaceId(spaceId: Int): Flow<com.example.network.Result<TxnDetailsBySpaceResponse>>
 }

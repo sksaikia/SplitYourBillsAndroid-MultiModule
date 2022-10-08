@@ -6,6 +6,7 @@ import com.example.feature_space.data.remote.response.add_members.AddMembersResp
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.data.remote.response.create_space.CreateSpaceResponse
 import com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse
+import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -35,4 +36,9 @@ interface SpaceService {
     suspend fun addMembersToSpaces(
         @Body contactList: List<AddMembersDTO>
     ): AddMembersResponse
+
+    @GET("transaction/details")
+    suspend fun getAllMembersForSpaceId(
+        @Query("spaceId") spaceId: Int
+    ): TxnDetailsBySpaceResponse
 }
