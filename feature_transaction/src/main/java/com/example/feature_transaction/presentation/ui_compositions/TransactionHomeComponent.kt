@@ -16,7 +16,12 @@ import com.example.design.UnifyText
 import com.example.feature_transaction.R
 
 @Composable
-fun TransactionHomeComponent() {
+fun TransactionHomeComponent(
+    txnName: String = "",
+    userName: String = "",
+    txnAmount: String = "",
+    txnDate: String = ""
+) {
     Card(
         modifier = Modifier.padding(10.dp),
         shape = RoundedCornerShape(6.dp),
@@ -36,7 +41,7 @@ fun TransactionHomeComponent() {
             )
 
             UnifyText(
-                text = "TATAKAE",
+                text = txnName,
                 modifier = Modifier.padding(horizontal = 10.dp).constrainAs(transactionName) {
                     top.linkTo(parent.top)
                     start.linkTo(icon.end)
@@ -44,7 +49,7 @@ fun TransactionHomeComponent() {
             )
 
             UnifyText(
-                text = "Eren Yeager",
+                text = userName,
                 modifier = Modifier.padding(horizontal = 10.dp).constrainAs(transactionDescription) {
                     top.linkTo(transactionName.bottom)
                     start.linkTo(icon.end)
@@ -52,7 +57,7 @@ fun TransactionHomeComponent() {
             )
 
             UnifyText(
-                text = "111",
+                text = txnAmount,
                 modifier = Modifier.constrainAs(price) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
@@ -60,7 +65,7 @@ fun TransactionHomeComponent() {
             )
 
             UnifyText(
-                text = "222",
+                text = txnDate,
                 modifier = Modifier.constrainAs(date) {
                     top.linkTo(price.bottom)
                     end.linkTo(parent.end)

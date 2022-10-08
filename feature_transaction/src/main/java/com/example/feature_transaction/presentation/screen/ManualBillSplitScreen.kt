@@ -35,8 +35,15 @@ fun ManualBillSplitScreen(
 ) {
     val spaceMembersState = transactionViewModel.spaceMembersState
 
+    val totalAmount = transactionViewModel.amount.collectAsState()
+    val transactionId = transactionViewModel.transactionId.collectAsState()
+
+    Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
+    Log.d("LEVI", "transactionId: ${transactionId.value}")
+
     LaunchedEffect(true) {
         transactionViewModel.getSpaceMembersBySpaceId(spaceId?.toInt() ?: 0)
+
     }
 
     LazyColumn() {
@@ -87,6 +94,7 @@ fun totalAmount(
     val transactionId = transactionViewModel.transactionId.collectAsState()
 
     Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
+    Log.d("LEVI", "transactionId: ${transactionId.value}")
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)

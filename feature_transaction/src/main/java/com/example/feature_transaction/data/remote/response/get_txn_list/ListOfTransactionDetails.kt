@@ -7,5 +7,5 @@ data class ListOfTransactionDetails(
     @SerializedName("totalTransactions")
     val totalTransactions: Int,
     @SerializedName("transactionDetailsResponse")
-    val transactionDetailsResponse: TransactionDetailsResponse,
+    val transactionDetailsResponse: List<TransactionDetailsResponse>,
 )

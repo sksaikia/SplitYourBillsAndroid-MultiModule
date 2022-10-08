@@ -15,12 +15,14 @@ import com.example.feature_transaction.domain.use_case.DeleteTransactionUseCase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceByUserIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpaceIdUsecase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
+import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByUserIdUseCase
 import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
 import com.example.feature_transaction.domain.use_case.UpdateSingleTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.presentation.viewmodel.add_txn_details_list.AddTxnDetailsListEvent
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
+import com.example.feature_transaction.presentation.viewmodel.all_txn_details.AllTxnDetailsState
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,11 +45,13 @@ class TransactionViewModel @Inject constructor(
     private val getSingleTxnDetailsByTxnDetailsIdUsecase: GetSingleTxnDetailsByTxnDetailsIdUsecase,
     private val deleteTransactionDetailsByTxnDetailsIdUseCase: DeleteTransactionDetailsByTxnDetailsIdUseCase,
     private val updateSingleTxnDetailsByTxnIdUseCase: UpdateSingleTxnDetailsByTxnIdUseCase,
-    sessionManager: SessionManager
+    private val getAllTxnDetailsByUserIdUseCase: GetAllTxnDetailsByUserIdUseCase,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
     var allSpacesState by mutableStateOf(AllSpacesState())
     var spaceMembersState by mutableStateOf(SpaceMembersState())
+    var getAllTxnDetailsState by mutableStateOf(AllTxnDetailsState())
 
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
@@ -206,6 +210,34 @@ class TransactionViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun getAllTxnDetailsByUserId() {
+        viewModelScope.launch {
+            getAllTxnDetailsByUserIdUseCase(sessionManager.fetchUserId())
+                .collectLatest { result ->
+                    when (result) {
+                        is com.example.network.Result.Success -> {
+                            getAllTxnDetailsState = getAllTxnDetailsState.copy(
+                                isLoading = false,
+                                allTxnDetails = result.data
+                            )
+                        }
+                        is Result.Loading -> {
+                            getAllTxnDetailsState = getAllTxnDetailsState.copy(
+                                isLoading = true,
+                                allTxnDetails = null
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            getAllTxnDetailsState = getAllTxnDetailsState.copy(
+                                isLoading = false,
+                                allTxnDetails = null
+                            )
+                        }
+                    }
+                }
         }
     }
 }

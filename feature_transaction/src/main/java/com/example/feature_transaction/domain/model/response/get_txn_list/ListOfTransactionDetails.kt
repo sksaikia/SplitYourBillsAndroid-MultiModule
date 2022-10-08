@@ -4,5 +4,5 @@ import com.example.feature_transaction.domain.model.response.single_txn_details.
 
 data class ListOfTransactionDetails(
     val totalTransactions: Int,
-    val transactionDetailsResponse: TransactionDetailsResponse
+    val transactionDetailsResponse: List<TransactionDetailsResponse>
 )

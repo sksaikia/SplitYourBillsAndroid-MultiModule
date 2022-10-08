@@ -181,6 +181,27 @@ fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTran
     )
 }
 
+fun List<TransactionDetailsResponse>.toDomainTransactionDetailsResponse() : List<com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse>{
+    val list = ArrayList<com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse>()
+    this.forEach {
+        list.add(
+            com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse(
+                it.trasnactionDetailId,
+                it.transactionId,
+                it.transaction.convertToDomainCreatedTransactionResponse(),
+                it.personId,
+                it.userDetails?.toDomainUserDetails(),
+                it.inviteId,
+                it.inviteDetails?.toInviteDetailsDomain(),
+                it.amount,
+                it.lastUpdated
+
+            )
+        )
+    }
+    return list
+}
+
 fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse {
     return com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse(
         this.trasnactionDetailId,
