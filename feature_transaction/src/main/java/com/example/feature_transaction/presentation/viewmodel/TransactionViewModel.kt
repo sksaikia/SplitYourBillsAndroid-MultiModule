@@ -186,17 +186,16 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    fun addAllTxnList(txnList: List<AddTxnListBody>){
+    fun addAllTxnList(txnList: List<AddTxnListBody>) {
         viewModelScope.launch {
             addTxnListUseCase(txnList).collectLatest { result ->
-                when(result) {
+                when (result) {
                     is com.example.network.Result.Success -> {
                         _addTxnDetailsListEvent.emit(
                             AddTxnDetailsListEvent.SuccessForAddTxnDetailsList
                         )
                     }
                     is com.example.network.Result.Loading -> {
-
                     }
                     is com.example.network.Result.Error -> {
                         _addTxnDetailsListEvent.emit(

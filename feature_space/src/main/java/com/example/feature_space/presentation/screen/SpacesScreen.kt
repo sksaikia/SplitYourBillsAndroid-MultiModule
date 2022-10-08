@@ -40,8 +40,10 @@ import com.example.feature_space.presentation.ui_composition.SpaceCard
 import com.example.feature_space.presentation.ui_composition.SpaceTrxCard
 import com.example.feature_space.presentation.ui_composition.TotalBalanceCard
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
+import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
 import com.example.navigation.NavigationItem
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -61,6 +63,15 @@ fun SpacesScreen(
 
     LaunchedEffect(key1 = true) {
         spaceViewModel.getAllSpaces()
+        spaceViewModel.allSpacesEventFlow.collectLatest { event ->
+            when(event) {
+                is AllSpacesEvent.ShowErrorToast -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.errorMessage
+                    )
+                }
+            }
+        }
     }
 
     Scaffold(

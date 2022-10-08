@@ -122,6 +122,7 @@ class SpaceViewModel @Inject constructor(
                             getAllSpacesResponse = null,
                             isLoading = false
                         )
+                        _allSpacesEventFlow.emit(AllSpacesEvent.ShowErrorToast("${result.message}"))
                     }
                 }
             }
