@@ -14,6 +14,7 @@ import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersEvent
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersState
+import com.example.feature_space.presentation.viewmodel.all_members.AllMembersForSpaceState
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
@@ -45,7 +46,8 @@ class SpaceViewModel @Inject constructor(
     var allSpacesState by mutableStateOf(AllSpacesState())
     var singleSpaceState by mutableStateOf(SingleSpaceState())
     var editSpaceState by mutableStateOf(EditSpaceState())
-    var allMembersState by mutableStateOf(AddMembersState())
+    var addMembersState by mutableStateOf(AddMembersState())
+    var allMembersForSpaceState by mutableStateOf(AllMembersForSpaceState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
@@ -197,7 +199,7 @@ class SpaceViewModel @Inject constructor(
                 .collectLatest { result ->
                     when(result) {
                         is com.example.network.Result.Success -> {
-                            allMembersState = allMembersState.copy(
+                            addMembersState = addMembersState.copy(
                                 isLoading = false,
                                 response = result.data
                             )
@@ -205,14 +207,42 @@ class SpaceViewModel @Inject constructor(
                         }
 
                         is com.example.network.Result.Error -> {
-                            allMembersState = allMembersState.copy(
+                            addMembersState = addMembersState.copy(
                                 isLoading = false,
                                 response = null
                             )
                         }
                         is com.example.network.Result.Loading -> {
-                            allMembersState = allMembersState.copy(
+                            addMembersState = addMembersState.copy(
                                 isLoading = true
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
+    //TODO dont use this
+    fun getAllMembersForSpaceId(spaceid: Int) {
+        viewModelScope.launch {
+            getAllMembersForSpaceIdUseCase(spaceid)
+                .collectLatest { result ->
+                    when(result) {
+                        is com.example.network.Result.Success -> {
+                            allMembersForSpaceState = allMembersForSpaceState.copy(
+                                isLoading = false,
+                                data = result.data
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            allMembersForSpaceState = allMembersForSpaceState.copy(
+                                isLoading = true
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            allMembersForSpaceState = allMembersForSpaceState.copy(
+                                isLoading = false,
+                                data = null
                             )
                         }
                     }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -45,8 +46,17 @@ fun SpaceDetailsScreen(
 ) {
     val specificSpaceDetailsState = spaceViewModel.singleSpaceState
     val editSpaceState = spaceViewModel.editSpaceState
+    val allMembersForSpaceState = spaceViewModel.allMembersForSpaceState
+
     val scaffoldState = rememberScaffoldState()
     var shouldEdit by remember {
+        mutableStateOf(false)
+    }
+    var shouldShowAllMembersForSpace by remember {
+        mutableStateOf(false)
+    }
+
+    var shouldShowAllTxnDetailsForSpace by remember {
         mutableStateOf(false)
     }
 
@@ -75,6 +85,8 @@ fun SpaceDetailsScreen(
                 }
             }
         }
+
+        spaceViewModel.getAllMembersForSpaceId(spaceId?.toInt() ?: 0)
     }
 
     Scaffold(
@@ -118,7 +130,8 @@ fun SpaceDetailsScreen(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     UnifyText(
-                        text = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription ?: "",
+                        text = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
+                            ?: "",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -137,7 +150,20 @@ fun SpaceDetailsScreen(
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         UnifyButton(buttonText = "All Transactions")
-                        UnifyButton(buttonText = "All members")
+                        UnifyButton(buttonText = "All members", onClickButton = {
+                            shouldShowAllMembersForSpace = !shouldShowAllMembersForSpace
+                        })
+                    }
+
+                    if (shouldShowAllMembersForSpace) {
+                        LazyColumn() {
+                            items(allMembersForSpaceState.data?.data?.totalTransactions ?: 0) { i ->
+                                val memberData = allMembersForSpaceState.data?.data?.txnDetails?.get(i)
+
+
+
+                            }
+                        }
                     }
                 }
             } else {
@@ -160,7 +186,8 @@ fun SpaceDetailsScreen(
                     Spacer(modifier = Modifier.height(20.dp))
                     UnifyEditText(
                         headerText = "Space Description",
-                        editText = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription ?: "",
+                        editText = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
+                            ?: "",
                         onValueChanged = {
                             spaceDescription = it
                         }
@@ -179,4 +206,8 @@ fun SpaceDetailsScreen(
             }
         }
     }
+}
+
+@Composable
+fun composeAllMembersArea() {
 }
