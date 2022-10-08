@@ -56,11 +56,6 @@ fun SpacesScreen(
 
     val allSpacesState = spaceViewModel.allSpacesState
 
-    val swipeButtonState = remember {
-        mutableStateOf(SwipeButtonState.INITIAL)
-    }
-    val coroutineScope = rememberCoroutineScope()
-
     LaunchedEffect(key1 = true) {
         spaceViewModel.getAllSpaces()
         spaceViewModel.allSpacesEventFlow.collectLatest { event ->
@@ -96,24 +91,6 @@ fun SpacesScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            UnifySwipeButton(
-                onSwiped = {
-                    swipeButtonState.value = SwipeButtonState.SWIPED
-                    coroutineScope.launch {
-                        delay(2000)
-                        swipeButtonState.value = SwipeButtonState.COLLAPSED
-                    }
-                },
-                swipeButtonState = swipeButtonState.value,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .height(60.dp),
-                iconPadding = PaddingValues(4.dp),
-                shape = CircleShape
-            ) {
-                UnifyText(text = "TATAKAE", fontColor = Color.White)
-            }
             TotalBalanceCard(amount = "₹ 5000.00")
 
 //            Row {

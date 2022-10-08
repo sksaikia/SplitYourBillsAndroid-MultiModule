@@ -62,7 +62,8 @@ fun UnifySwipeButton(
     icon: ImageVector = Icons.Default.ArrowForward,
     rotateIcon: Boolean = true,
     iconPadding: PaddingValues = PaddingValues(2.dp),
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
+    onClickButton : () -> Unit = {},
 ) {
     val contentColor by colors.contentColor(enabled)
     val dragOffset = remember {
@@ -101,7 +102,7 @@ fun UnifySwipeButton(
                     }
 
                     IconButton(
-                        onClick = { },
+                        onClick = {},
                         modifier = Modifier
                             .scale(animatedProgress.value)
                             .padding(iconPadding)
