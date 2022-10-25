@@ -3,6 +3,7 @@ package com.example.feature_space.data.remote // ktlint-disable package-name
 import com.example.feature_space.data.remote.request.add_members.AddMembersDTO
 import com.example.feature_space.data.remote.request.create_space.CreateSpaceDTO
 import com.example.feature_space.data.remote.response.add_members.AddMembersResponse
+import com.example.feature_space.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.data.remote.response.create_space.CreateSpaceResponse
 import com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse
@@ -37,8 +38,8 @@ interface SpaceService {
         @Body contactList: List<AddMembersDTO>
     ): AddMembersResponse
 
-    @GET("transaction/details")
-    suspend fun getAllMembersForSpaceId(
-        @Query("spaceId") spaceId: Int
-    ): TxnDetailsBySpaceResponse
+    @GET("spaces/member/{spaceId}")
+    suspend fun getAllMembersForSpecificSpaceId(@Path(value = "spaceId") spaceId: Int): AllMembersForSpaceResponse
+
+
 }

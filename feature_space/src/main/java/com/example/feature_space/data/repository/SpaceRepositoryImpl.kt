@@ -1,13 +1,14 @@
 package com.example.feature_space.data.repository
 
+import android.util.Log
 import com.example.feature_space.data.mapper.convertToCreateSpaceBodyData
 import com.example.feature_space.data.mapper.convertToCreateSpaceResponseBodyData
 import com.example.feature_space.data.mapper.toDataAddMembersBody
 import com.example.feature_space.data.mapper.toDomainAddMembersResponse
+import com.example.feature_space.data.mapper.toDomainAllMembersForSpaceResponse
 import com.example.feature_space.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_space.data.mapper.toDomainSingleSpaceMemberResponse
 import com.example.feature_space.data.remote.SpaceService
-import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.domain.model.request.create_space.CreateSpaceBody
 import com.example.feature_space.domain.model.response.add_members.AddMembersResponse
@@ -100,16 +101,17 @@ class SpaceRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAllMembersForSpaceId(spaceId: Int): Flow<Result<TxnDetailsBySpaceResponse>> {
+    override suspend fun getAllMembersBySpaceId(spaceid: Int): Flow<Result<com.example.feature_space.domain.model.response.all_member_for_space.AllMembersForSpaceResponse>> {
         return flow {
-            emit(com.example.network.Result.Loading(isLoading = true))
+            emit(Result.Loading(isLoading = true))
 
             safeApiCall({
-               val response = api.getAllMembersForSpaceId(spaceId)
-            },{ exception ->
-                emit(com.example.network.Result.Error(exception))
+                val response = api.getAllMembersForSpecificSpaceId(spaceid)
+                emit(Result.Success(data = response.toDomainAllMembersForSpaceResponse()))
+            }, { exception ->
+                emit(Result.Error(exception))
             })
-
         }
     }
+
 }
