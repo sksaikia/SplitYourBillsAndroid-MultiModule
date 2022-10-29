@@ -17,9 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.example.authentication.presentation.viewModel.AuthenticationViewModel
-import com.example.authentication.presentation.viewModel.login.LoginEvent
 import com.example.authentication.presentation.viewModel.registration.RegistrationEvent
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
