@@ -1,5 +1,6 @@
 package com.example.util
 
+import com.example.util.DateHelper.formatDate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -7,6 +8,10 @@ object DateHelper {
 
     fun String.formatDate(): String {
         return this.toDate().formatTo("dd MMM yyyy")
+    }
+
+    fun String.formatDateOnly(): String {
+        return this.toDate().formatTo("dd - MMM")
     }
 
     fun String.toDate(dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss", timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {

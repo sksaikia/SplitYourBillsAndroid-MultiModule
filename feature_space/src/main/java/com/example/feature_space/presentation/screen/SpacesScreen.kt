@@ -33,6 +33,7 @@ import com.example.feature_space.presentation.ui_composition.TotalBalanceCard
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.all_spaces.AllSpacesEvent
 import com.example.navigation.NavigationItem
+import com.example.util.DateHelper.formatDateOnly
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -124,7 +125,7 @@ fun SpacesScreen(
                     val spaceMember = allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.get(i)
                     SpaceCard(
                         spaceName = (spaceMember?.spaceDetailsResponse?.spaceName ?: 0).toString(),
-                        date = "28 - Jan",
+                        date = (spaceMember?.spaceDetailsResponse?.lastUpdated?.formatDateOnly() ?: ""),
                         otherUserCount = 3,
                         amount = 1170,
                         modifier = Modifier.clickable {
