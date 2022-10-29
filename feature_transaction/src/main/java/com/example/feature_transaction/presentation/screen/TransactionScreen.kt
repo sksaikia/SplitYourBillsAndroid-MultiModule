@@ -30,6 +30,7 @@ import com.example.feature_transaction.presentation.ui_compositions.SpaceTrxCard
 import com.example.feature_transaction.presentation.ui_compositions.TransactionHomeComponent
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.navigation.NavigationItem
+import com.example.util.DateHelper.formatDate
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -104,8 +105,8 @@ fun TransactionScreen(
                     TransactionHomeComponent(
                         txnName = txnDetail?.transaction?.transactionName ?: "",
                         userName = txnDetail?.inviteDetails?.inviteName ?: "",
-                        txnAmount = txnDetail?.amount.toString(),
-                        txnDate = txnDetail?.lastUpdated ?: "",
+                        txnAmount = "₹ ${txnDetail?.amount}",
+                        txnDate = txnDetail?.lastUpdated?.formatDate() ?: "",
                         modifier = Modifier.clickable {
                             navigateTo(
                                 NavigationItem.TransactionDetailsScreen.withArgs(
@@ -118,8 +119,8 @@ fun TransactionScreen(
                     TransactionHomeComponent(
                         txnName = txnDetail.transaction.transactionName,
                         userName = txnDetail.userDetails.username,
-                        txnAmount = txnDetail.amount.toString(),
-                        txnDate = txnDetail.lastUpdated,
+                        txnAmount = "₹ ${txnDetail.amount}",
+                        txnDate = txnDetail.lastUpdated.formatDate(),
                         modifier = Modifier.clickable {
                             navigateTo(
                                 NavigationItem.TransactionDetailsScreen.withArgs(

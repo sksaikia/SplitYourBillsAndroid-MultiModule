@@ -18,8 +18,7 @@ import com.example.compositions.UserCard
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
-import com.example.util.DateHelper.formatTo
-import com.example.util.DateHelper.toDate
+import com.example.util.DateHelper.formatDate
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -70,7 +69,7 @@ fun TransactionDetailsScreen(
                     UnifyText(text = "When", fontSize = 12.sp, fontWeight = FontWeight.Normal)
                     Spacer(modifier = Modifier.height(6.dp))
                     UnifyText(
-                        text = data?.lastUpdated?.toDate()?.formatTo("dd MMM yyyy") ?: "",
+                        text = data?.lastUpdated?.formatDate() ?: "",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )

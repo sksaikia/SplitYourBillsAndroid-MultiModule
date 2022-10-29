@@ -4,6 +4,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateHelper {
+
+    fun String.formatDate(): String {
+        return this.toDate().formatTo("dd MMM yyyy")
+    }
+
     fun String.toDate(dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss", timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
         val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
         parser.timeZone = timeZone
