@@ -71,7 +71,7 @@ fun ManualBillSplitScreen(
     }
 
     Scaffold(scaffoldState = scaffoldState) {
-        LazyColumn() {
+        LazyColumn {
             item {
                 totalAmount(navigateTo)
             }

@@ -156,7 +156,7 @@ fun SpaceDetailsScreen(
                     }
 
                     if (shouldShowAllMembersForSpace) {
-                        LazyColumn() {
+                        LazyColumn {
                             items(allMembersForSpaceState.data?.data?.totalMembers?: 0) { i ->
                                 val memberData = allMembersForSpaceState.data?.data?.spaceMemberResponse?.get(i)
 

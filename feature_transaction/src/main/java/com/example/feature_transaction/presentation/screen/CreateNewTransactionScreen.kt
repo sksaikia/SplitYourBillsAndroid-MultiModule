@@ -101,7 +101,7 @@ fun CreateNewTransactionScreen(
     var date by remember { mutableStateOf("") }
 
     Scaffold(scaffoldState = scaffoldState) {
-        LazyColumn() {
+        LazyColumn {
             item {
                 UnifyEditText(headerText = "Title", onValueChanged = {
                     txnName = it
@@ -119,7 +119,7 @@ fun CreateNewTransactionScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column() {
+                    Column {
                         UnifyText(
                             text = "When",
                             modifier = Modifier
@@ -246,7 +246,7 @@ fun CreateNewTransactionScreen(
                         name = memberData.userDetails.username,
                         shouldShowContributionAmount = true,
                         amount = transactionViewModel.amount.value /
-                            (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                            (spaceMembersState.allSpaceMembers.data.totalMembers ?: 1)
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))

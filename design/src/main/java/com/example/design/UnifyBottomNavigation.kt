@@ -21,7 +21,7 @@ import com.example.navigation.NavigationItem
 
 @Composable
 fun UnifyBottomNavigation(navController : NavController, items : List<NavigationItem>) {
-    Column() {
+    Column {
         Divider(thickness = 1.dp,color = Color.Black.copy(0.4f))
         BottomNavigation(
             backgroundColor = Color.White,

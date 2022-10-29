@@ -86,7 +86,7 @@ fun ContactPickerScreen(
     val listOfContacts = mutableListOf<Contact>()
 
     val selectedStates = remember {
-        contactsState.contacts?.let { List(it.size) { index -> index to false }?.toMutableStateMap() }
+        contactsState.contacts?.let { List(it.size) { index -> index to false }.toMutableStateMap() }
     }
 
     if (permissionState.allPermissionsGranted) {
@@ -173,7 +173,7 @@ fun ListItemView(contact: Contact, selectedStates: SnapshotStateMap<Int, Boolean
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column() {
+            Column {
                 UnifyText(
                     text = contact.name ?: "",
                     fontSize = if (selectedStates[index] == false) 24.sp else 12.sp
