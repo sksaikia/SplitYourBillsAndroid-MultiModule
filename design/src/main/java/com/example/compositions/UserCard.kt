@@ -25,7 +25,7 @@ fun UserCard(
     amount: Int = 0
 ) {
     Row(
-        modifier = modifier.padding(horizontal = 20.dp).fillMaxWidth().padding(16.dp),
+        modifier = modifier.fillMaxWidth().padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -45,7 +45,7 @@ fun UserCard(
         UnifyText(text = name)
         Spacer(modifier = modifier.width(100.dp))
         if (shouldShowContributionAmount) {
-            UnifyText(text = amount.toString(), fontWeight = FontWeight.Bold)
+            UnifyText(text = "₹ $amount", fontWeight = FontWeight.Bold)
         }
     }
 }
