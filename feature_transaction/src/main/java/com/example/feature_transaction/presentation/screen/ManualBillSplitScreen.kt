@@ -1,5 +1,6 @@
 package com.example.feature_transaction.presentation.screen
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
@@ -25,8 +28,18 @@ import com.example.compositions.UserEditableCard
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
+import com.example.feature_transaction.presentation.viewmodel.add_txn_details_list.AddTxnDetailsListEvent
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
+import com.example.navigation.NavigationItem
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 
+/**
+ * activityViewModel is used because we have to share the viewModel between multiple screens.
+ * doing hiltViewModel makes it attached to a single screen , so we can not share any variable
+ * via the view model
+ * **/
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ManualBillSplitScreen(
     navigateTo: (String) -> Unit,
@@ -34,47 +47,68 @@ fun ManualBillSplitScreen(
     transactionViewModel: TransactionViewModel = activityViewModel()
 ) {
     val spaceMembersState = transactionViewModel.spaceMembersState
+    val scaffoldState = rememberScaffoldState()
 
-    val totalAmount = transactionViewModel.amount.collectAsState()
-    val transactionId = transactionViewModel.transactionId.collectAsState()
-
-    Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
-    Log.d("LEVI", "transactionId: ${transactionId.value}")
 
     LaunchedEffect(true) {
         transactionViewModel.getSpaceMembersBySpaceId(spaceId?.toInt() ?: 0)
+
+        transactionViewModel.addTxnDetailsListEvent.collectLatest { event ->
+            when(event) {
+                is AddTxnDetailsListEvent.ShowErrorToast -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.errorMessage
+                    )
+                }
+                is AddTxnDetailsListEvent.SuccessForAddTxnDetailsList -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = "Successfully added TXNs"
+                    )
+                    delay(1000L)
+                    navigateTo(NavigationItem.TransactionScreen.route)
+                }
+            }
+        }
     }
 
-    LazyColumn() {
-        item {
-            totalAmount(navigateTo)
-        }
-        items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
-            val memberData =
-                spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
+    Scaffold(scaffoldState = scaffoldState) {
+        LazyColumn() {
+            item {
+                totalAmount(navigateTo)
+            }
+            items(spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 0) { i ->
+                val memberData =
+                    spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.get(i)
 
-            if (memberData?.userDetails == null) {
-                UserEditableCard(
-                    name = memberData?.inviteDetails?.inviteName ?: "",
-                    onValueChanged = {
-                        if (it.isEmpty()) {
-                            transactionViewModel.setIndividualContriDetail(i, 0)
-                        } else {
-                            transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
+                if (memberData?.userDetails == null) {
+                    UserEditableCard(
+                        name = memberData?.inviteDetails?.inviteName ?: "",
+                        onValueChanged = {
+                            if (it.isEmpty()) {
+                                transactionViewModel.setIndividualContriDetail(i, 0)
+                            } else {
+                                transactionViewModel.setIndividualContriDetail(
+                                    i,
+                                    it.toIntOrNull() ?: 0
+                                )
+                            }
                         }
-                    }
-                )
-            } else {
-                UserEditableCard(
-                    name = memberData.userDetails.username,
-                    onValueChanged = {
-                        if (it.isEmpty()) {
-                            transactionViewModel.setIndividualContriDetail(i, 0)
-                        } else {
-                            transactionViewModel.setIndividualContriDetail(i, it.toIntOrNull() ?: 0)
+                    )
+                } else {
+                    UserEditableCard(
+                        name = memberData.userDetails.username,
+                        onValueChanged = {
+                            if (it.isEmpty()) {
+                                transactionViewModel.setIndividualContriDetail(i, 0)
+                            } else {
+                                transactionViewModel.setIndividualContriDetail(
+                                    i,
+                                    it.toIntOrNull() ?: 0
+                                )
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }
@@ -91,9 +125,6 @@ fun totalAmount(
     val currentContributionAmount = transactionViewModel.currentContributionValue.collectAsState()
     val totalAmount = transactionViewModel.amount.collectAsState()
     val transactionId = transactionViewModel.transactionId.collectAsState()
-
-    Log.d("LEVI", "Fragment totalAmount: ${totalAmount.value}")
-    Log.d("LEVI", "transactionId: ${transactionId.value}")
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)
