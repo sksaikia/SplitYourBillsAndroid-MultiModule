@@ -27,7 +27,7 @@ interface TransactionService {
     suspend fun getAllMembersForSpecificSpaceId(@Path(value = "spaceId") spaceId: Int): AllMembersForSpaceResponse
 
     @POST("transaction/add")
-    suspend fun createTransaction(@Body createTransactionDTO: CreateTransactionDTO) : CreateTransactionResponse
+    suspend fun createTransaction(@Body createTransactionDTO: CreateTransactionDTO): CreateTransactionResponse
 
     @DELETE("transaction")
     suspend fun deleteTransactionById(@Query(value = "transactionId") transactionId: Int): DeleteTransactionResponse
@@ -51,6 +51,8 @@ interface TransactionService {
     suspend fun deleteTxnDetailsByTxnDetailsId(@Query(value = "txnDetailsId") txnDetailsId: Int): DeleteTxnDetailsResponse
 
     @PUT("/transaction/details")
-    suspend fun updateSingleTxnDetail(@Query(value = "txnDetailsId") txnDetailsId: Int, @Body txnList: AddTxnListDTO): GetSingleTxnDetailsResponse
-
+    suspend fun updateSingleTxnDetail(
+        @Query(value = "txnDetailsId") txnDetailsId: Int,
+        @Body txnList: AddTxnListDTO
+    ): GetSingleTxnDetailsResponse
 }

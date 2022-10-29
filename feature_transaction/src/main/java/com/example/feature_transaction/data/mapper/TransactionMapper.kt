@@ -138,7 +138,8 @@ fun DeleteTransactionResponse.DeletedTransactionResponse.convertToDeletedTransac
 
 fun List<AddTxnListBody>.toAddTxnDTO(): List<AddTxnListDTO> {
     val list = mutableListOf<AddTxnListDTO>()
-    this.forEach { list.add(it.toAddTxnSingleDTO())
+    this.forEach {
+        list.add(it.toAddTxnSingleDTO())
     }
     return list
 }
@@ -181,7 +182,7 @@ fun com.example.feature_transaction.data.remote.response.get_txn_list.ListOfTran
     )
 }
 
-fun List<TransactionDetailsResponse>.toDomainTransactionDetailsResponse() : List<com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse>{
+fun List<TransactionDetailsResponse>.toDomainTransactionDetailsResponse(): List<com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse> {
     val list = ArrayList<com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse>()
     this.forEach {
         list.add(

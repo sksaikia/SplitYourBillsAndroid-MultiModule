@@ -10,8 +10,7 @@ class CreateTransactionUseCase(
     private val repository: TransactionRepository
 ) {
 
-    suspend operator fun invoke(createTransactionBody: CreateTransactionBody)
-    : Flow<Result<CreateTransactionResponse>> {
+    suspend operator fun invoke(createTransactionBody: CreateTransactionBody): Flow<Result<CreateTransactionResponse>> {
         return repository.createTransaction(createTransactionBody)
     }
 }

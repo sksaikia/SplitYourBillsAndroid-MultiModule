@@ -5,7 +5,7 @@ import com.example.feature_transaction.data.remote.response.create_transaction.C
 import com.google.gson.annotations.SerializedName
 
 data class TransactionDetailsResponse(
-    //TYPO here
+    // TYPO here
     @SerializedName("trasnactionDetailId")
     val trasnactionDetailId: Int,
     @SerializedName("transactionId")

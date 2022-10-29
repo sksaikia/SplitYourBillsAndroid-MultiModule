@@ -49,12 +49,11 @@ fun ManualBillSplitScreen(
     val spaceMembersState = transactionViewModel.spaceMembersState
     val scaffoldState = rememberScaffoldState()
 
-
     LaunchedEffect(true) {
         transactionViewModel.getSpaceMembersBySpaceId(spaceId?.toInt() ?: 0)
 
         transactionViewModel.addTxnDetailsListEvent.collectLatest { event ->
-            when(event) {
+            when (event) {
                 is AddTxnDetailsListEvent.ShowErrorToast -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.errorMessage

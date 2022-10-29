@@ -25,9 +25,9 @@ import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxn
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.RemoteDataSource
 import com.example.network.Result
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 class TransactionRepositoryImpl @Inject constructor(
     private val api: TransactionService
@@ -162,7 +162,8 @@ class TransactionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateTxnDetailsByTxnDetailsId(txnDetailsId: Int, txnBody: AddTxnListBody): Flow<Result<GetSingleTxnDetailsResponse>> {
-        return flow { emit(com.example.network.Result.Loading(isLoading = true))
+        return flow {
+            emit(com.example.network.Result.Loading(isLoading = true))
 
             safeApiCall({
                 val response = api.updateSingleTxnDetail(txnDetailsId, txnBody.toAddTxnSingleDTO())

@@ -1,6 +1,5 @@
 package com.example.feature_transaction.domain.use_case
 
-import com.example.feature_transaction.domain.model.response.all_member_for_space.AllMembersForSpaceResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.Result
