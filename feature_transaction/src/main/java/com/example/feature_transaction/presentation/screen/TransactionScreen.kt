@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ViewModelHelper.activityViewModel
 import com.example.design.UnifyText
 import com.example.feature_transaction.R
 import com.example.feature_transaction.TotalBalanceCard
@@ -34,7 +34,7 @@ import com.example.navigation.NavigationItem
 @Composable
 fun TransactionScreen(
     navigateTo: (String) -> Unit,
-    transactionViewModel: TransactionViewModel = hiltViewModel()
+    transactionViewModel: TransactionViewModel = activityViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
 
@@ -114,7 +114,6 @@ fun TransactionScreen(
                         txnDate = txnDetail?.lastUpdated ?: ""
                     )
                 }
-
             }
 
 //            Row {

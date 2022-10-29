@@ -32,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.UserCard
 import com.example.design.UnifyButton
 import com.example.design.UnifyButtonSmallType
@@ -50,7 +50,7 @@ import java.util.*
 @Composable
 fun CreateNewTransactionScreen(
     navigateTo: (String) -> Unit,
-    transactionViewModel: TransactionViewModel = hiltViewModel()
+    transactionViewModel: TransactionViewModel = activityViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
 
@@ -176,6 +176,21 @@ fun CreateNewTransactionScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    UnifyButton(buttonText = "Save TXN", onClickButton = {
+                        transactionViewModel.createANewTransaction(
+                            spaceId.value,
+                            txnName,
+                            txnDescription
+                        )
+                    })
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
                 UnifyText(
                     text = "Select Contribution type",
                     modifier =
@@ -198,26 +213,16 @@ fun CreateNewTransactionScreen(
                     items(listOfTxnSplits.size) { i ->
                         UnifyButtonSmallType(buttonText = listOfTxnSplits[i], onClickButton = {
                             if (listOfTxnSplits[i] == "Manually split the bill") {
-                                navigateTo(NavigationItem.ManualBillSplitScreen.withArgs(
-                                    spaceId.value.toString()
-                                ))
+                                navigateTo(
+                                    NavigationItem.ManualBillSplitScreen.withArgs(
+                                        spaceId.value.toString()
+                                    )
+                                )
                             }
                         })
                     }
                 }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    UnifyButton(buttonText = "Save TXN", onClickButton = {
-                        transactionViewModel.createANewTransaction(
-                            spaceId.value.toInt(),
-                            txnName,
-                            txnDescription
-                        )
-                    })
-                }
                 UnifyText(
                     text = "All contributions",
                     modifier =

@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.UserEditableCard
 import com.example.design.UnifyText
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
@@ -31,7 +31,7 @@ import com.example.feature_transaction.presentation.viewmodel.all_space_members.
 fun ManualBillSplitScreen(
     navigateTo: (String) -> Unit,
     spaceId: String? = "0",
-    transactionViewModel: TransactionViewModel = hiltViewModel()
+    transactionViewModel: TransactionViewModel = activityViewModel()
 ) {
     val spaceMembersState = transactionViewModel.spaceMembersState
 
@@ -43,7 +43,6 @@ fun ManualBillSplitScreen(
 
     LaunchedEffect(true) {
         transactionViewModel.getSpaceMembersBySpaceId(spaceId?.toInt() ?: 0)
-
     }
 
     LazyColumn() {
@@ -84,7 +83,7 @@ fun ManualBillSplitScreen(
 @Composable
 fun totalAmount(
     navigateTo: (String) -> Unit,
-    transactionViewModel: TransactionViewModel = hiltViewModel()
+    transactionViewModel: TransactionViewModel = activityViewModel()
 ) {
     val spaceMembersState = transactionViewModel.spaceMembersState
     val individualContributionValuesList =
@@ -128,7 +127,7 @@ fun totalAmount(
                 modifier = Modifier.clickable {
                     Log.d("EREN", "totalAmount: ${individualContributionValuesList.value}")
                     if (currentContributionAmount.value == totalAmount.value) {
-                        val list =  createRequestBodyForSavingTxnLists(
+                        val list = createRequestBodyForSavingTxnLists(
                             spaceMembersState,
                             individualContributionValuesList,
                             transactionId
@@ -152,9 +151,14 @@ fun createRequestBodyForSavingTxnLists(
     val list = mutableListOf<AddTxnListBody>()
     var i = 0
     spaceMembersState.allSpaceMembers?.data?.spaceMemberResponse?.forEach {
-        list.add(AddTxnListBody(transactionId.value,it.personId,it.inviteId,
-            individualContributionValuesList.value[i]
-        ))
+        list.add(
+            AddTxnListBody(
+                transactionId.value,
+                it.personId,
+                it.inviteId,
+                individualContributionValuesList.value[i]
+            )
+        )
         i++
     }
     return list

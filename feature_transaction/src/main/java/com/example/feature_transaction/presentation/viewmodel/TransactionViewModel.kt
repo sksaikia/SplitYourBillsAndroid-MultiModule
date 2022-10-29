@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
@@ -73,6 +74,10 @@ class TransactionViewModel @Inject constructor(
 
     private val _spaceId = MutableStateFlow<Int>(0)
     val spaceId = _spaceId.asStateFlow()
+
+    init {
+        Log.d("LEVI", "Init called")
+    }
 
     fun setSpaceId(spaceId: Int) {
         _spaceId.value = spaceId
