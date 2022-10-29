@@ -52,6 +52,7 @@ class TransactionViewModel @Inject constructor(
     var allSpacesState by mutableStateOf(AllSpacesState())
     var spaceMembersState by mutableStateOf(SpaceMembersState())
     var getAllTxnDetailsState by mutableStateOf(AllTxnDetailsState())
+    var getAllTxnDetailsByTxnIdState by mutableStateOf(AllTxnDetailsState())
 
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
@@ -238,6 +239,33 @@ class TransactionViewModel @Inject constructor(
                             getAllTxnDetailsState = getAllTxnDetailsState.copy(
                                 isLoading = false,
                                 allTxnDetails = null
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getAllTxnDetailsByTxnId(txnId: Int) {
+        viewModelScope.launch {
+            getAllTxnDetailsByTxnIdUseCase.invoke(txnId)
+                .collectLatest { result ->
+                    when (result) {
+                        is com.example.network.Result.Success -> {
+                            getAllTxnDetailsByTxnIdState = getAllTxnDetailsByTxnIdState.copy(
+                                isLoading = false,
+                                allTxnDetails = result.data
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            getAllTxnDetailsByTxnIdState = getAllTxnDetailsByTxnIdState.copy(
+                                isLoading = false,
+                                allTxnDetails = null
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            getAllTxnDetailsByTxnIdState = getAllTxnDetailsByTxnIdState.copy(
+                                isLoading = true
                             )
                         }
                     }

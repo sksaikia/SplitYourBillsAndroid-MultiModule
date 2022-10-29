@@ -1,6 +1,7 @@
 package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -104,14 +105,28 @@ fun TransactionScreen(
                         txnName = txnDetail?.transaction?.transactionName ?: "",
                         userName = txnDetail?.inviteDetails?.inviteName ?: "",
                         txnAmount = txnDetail?.amount.toString(),
-                        txnDate = txnDetail?.lastUpdated ?: ""
+                        txnDate = txnDetail?.lastUpdated ?: "",
+                        modifier = Modifier.clickable {
+                            navigateTo(
+                                NavigationItem.TransactionDetailsScreen.withArgs(
+                                    txnDetail?.transactionId.toString()
+                                )
+                            )
+                        }
                     )
                 } else {
                     TransactionHomeComponent(
                         txnName = txnDetail.transaction.transactionName,
                         userName = txnDetail.userDetails.username,
                         txnAmount = txnDetail.amount.toString(),
-                        txnDate = txnDetail.lastUpdated
+                        txnDate = txnDetail.lastUpdated,
+                        modifier = Modifier.clickable {
+                            navigateTo(
+                                NavigationItem.TransactionDetailsScreen.withArgs(
+                                    txnDetail.transactionId.toString()
+                                )
+                            )
+                        }
                     )
                 }
             }

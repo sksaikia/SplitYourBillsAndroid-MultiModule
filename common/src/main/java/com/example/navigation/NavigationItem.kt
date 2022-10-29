@@ -85,6 +85,11 @@ sealed class NavigationItem(
         title = "Create New Transaction"
     )
 
+    object TransactionDetailsScreen : NavigationItem(
+        route = "transaction_details_screen",
+        title = "Transaction Details"
+    )
+
     fun withArgs(vararg args : String) : String {
         return buildString {
             append(route)

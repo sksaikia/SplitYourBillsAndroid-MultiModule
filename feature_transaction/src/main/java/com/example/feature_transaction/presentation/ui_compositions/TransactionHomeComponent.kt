@@ -20,10 +20,11 @@ fun TransactionHomeComponent(
     txnName: String = "",
     userName: String = "",
     txnAmount: String = "",
-    txnDate: String = ""
+    txnDate: String = "",
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier.padding(10.dp),
+        modifier = modifier.padding(10.dp),
         shape = RoundedCornerShape(6.dp),
         elevation = 6.dp
     ) {

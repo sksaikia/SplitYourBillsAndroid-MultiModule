@@ -15,8 +15,9 @@ import com.example.feature_space.presentation.screen.CreateNewSpaceScreen
 import com.example.feature_space.presentation.screen.ShareSpaceScreen
 import com.example.feature_space.presentation.screen.SpaceDetailsScreen
 import com.example.feature_space.presentation.screen.SpacesScreen
-import com.example.feature_transaction.presentation.screen.ManualBillSplitScreen
 import com.example.feature_transaction.presentation.screen.CreateNewTransactionScreen
+import com.example.feature_transaction.presentation.screen.ManualBillSplitScreen
+import com.example.feature_transaction.presentation.screen.TransactionDetailsScreen
 import com.example.feature_transaction.presentation.screen.TransactionScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -168,6 +169,21 @@ fun NavigationGraph(
                     navController.navigate(it)
                 }
             )
+        }
+
+        composable(
+            route = NavigationItem.TransactionDetailsScreen.route  + "/{txnId}",
+            arguments = listOf(
+                navArgument("txnId") {
+                    type = NavType.StringType
+                    defaultValue = "0"
+                }
+            )
+        ) {
+            TransactionDetailsScreen(navigateTo = {
+                navController.navigate(it)
+            },
+            txnId = it.arguments?.getString("txnId"))
         }
     }
 }
