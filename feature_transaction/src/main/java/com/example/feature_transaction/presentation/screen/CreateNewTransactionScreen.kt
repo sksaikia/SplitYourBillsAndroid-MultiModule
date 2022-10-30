@@ -75,6 +75,9 @@ fun CreateNewTransactionScreen(
     val currentDate = "$day/$month/$year"
 
     var mDate = remember { mutableStateOf(currentDate) }
+    var enabledSplitOptions by remember {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(key1 = true) {
         transactionViewModel.createNewTxnEventFlow.collectLatest { event ->
@@ -93,6 +96,7 @@ fun CreateNewTransactionScreen(
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = "Successfully Created the Transaction"
                     )
+                    enabledSplitOptions = true
                 }
             }
         }
@@ -219,7 +223,7 @@ fun CreateNewTransactionScreen(
                                     )
                                 )
                             }
-                        })
+                        }, enabled = enabledSplitOptions)
                     }
                 }
 
