@@ -23,6 +23,7 @@ import com.example.feature_transaction.presentation.viewmodel.all_space_members.
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpacesState
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import com.example.feature_transaction.presentation.viewmodel.all_txn_details.AllTxnDetailsState
+import com.example.feature_transaction.presentation.viewmodel.get_all_txn.GetAllTxnEvent
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -60,6 +61,9 @@ class TransactionViewModel @Inject constructor(
     private val _addTxnDetailsListEvent = MutableSharedFlow<AddTxnDetailsListEvent>()
     val addTxnDetailsListEvent = _addTxnDetailsListEvent.asSharedFlow()
 
+    private val _getAllTxnEvent = MutableSharedFlow<GetAllTxnEvent>()
+    val getAllTxnEvent = _getAllTxnEvent.asSharedFlow()
+
     private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10, { 0 }))
     val individualContributionValues = _individualContributionValues.asStateFlow()
 
@@ -75,10 +79,6 @@ class TransactionViewModel @Inject constructor(
     private val _spaceId = MutableStateFlow<Int>(0)
     val spaceId = _spaceId.asStateFlow()
 
-    init {
-        Log.d("LEVI", "Init called")
-    }
-
     fun setSpaceId(spaceId: Int) {
         _spaceId.value = spaceId
     }
@@ -86,7 +86,6 @@ class TransactionViewModel @Inject constructor(
     fun setAmount(currentAmount: String) {
         try {
             _amount.value = currentAmount.toInt()
-            Log.d("LEVI", "ViewModel setAmount: ${_amount.value}")
         } catch (e: Exception) {
             _amount.value = 0
         }
@@ -124,6 +123,9 @@ class TransactionViewModel @Inject constructor(
                         )
                     }
                     is Result.Error -> {
+                        allSpacesState = allSpacesState.copy(
+                            isLoading = false
+                        )
                         _createNewTxnEventFlow.emit(
                             CreateNewTxnEvent.ShowErrorToastForErrorInSpace(
                                 "${result.message}"
@@ -239,6 +241,11 @@ class TransactionViewModel @Inject constructor(
                             getAllTxnDetailsState = getAllTxnDetailsState.copy(
                                 isLoading = false,
                                 allTxnDetails = null
+                            )
+                            _getAllTxnEvent.emit(
+                                GetAllTxnEvent.ShowErrorToast(
+                                    "${result.message}"
+                                )
                             )
                         }
                     }

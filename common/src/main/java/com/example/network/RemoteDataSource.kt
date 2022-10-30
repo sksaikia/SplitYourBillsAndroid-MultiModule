@@ -20,6 +20,11 @@ open class RemoteDataSource {
                         Log.d("FATAL", "safeApiCall: ")
                         error("Code : ${e.code()} , Phone no. already exists")
                     }
+                    if (e.code() == 500) {
+                        error("${e.code()} , Unexpected Server Exception")
+                    } else {
+                        error("${e.code()} , Unknown Error")
+                    }
                 }
 //                    is SocketTimeoutException -> error("Socket Exception with code ${e.message}")
 //                    is IOException -> error("Io Exception with code ${e.message}")

@@ -239,14 +239,16 @@ fun CreateNewTransactionScreen(
                         name = memberData?.inviteDetails?.inviteName ?: "",
                         shouldShowContributionAmount = true,
                         amount = transactionViewModel.amount.value /
-                            (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1)
+                            (spaceMembersState.allSpaceMembers?.data?.totalMembers ?: 1),
+                        modifier = Modifier.padding(horizontal = 20.dp)
                     )
                 } else {
                     UserCard(
                         name = memberData.userDetails.username,
                         shouldShowContributionAmount = true,
                         amount = transactionViewModel.amount.value /
-                            (spaceMembersState.allSpaceMembers.data.totalMembers ?: 1)
+                            (spaceMembersState.allSpaceMembers.data.totalMembers ?: 1),
+                        modifier = Modifier.padding(horizontal = 20.dp)
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))

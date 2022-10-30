@@ -29,8 +29,10 @@ import com.example.feature_transaction.TotalBalanceCard
 import com.example.feature_transaction.presentation.ui_compositions.SpaceTrxCard
 import com.example.feature_transaction.presentation.ui_compositions.TransactionHomeComponent
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
+import com.example.feature_transaction.presentation.viewmodel.get_all_txn.GetAllTxnEvent
 import com.example.navigation.NavigationItem
 import com.example.util.DateHelper.formatDate
+import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -44,6 +46,15 @@ fun TransactionScreen(
 
     LaunchedEffect(true) {
         transactionViewModel.getAllTxnDetailsByUserId()
+        transactionViewModel.getAllTxnEvent.collectLatest { event ->
+            when (event) {
+                is GetAllTxnEvent.ShowErrorToast -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.errorMessage
+                    )
+                }
+            }
+        }
     }
 
     Scaffold(
