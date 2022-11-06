@@ -2,16 +2,21 @@ package com.example.session
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 
 class SessionManager(context: Context) {
 
     // context.getString(R.string.app_name)
     private var prefs: SharedPreferences = context.getSharedPreferences("SplitYourBillsAndroid", Context.MODE_PRIVATE)
 
-    fun saveAuthToken(token: String) {
+    /**
+     * commit is synchronous , it returns true or false
+     * apply is faster i.e. async
+     * */
+    fun saveAuthToken(token: String): Boolean {
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
-        editor.apply()
+        return editor.commit()
     }
 
     fun saveUserName(name: String) {

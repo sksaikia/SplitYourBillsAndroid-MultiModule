@@ -120,12 +120,13 @@ class AuthenticationViewModel @Inject constructor(
                                 loginResponse = loginResponse
                             )
                             with(sessionManager) {
-                                this.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
                                 this.saveUserId(loginResponse.loginData.userDetailsResponse.userId)
                                 this.savePhoneNo(loginResponse.loginData.userDetailsResponse.phoneNo)
                                 this.saveUserName(loginResponse.loginData.userDetailsResponse.username)
+                                val state = this.saveAuthToken(loginResponse.loginData.jwtResponse.accessToken)
+                                if (state)
+                                    _loginEventFlow.emit(LoginEvent.NavigateToHome)
                             }
-                            _loginEventFlow.emit(LoginEvent.NavigateToHome)
                             Log.d("FATAL", "loginUser: ${sessionManager.fetchAuthToken()}")
                         }
                     }

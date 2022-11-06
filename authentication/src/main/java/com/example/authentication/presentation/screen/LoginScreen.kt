@@ -39,7 +39,7 @@ fun LoginScreen(
         authenticationViewModel.loginEventFlow.collectLatest { event ->
             when (event) {
                 is LoginEvent.NavigateToHome -> {
-                    navigateTo(NavigationItem.HomeScreen.route)
+                    navigateTo(NavigationItem.SpacesScreen.route)
                 }
                 is LoginEvent.ShowErrorToast -> {
                     scaffoldState.snackbarHostState.showSnackbar(
