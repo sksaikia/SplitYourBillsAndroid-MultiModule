@@ -61,7 +61,7 @@ fun TransactionDetailsScreen(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     UnifyText(
-                        text = data?.amount.toString() ?: "",
+                        text = "₹ ${data?.amount} " ?: "",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
