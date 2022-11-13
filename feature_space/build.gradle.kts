@@ -63,6 +63,8 @@ dependencies {
     implementation(ComposeDependencies.toolingCompose)
     implementation(ComposeDependencies.materialCompose)
     implementation(ComposeDependencies.navigationCompose)
+    implementation(ComposeDependencies.constraintLayoutCompose)
+
 
     testImplementation(TestDependencies.junit)
     androidTestImplementation(TestDependencies.androidxJunit)

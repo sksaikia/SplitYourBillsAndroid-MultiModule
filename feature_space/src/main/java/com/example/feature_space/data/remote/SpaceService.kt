@@ -14,6 +14,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryName
 
 interface SpaceService {
 
@@ -41,5 +42,6 @@ interface SpaceService {
     @GET("spaces/member/{spaceId}")
     suspend fun getAllMembersForSpecificSpaceId(@Path(value = "spaceId") spaceId: Int): AllMembersForSpaceResponse
 
-
+    @GET("transaction/details")
+    suspend fun getAllTxnDetailsBySpaceId(@Query(value = "spaceId") spaceId: Int) : TxnDetailsBySpaceResponse
 }

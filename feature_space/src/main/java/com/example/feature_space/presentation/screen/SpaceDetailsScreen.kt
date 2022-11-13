@@ -1,6 +1,7 @@
 package com.example.feature_space.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,8 +37,11 @@ import com.example.compositions.UserCard
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
+import com.example.feature_space.presentation.ui_composition.TransactionHomeComponent
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceEvent
+import com.example.navigation.NavigationItem
+import com.example.util.DateHelper.formatDate
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -50,6 +54,7 @@ fun SpaceDetailsScreen(
     val specificSpaceDetailsState = spaceViewModel.singleSpaceState
     val editSpaceState = spaceViewModel.editSpaceState
     val allMembersForSpaceState = spaceViewModel.allMembersForSpaceState
+    val txnDetailsBySpaceState = spaceViewModel.txnDetailsBySpaceState
 
     val scaffoldState = rememberScaffoldState()
     var shouldEdit by remember {
@@ -71,6 +76,7 @@ fun SpaceDetailsScreen(
     LaunchedEffect(key1 = true) {
         spaceViewModel.getSpecificSpaceBySpaceId(spaceId?.toInt() ?: 0)
         spaceViewModel.getAllMembersForSpaceId(spaceId?.toInt() ?: 0)
+        spaceViewModel.getTxnDetailsBySpaceId(spaceId?.toInt() ?: 0)
         spaceViewModel.editSpaceEventFlow.collectLatest { event ->
             when (event) {
                 is EditSpaceEvent.OnSaveSpaceDetails -> {
@@ -89,8 +95,6 @@ fun SpaceDetailsScreen(
                 }
             }
         }
-
-
     }
 
     Scaffold(
@@ -161,9 +165,13 @@ fun SpaceDetailsScreen(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            UnifyButton(buttonText = "All Transactions")
+                            UnifyButton(buttonText = "All Transactions", onClickButton = {
+                                shouldShowAllTxnDetailsForSpace = !shouldShowAllTxnDetailsForSpace
+                                shouldShowAllMembersForSpace = false
+                            })
                             UnifyButton(buttonText = "All members", onClickButton = {
                                 shouldShowAllMembersForSpace = !shouldShowAllMembersForSpace
+                                shouldShowAllTxnDetailsForSpace = false
                             })
                         }
 
@@ -188,8 +196,49 @@ fun SpaceDetailsScreen(
                                             modifier = Modifier.padding(horizontal = 20.dp)
                                         )
                                     }
+                                }
+                            }
+                        }
 
+                        if (shouldShowAllTxnDetailsForSpace) {
+                            LazyColumn {
+                                items(
+                                    txnDetailsBySpaceState.data?.data?.totalTransactions ?: 0
 
+                                ) { i ->
+                                    val txnDetail =
+                                        txnDetailsBySpaceState.data?.data?.txnDetails?.get(
+                                            i
+                                        )
+                                    if (txnDetail?.personId != -1) {
+                                        TransactionHomeComponent(
+                                            txnName = txnDetail?.transactionName ?: "",
+                                            userName = txnDetail?.userName ?: "",
+                                            txnAmount = "₹ ${txnDetail?.amount}",
+                                            txnDate = txnDetail?.lastUpdated?.formatDate() ?: "",
+                                            modifier = Modifier.clickable {
+                                                navigateTo(
+                                                    NavigationItem.TransactionDetailsScreen.withArgs(
+                                                        txnDetail?.transactionId.toString()
+                                                    )
+                                                )
+                                            }
+                                        )
+                                    } else {
+                                        TransactionHomeComponent(
+                                            txnName = txnDetail?.transactionName,
+                                            userName = txnDetail.inviteName ?: "",
+                                            txnAmount = "₹ ${txnDetail.amount}",
+                                            txnDate = txnDetail.lastUpdated.formatDate(),
+                                            modifier = Modifier.clickable {
+                                                navigateTo(
+                                                    NavigationItem.TransactionDetailsScreen.withArgs(
+                                                        txnDetail.transactionId.toString()
+                                                    )
+                                                )
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         }

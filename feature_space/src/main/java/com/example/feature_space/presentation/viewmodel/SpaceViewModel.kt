@@ -12,6 +12,7 @@ import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllMembersForSpaceIdUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
+import com.example.feature_space.domain.usecase.GetTxnDetailsBySpaceIdUseCase
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersEvent
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersState
 import com.example.feature_space.presentation.viewmodel.all_members.AllMembersForSpaceState
@@ -22,6 +23,7 @@ import com.example.feature_space.presentation.viewmodel.create_space.CreateSpace
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceEvent
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceState
 import com.example.feature_space.presentation.viewmodel.specific_space.SingleSpaceState
+import com.example.feature_space.presentation.viewmodel.specific_space.TxnDetailsBySpaceState
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,6 +41,7 @@ class SpaceViewModel @Inject constructor(
     private val editSpaceUseCase: EditSpaceUseCase,
     private val addMembersToSpaceUseCase: AddMembersToSpaceUseCase,
     private val getAllMembersForSpaceIdUseCase: GetAllMembersForSpaceIdUseCase,
+    private val getTxnDetailsBySpaceIdUseCase: GetTxnDetailsBySpaceIdUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
@@ -48,6 +51,7 @@ class SpaceViewModel @Inject constructor(
     var editSpaceState by mutableStateOf(EditSpaceState())
     var addMembersState by mutableStateOf(AddMembersState())
     var allMembersForSpaceState by mutableStateOf(AllMembersForSpaceState())
+    var txnDetailsBySpaceState by mutableStateOf(TxnDetailsBySpaceState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
@@ -222,7 +226,6 @@ class SpaceViewModel @Inject constructor(
         }
     }
 
-    //TODO dont use this
     fun getAllMembersForSpaceId(spaceid: Int) {
         viewModelScope.launch {
             getAllMembersForSpaceIdUseCase(spaceid)
@@ -241,6 +244,33 @@ class SpaceViewModel @Inject constructor(
                         }
                         is com.example.network.Result.Error -> {
                             allMembersForSpaceState = allMembersForSpaceState.copy(
+                                isLoading = false,
+                                data = null
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getTxnDetailsBySpaceId(spaceid: Int) {
+        viewModelScope.launch {
+            getTxnDetailsBySpaceIdUseCase(spaceid)
+                .collectLatest { result ->
+                    when(result) {
+                        is com.example.network.Result.Success -> {
+                            txnDetailsBySpaceState = txnDetailsBySpaceState.copy(
+                                isLoading = false,
+                                data = result.data
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            txnDetailsBySpaceState = txnDetailsBySpaceState.copy(
+                                isLoading = true
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            txnDetailsBySpaceState = txnDetailsBySpaceState.copy(
                                 isLoading = false,
                                 data = null
                             )

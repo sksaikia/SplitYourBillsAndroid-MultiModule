@@ -9,6 +9,7 @@ import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllMembersForSpaceIdUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
+import com.example.feature_space.domain.usecase.GetTxnDetailsBySpaceIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -66,5 +67,11 @@ object SpaceModule {
     @Singleton
     fun provideGetAllMembersForSpaceIdUseCase(repository: SpacesRepository): GetAllMembersForSpaceIdUseCase {
         return GetAllMembersForSpaceIdUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetTxnDetailsBySpaceIdUseCase(repository: SpacesRepository): GetTxnDetailsBySpaceIdUseCase {
+        return GetTxnDetailsBySpaceIdUseCase(repository)
     }
 }

@@ -7,6 +7,7 @@ import com.example.feature_space.domain.model.response.all_member_for_space.AllM
 import com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
 import com.example.feature_space.domain.model.response.space_details.SingleSpaceDetailsResponse
+import com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
 
@@ -23,5 +24,7 @@ interface SpacesRepository {
     suspend fun addMembersToSpace(addedMembersBody: List<AddMembersBody>): Flow<Result<AddMembersResponse>>
 
     suspend fun getAllMembersBySpaceId(spaceid: Int): Flow<Result<AllMembersForSpaceResponse>>
+
+    suspend fun getAllTxnDetailsBySpaceId(spaceId: Int): Flow<com.example.network.Result<TxnDetailsBySpaceResponse>>
 
 }
