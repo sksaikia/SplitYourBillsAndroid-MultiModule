@@ -78,7 +78,7 @@ fun UnifyButton(
 enum class ButtonState { Pressed, Idle }
 fun Modifier.bounceClick() = composed {
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-    val scale by animateFloatAsState(if (buttonState == ButtonState.Pressed) 0.70f else 1f)
+    val scale by animateFloatAsState(if (buttonState == ButtonState.Pressed) 0.80f else 1f)
 
     this
         .graphicsLayer {
