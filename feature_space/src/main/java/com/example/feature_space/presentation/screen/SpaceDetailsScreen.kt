@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compositions.ShimmerAnimation
+import com.example.compositions.UserCard
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
@@ -69,6 +70,7 @@ fun SpaceDetailsScreen(
 
     LaunchedEffect(key1 = true) {
         spaceViewModel.getSpecificSpaceBySpaceId(spaceId?.toInt() ?: 0)
+        spaceViewModel.getAllMembersForSpaceId(spaceId?.toInt() ?: 0)
         spaceViewModel.editSpaceEventFlow.collectLatest { event ->
             when (event) {
                 is EditSpaceEvent.OnSaveSpaceDetails -> {
@@ -88,7 +90,7 @@ fun SpaceDetailsScreen(
             }
         }
 
-        spaceViewModel.getAllMembersForSpaceId(spaceId?.toInt() ?: 0)
+
     }
 
     Scaffold(
@@ -172,6 +174,22 @@ fun SpaceDetailsScreen(
                                         allMembersForSpaceState.data?.data?.spaceMemberResponse?.get(
                                             i
                                         )
+
+                                    if (memberData?.userDetails == null) {
+                                        UserCard(
+                                            name = memberData?.inviteDetails?.inviteName ?: "",
+                                            shouldShowContributionAmount = false,
+                                            modifier = Modifier.padding(horizontal = 20.dp)
+                                        )
+                                    } else {
+                                        UserCard(
+                                            name = memberData.userDetails.username,
+                                            shouldShowContributionAmount = false,
+                                            modifier = Modifier.padding(horizontal = 20.dp)
+                                        )
+                                    }
+
+
                                 }
                             }
                         }
