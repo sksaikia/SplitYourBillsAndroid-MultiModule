@@ -45,7 +45,7 @@ fun UserCard(
         UnifyText(text = name)
         Spacer(modifier = modifier.width(100.dp))
         if (shouldShowContributionAmount) {
-            UnifyText(text = "₹ $amount", fontWeight = FontWeight.Bold)
+            UnifyText(text = "₹ $amount", fontWeight = FontWeight.Bold, shouldSetMaxLines = true)
         }
     }
 }
