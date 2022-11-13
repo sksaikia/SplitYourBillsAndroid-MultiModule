@@ -1,12 +1,14 @@
 package com.example.network
 
 import android.util.Log
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 
 open class RemoteDataSource {
 
     open suspend fun <T> safeApiCall(apiCall: suspend () -> T, error: suspend (String) -> Unit) {
         try {
+            delay(2000)
             apiCall.invoke()
         } catch (e: Throwable) {
             //  Log.d("FATAL", "safeApiCall error: ${(e as BaseErrorResponse).s}")

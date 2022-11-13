@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FloatingActionButton
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.compositions.ShimmerAnimation
 import com.example.design.UnifyButton
 import com.example.design.UnifyEditText
 import com.example.design.UnifyText
@@ -106,62 +108,71 @@ fun SpaceDetailsScreen(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             if (!shouldEdit) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    if (specificSpaceDetailsState.isLoading) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-                    }
-                    UnifyText(text = "Space Name", fontSize = 12.sp, fontWeight = FontWeight.Normal)
-                    Spacer(modifier = Modifier.height(6.dp))
-                    UnifyText(
-                        text = specificSpaceDetailsState.data?.spacesResponse?.spaceName ?: "",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    UnifyText(
-                        text = "Description",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal
-                    )
-                    Spacer(modifier = Modifier.height(6.dp))
-                    UnifyText(
-                        text = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
-                            ?: "",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    UnifyText(text = "Created By", fontSize = 12.sp, fontWeight = FontWeight.Normal)
-                    Spacer(modifier = Modifier.height(6.dp))
-                    UnifyText(
-                        text = specificSpaceDetailsState.data?.spacesResponse?.userResponse?.username
-                            ?: "",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                if (specificSpaceDetailsState.isLoading) {
+                    SpaceDetailsLoaderView()
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.Start
                     ) {
-                        UnifyButton(buttonText = "All Transactions")
-                        UnifyButton(buttonText = "All members", onClickButton = {
-                            shouldShowAllMembersForSpace = !shouldShowAllMembersForSpace
-                        })
-                    }
+                        UnifyText(
+                            text = "Space Name",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Normal
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        UnifyText(
+                            text = specificSpaceDetailsState.data?.spacesResponse?.spaceName ?: "",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        UnifyText(
+                            text = "Description",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Normal
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        UnifyText(
+                            text = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
+                                ?: "",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        UnifyText(
+                            text = "Created By",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Normal
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        UnifyText(
+                            text = specificSpaceDetailsState.data?.spacesResponse?.userResponse?.username
+                                ?: "",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            UnifyButton(buttonText = "All Transactions")
+                            UnifyButton(buttonText = "All members", onClickButton = {
+                                shouldShowAllMembersForSpace = !shouldShowAllMembersForSpace
+                            })
+                        }
 
-                    if (shouldShowAllMembersForSpace) {
-                        LazyColumn {
-                            items(allMembersForSpaceState.data?.data?.totalMembers?: 0) { i ->
-                                val memberData = allMembersForSpaceState.data?.data?.spaceMemberResponse?.get(i)
-
-
-
+                        if (shouldShowAllMembersForSpace) {
+                            LazyColumn {
+                                items(allMembersForSpaceState.data?.data?.totalMembers ?: 0) { i ->
+                                    val memberData =
+                                        allMembersForSpaceState.data?.data?.spaceMemberResponse?.get(
+                                            i
+                                        )
+                                }
                             }
                         }
                     }
@@ -209,5 +220,18 @@ fun SpaceDetailsScreen(
 }
 
 @Composable
-fun composeAllMembersArea() {
+fun SpaceDetailsLoaderView() {
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 15.dp)) {
+        ShimmerAnimation(modifier = Modifier.width(120.dp).height(26.dp))
+        ShimmerAnimation(modifier = Modifier.width(80.dp).height(26.dp))
+        ShimmerAnimation(modifier = Modifier.width(120.dp).height(26.dp))
+        ShimmerAnimation(modifier = Modifier.width(80.dp).height(26.dp))
+        ShimmerAnimation(modifier = Modifier.width(120.dp).height(26.dp))
+        ShimmerAnimation(modifier = Modifier.width(80.dp).height(26.dp))
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            ShimmerAnimation(modifier = Modifier.width(160.dp).height(50.dp))
+            ShimmerAnimation(modifier = Modifier.width(160.dp).height(50.dp))
+        }
+    }
 }

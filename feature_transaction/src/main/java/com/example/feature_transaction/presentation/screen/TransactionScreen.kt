@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ViewModelHelper.activityViewModel
+import com.example.compositions.ShimmerAnimation
 import com.example.design.UnifyText
 import com.example.feature_transaction.R
 import com.example.feature_transaction.TotalBalanceCard
@@ -110,6 +111,12 @@ fun TransactionScreen(
                 Spacer(modifier = Modifier.height(10.dp))
             }
 
+            item {
+                if (getAllTxnDetailsState.isLoading) {
+                    TransactionListLoaderView()
+                }
+            }
+
             items(getAllTxnDetailsState.allTxnDetails?.data?.totalTransactions ?: 0) { i ->
                 val txnDetail = getAllTxnDetailsState.allTxnDetails?.data?.transactionDetailsResponse?.get(i)
                 if (txnDetail?.userDetails == null) {
@@ -148,5 +155,12 @@ fun TransactionScreen(
 //                SpaceTrxCard(headerText = "Total Out", amount = "5000")
 //            }
         }
+    }
+}
+
+@Composable
+fun TransactionListLoaderView() {
+    repeat(7) {
+        ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(60.dp))
     }
 }
