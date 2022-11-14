@@ -38,7 +38,7 @@ fun ProfileScreen(navigateTo: (String) -> Unit) {
             } else {
                 minute++
             }
-            delay(10)
+            delay(15)
         }
     }
 
