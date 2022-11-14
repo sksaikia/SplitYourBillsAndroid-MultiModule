@@ -1,22 +1,53 @@
 package com.example.feature_profile
 
-import android.util.Log
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
-import com.example.compositions.ShimmerAnimation
-import com.example.compositions.UserEditableCard
-import com.example.design.UnifyButton
-import java.lang.reflect.Modifier
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import com.example.compositions.UnifyAnalogClock
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProfileScreen(navigateTo: (String) -> Unit) {
-    LazyColumn {
+//    LazyColumn {
+//
+//        items(10) { i ->
+//            UserEditableCard("ABC $i")
+//
+//       }
+//    }
 
-        items(10) { i ->
-            UserEditableCard("ABC $i")
+    var hour by remember {
+        mutableStateOf(0)
+    }
+
+    var minute by remember {
+        mutableStateOf(0)
+    }
+
+    LaunchedEffect(true) {
+        while (true) {
+            if ((minute + 1) > 59) {
+                hour++
+                minute = 0
+            } else {
+                minute++
+            }
+            delay(10)
         }
     }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        UnifyAnalogClock(
+            hour = hour,
+            minute = minute,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
+
