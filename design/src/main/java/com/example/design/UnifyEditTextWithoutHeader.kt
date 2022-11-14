@@ -25,7 +25,8 @@ fun UnifyEditTextWithoutHeader(
             onValueChange = {
                 text = it
                 onValueChanged(it)
-            }
+            },
+            maxLines = 1
 
         )
     }

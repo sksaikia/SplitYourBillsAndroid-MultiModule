@@ -49,7 +49,8 @@ fun SingleSpaceMemberResponse.toDomainSingleSpaceMemberResponse(): com.example.f
         this.lastUpdated,
         this.joined,
         this.spaceDetailsResponse?.toSpaceDetailsResponseDomain(),
-        this.invite?.toInviteDetailsDomain()
+        this.invite?.toInviteDetailsDomain(),
+        this.payableAmount
     )
 }
 
@@ -149,7 +150,8 @@ fun AddTxnListBody.toAddTxnSingleDTO(): AddTxnListDTO {
         this.transactionId,
         this.personId,
         this.inviteId,
-        this.amount
+        this.amount,
+        this.payableAmount
     )
 }
 
@@ -195,8 +197,8 @@ fun List<TransactionDetailsResponse>.toDomainTransactionDetailsResponse(): List<
                 it.inviteId,
                 it.inviteDetails?.toInviteDetailsDomain(),
                 it.amount,
-                it.lastUpdated
-
+                it.lastUpdated,
+                it.payableAmount
             )
         )
     }
@@ -213,7 +215,8 @@ fun TransactionDetailsResponse.toDomainTransactionDetailsResponse(): com.example
         this.inviteId,
         this.inviteDetails?.toInviteDetailsDomain(),
         this.amount,
-        this.lastUpdated
+        this.lastUpdated,
+        this.payableAmount
     )
 }
 

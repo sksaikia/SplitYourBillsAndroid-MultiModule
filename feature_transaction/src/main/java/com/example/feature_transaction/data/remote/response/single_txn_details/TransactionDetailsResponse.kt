@@ -24,4 +24,6 @@ data class TransactionDetailsResponse(
     val amount: Int,
     @SerializedName("lastUpdated")
     val lastUpdated: String,
+    @SerializedName("payableAmount")
+    val payableAmount: Long
 )

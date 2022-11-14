@@ -104,6 +104,19 @@ fun TransactionDetailsScreen(
                         )
                         Spacer(modifier = Modifier.height(20.dp))
                         UnifyText(
+                            text = "Payable Amount by You",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Normal
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        UnifyText(
+                            text = "₹ ${data?.payableAmount} " ?: "",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Spacer(modifier = Modifier.height(20.dp))
+                        UnifyText(
                             text = "Contributors",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal

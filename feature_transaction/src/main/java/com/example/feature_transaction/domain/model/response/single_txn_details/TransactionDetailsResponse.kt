@@ -14,4 +14,5 @@ data class TransactionDetailsResponse(
     val inviteDetails: SingleSpaceMemberResponse.InviteDetails?,
     val amount: Int,
     val lastUpdated: String,
+    val payableAmount: Long
 )

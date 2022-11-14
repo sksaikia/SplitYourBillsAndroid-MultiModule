@@ -11,7 +11,8 @@ data class SingleSpaceMemberResponse(
     val lastUpdated: String,
     val joined: Boolean,
     val spaceDetailsResponse: SpaceDetailsResponse?,
-    val inviteDetails: InviteDetails? = null
+    val inviteDetails: InviteDetails? = null,
+    val payableAmount: Long
 ) {
     data class UserDetails(
         val phoneNo: String,

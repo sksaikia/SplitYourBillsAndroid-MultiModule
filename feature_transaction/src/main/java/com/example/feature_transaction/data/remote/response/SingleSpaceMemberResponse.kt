@@ -20,7 +20,9 @@ data class SingleSpaceMemberResponse(
     @SerializedName("spaceResponse")
     val spaceDetailsResponse: SpaceDetailsResponse?,
     @SerializedName("invite")
-    val invite: InviteDetails? = null
+    val invite: InviteDetails? = null,
+    @SerializedName("payableAmount")
+    val payableAmount: Long
 ) {
     data class UserDetails(
         @SerializedName("phoneNo")

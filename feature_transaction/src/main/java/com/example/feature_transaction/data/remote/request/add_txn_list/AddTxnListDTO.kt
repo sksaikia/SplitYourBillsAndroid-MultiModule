@@ -10,5 +10,7 @@ data class AddTxnListDTO(
     @SerializedName("inviteId")
     val inviteId: Int,
     @SerializedName("amount")
-    val amount: Int
+    val amount: Int,
+    @SerializedName("payableAmount")
+    val payableAmount: Long
 )

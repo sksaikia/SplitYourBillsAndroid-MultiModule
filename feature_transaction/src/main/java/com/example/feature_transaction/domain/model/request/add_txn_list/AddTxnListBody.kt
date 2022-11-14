@@ -4,5 +4,6 @@ data class AddTxnListBody(
     val transactionId: Int,
     val personId: Int,
     val inviteId: Int,
-    val amount: Int
+    val amount: Int,
+    val payableAmount: Long
 )

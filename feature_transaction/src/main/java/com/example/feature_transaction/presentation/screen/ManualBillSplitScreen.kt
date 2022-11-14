@@ -185,7 +185,9 @@ fun createRequestBodyForSavingTxnLists(
                 transactionId.value,
                 it.personId,
                 it.inviteId,
-                individualContributionValuesList.value[i]
+                individualContributionValuesList.value[i],
+                // TODO change here
+                it.payableAmount
             )
         )
         i++

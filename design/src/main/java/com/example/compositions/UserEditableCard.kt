@@ -1,5 +1,6 @@
 package com.example.compositions
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +19,7 @@ import com.example.design.UnifyText
 fun UserEditableCard(
     name: String = "",
     phoneNo: String = "",
-    onValueChanged : (String)-> Unit = {},
+    onValueChanged: (String) -> Unit = {},
     modifier: Modifier = Modifier,
     amount: Int = 0
 ) {
@@ -41,11 +42,23 @@ fun UserEditableCard(
         Spacer(modifier = modifier.width(20.dp))
         UnifyText(text = name)
         Spacer(modifier = modifier.width(100.dp))
-        UnifyText(text = "$")
-        UnifyEditTextWithoutHeader(
-            editText = amount.toString(),
-            onValueChanged = onValueChanged
-        )
+        Column() {
+            Row() {
+                UnifyText(text = "Contribution:  $")
+                UnifyEditTextWithoutHeader(
+                    editText = amount.toString(),
+                    onValueChanged = onValueChanged
+                )
+            }
+
+            Row() {
+                UnifyText(text = "Payable Amount:  $")
+                UnifyEditTextWithoutHeader(
+                    editText = amount.toString(),
+                    onValueChanged = onValueChanged
+                )
+            }
+        }
     }
 }
 

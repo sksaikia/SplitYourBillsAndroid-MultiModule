@@ -14,15 +14,7 @@ import java.lang.reflect.Modifier
 @Composable
 fun ProfileScreen(navigateTo: (String) -> Unit) {
     LazyColumn {
-        items(5) {
-            ShimmerAnimation(modifier = androidx.compose.ui.Modifier.width(100.dp).height(30.dp))
-        }
 
-        item {
-            UnifyButton(buttonText = "Eren", onClickButton = {
-                Log.d("EREN", "ProfileScreen: a")
-            })
-        }
         items(10) { i ->
             UserEditableCard("ABC $i")
         }
