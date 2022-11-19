@@ -22,8 +22,10 @@ fun UnifyAnalogClock(
     outlineColor: Color = Color.Black,
     outlineWidth: Dp = 8.dp,
     fillColor: Color = Color(0xffFFFFFF),
-    hourHandColor: Color = Color(0xFFb4b4b4),
-    minuteHandColor: Color = Color(0xFFb4b4b4),
+ //   hourHandColor: Color = Color(0xFFb4b4b4),
+    hourHandColor: Color = Color(0xFF606050),
+//    minuteHandColor: Color = Color(0xFFb4b4b4),
+    minuteHandColor: Color = Color(0xFF606050),
     hourMarkerColor: Color = Color(0xFF319af9),
     centerColor: Color = Color(0xFF00eaff),
     modifier: Modifier = Modifier
