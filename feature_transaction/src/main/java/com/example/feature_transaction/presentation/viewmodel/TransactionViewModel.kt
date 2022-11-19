@@ -64,11 +64,17 @@ class TransactionViewModel @Inject constructor(
     private val _getAllTxnEvent = MutableSharedFlow<GetAllTxnEvent>()
     val getAllTxnEvent = _getAllTxnEvent.asSharedFlow()
 
-    private val _individualContributionValues = MutableStateFlow(MutableList<Int>(10, { 0 }))
+    private var _individualContributionValues = MutableStateFlow(MutableList<Int>(10, { 0 }))
     val individualContributionValues = _individualContributionValues.asStateFlow()
 
     private val _currentContributionValue = MutableStateFlow<Int>(0)
     val currentContributionValue = _currentContributionValue.asStateFlow()
+
+    private var _totalPayableAmountValuesList = MutableStateFlow(MutableList<Int>(10, { 0 }))
+    val totalPayableAmountValuesList = _totalPayableAmountValuesList.asStateFlow()
+
+    private val _currentTotalPayableAmount = MutableStateFlow<Int>(0)
+    val currentTotalPayableAmount = _currentTotalPayableAmount.asStateFlow()
 
     private val _amount = MutableStateFlow<Int>(0)
     val amount = _amount.asStateFlow()
@@ -94,6 +100,18 @@ class TransactionViewModel @Inject constructor(
     fun setIndividualContriDetail(index: Int, value: Int) {
         _individualContributionValues.value[index] = value
         setCurrentContributionValue(_individualContributionValues.value)
+    }
+
+    fun setIndividualPayableAmount(index: Int, value: Int) {
+        _totalPayableAmountValuesList.value[index] = value
+        setCurrentTotalPayableValue(_totalPayableAmountValuesList.value)
+    }
+
+    private fun setCurrentTotalPayableValue(list: List<Int>) {
+        _currentTotalPayableAmount.value = 0
+        list.forEach {
+            _currentTotalPayableAmount.value += it
+        }
     }
 
     private fun setCurrentContributionValue(list: List<Int>) {

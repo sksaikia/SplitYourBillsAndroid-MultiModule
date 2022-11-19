@@ -19,7 +19,8 @@ import com.example.design.UnifyText
 fun UserEditableCard(
     name: String = "",
     phoneNo: String = "",
-    onValueChanged: (String) -> Unit = {},
+    onValueChangedForContribution: (String) -> Unit = {},
+    onValueChangedForPayableAmount: (String) -> Unit = {},
     modifier: Modifier = Modifier,
     amount: Int = 0
 ) {
@@ -41,13 +42,13 @@ fun UserEditableCard(
         )
         Spacer(modifier = modifier.width(20.dp))
         UnifyText(text = name)
-        Spacer(modifier = modifier.width(100.dp))
+        Spacer(modifier = modifier.width(40.dp))
         Column() {
             Row() {
                 UnifyText(text = "Contribution:  $")
                 UnifyEditTextWithoutHeader(
                     editText = amount.toString(),
-                    onValueChanged = onValueChanged
+                    onValueChanged = onValueChangedForContribution
                 )
             }
 
@@ -55,7 +56,7 @@ fun UserEditableCard(
                 UnifyText(text = "Payable Amount:  $")
                 UnifyEditTextWithoutHeader(
                     editText = amount.toString(),
-                    onValueChanged = onValueChanged
+                    onValueChanged = onValueChangedForPayableAmount
                 )
             }
         }
