@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -44,9 +45,11 @@ fun TransactionScreen(
     val scaffoldState = rememberScaffoldState()
 
     val getAllTxnDetailsState = transactionViewModel.getAllTxnDetailsState
+    val txnBalanceState = transactionViewModel.getTxnBalanceState
 
     LaunchedEffect(true) {
         transactionViewModel.getAllTxnDetailsByUserId()
+        transactionViewModel.getTxnBalance()
         transactionViewModel.getAllTxnEvent.collectLatest { event ->
             when (event) {
                 is GetAllTxnEvent.ShowErrorToast -> {
@@ -77,38 +80,48 @@ fun TransactionScreen(
                 .fillMaxSize()
         ) {
             item {
-                TotalBalanceCard(amount = "₹ 5000.00")
-
-                val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
-                    Triple("Total In", "10000", R.drawable.trx_in),
-                    Triple("Total Out", "5000", R.drawable.trx_out)
-                )
-
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    SpaceTrxCard(
-                        headerText = listOfTrxCard[0].first,
-                        amount = listOfTrxCard[0].second,
-                        icon = listOfTrxCard[0].third,
-                        modifier = Modifier.weight(0.5f)
+                if (txnBalanceState.isLoading) {
+                    TotalBalanceLoader()
+                } else {
+                    TotalBalanceCard(
+                        amount = (
+                            txnBalanceState.response?.data?.totalOut?.minus(
+                                txnBalanceState.response.data.totalIn
+                            ) ?: 0
+                            ).toString()
                     )
-                    SpaceTrxCard(
-                        headerText = listOfTrxCard[1].first,
-                        amount = listOfTrxCard[1].second,
-                        icon = listOfTrxCard[1].third,
-                        modifier = Modifier.weight(0.5f)
+
+                    val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
+                        Triple("Total In", (txnBalanceState.response?.data?.totalIn ?: "0").toString(), R.drawable.trx_in),
+                        Triple("Total Out", (txnBalanceState.response?.data?.totalOut ?: "0").toString(), R.drawable.trx_out)
                     )
+
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        SpaceTrxCard(
+                            headerText = listOfTrxCard[0].first,
+                            amount = listOfTrxCard[0].second,
+                            icon = listOfTrxCard[0].third,
+                            modifier = Modifier.weight(0.5f)
+                        )
+                        SpaceTrxCard(
+                            headerText = listOfTrxCard[1].first,
+                            amount = listOfTrxCard[1].second,
+                            icon = listOfTrxCard[1].third,
+                            modifier = Modifier.weight(0.5f)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    UnifyText(
+                        text = "Recent Transactions",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                UnifyText(
-                    text = "Recent Transactions",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    modifier = Modifier.padding(horizontal = 10.dp)
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
             }
 
             item {
@@ -163,4 +176,11 @@ fun TransactionListLoaderView() {
     repeat(7) {
         ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(60.dp))
     }
+}
+
+@Composable
+fun TotalBalanceLoader() {
+    ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(100.dp))
+    ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(100.dp))
+    ShimmerAnimation(modifier = Modifier.width(160.dp).height(30.dp))
 }

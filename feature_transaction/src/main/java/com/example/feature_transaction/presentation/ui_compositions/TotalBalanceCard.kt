@@ -36,7 +36,7 @@ fun TotalBalanceCard(
         ) {
             UnifyText(text = "Total Balance", fontSize = 12.sp, fontWeight = FontWeight.Thin)
             Spacer(modifier = Modifier.height(5.dp))
-            UnifyText(text = amount, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            UnifyText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
     }
 }

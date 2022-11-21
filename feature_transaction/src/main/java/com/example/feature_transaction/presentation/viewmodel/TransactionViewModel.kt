@@ -302,9 +302,9 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    fun getTxnBalance(userId: Int) {
+    fun getTxnBalance() {
         viewModelScope.launch {
-            getTxnbalanceUseCase.invoke(userId)
+            getTxnbalanceUseCase.invoke(sessionManager.fetchUserId())
                 .collectLatest { result ->
                     when (result) {
                         is com.example.network.Result.Success -> {
