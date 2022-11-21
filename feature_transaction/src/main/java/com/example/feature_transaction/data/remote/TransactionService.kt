@@ -10,6 +10,7 @@ import com.example.feature_transaction.data.remote.response.delete_transaction.D
 import com.example.feature_transaction.data.remote.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
+import com.example.feature_transaction.data.remote.response.txn_balance.TxnBalanceResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -55,4 +56,9 @@ interface TransactionService {
         @Query(value = "txnDetailsId") txnDetailsId: Int,
         @Body txnList: AddTxnListDTO
     ): GetSingleTxnDetailsResponse
+
+    @GET("/transaction/details/balance")
+    suspend fun getTxnDetailsBalance(
+        @Query(value = "userId") userId: Int
+    ): TxnBalanceResponse
 }

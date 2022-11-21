@@ -12,6 +12,7 @@ import com.example.feature_transaction.data.mapper.toDomainDeleteTxnDetailsRespo
 import com.example.feature_transaction.data.mapper.toDomainGetAllSpacesResponse
 import com.example.feature_transaction.data.mapper.toDomainGetSingleTxnDetails
 import com.example.feature_transaction.data.mapper.toDomainGetTxnDetailsResponse
+import com.example.feature_transaction.data.mapper.toDomainTxnBalanceResponse
 import com.example.feature_transaction.data.remote.TransactionService
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
@@ -22,6 +23,7 @@ import com.example.feature_transaction.domain.model.response.create_transaction.
 import com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
+import com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse
 import com.example.feature_transaction.domain.repository.TransactionRepository
 import com.example.network.RemoteDataSource
 import com.example.network.Result
@@ -170,6 +172,19 @@ class TransactionRepositoryImpl @Inject constructor(
                 emit(Result.Success(data = response.toDomainGetSingleTxnDetails()))
             }, { exception ->
                 emit(Result.Error(exception))
+            })
+        }
+    }
+
+    override suspend fun getTxnDetailsBalance(userId: Int): Flow<Result<TxnBalanceResponse>> {
+        return flow {
+            emit(com.example.network.Result.Loading(isLoading = true))
+
+            safeApiCall({
+                val response = api.getTxnDetailsBalance(userId)
+                emit(com.example.network.Result.Success(data = response.toDomainTxnBalanceResponse()))
+            }, { exception ->
+                emit(com.example.network.Result.Error(exception))
             })
         }
     }

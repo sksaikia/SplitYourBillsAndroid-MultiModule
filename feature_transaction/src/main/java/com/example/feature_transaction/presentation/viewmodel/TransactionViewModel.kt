@@ -17,6 +17,7 @@ import com.example.feature_transaction.domain.use_case.GetAllSpaceMembersBySpace
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByUserIdUseCase
 import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
+import com.example.feature_transaction.domain.use_case.GetTxnBalanceUseCase
 import com.example.feature_transaction.domain.use_case.UpdateSingleTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.presentation.viewmodel.add_txn_details_list.AddTxnDetailsListEvent
 import com.example.feature_transaction.presentation.viewmodel.all_space_members.SpaceMembersState
@@ -24,6 +25,7 @@ import com.example.feature_transaction.presentation.viewmodel.all_spaces.AllSpac
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
 import com.example.feature_transaction.presentation.viewmodel.all_txn_details.AllTxnDetailsState
 import com.example.feature_transaction.presentation.viewmodel.get_all_txn.GetAllTxnEvent
+import com.example.feature_transaction.presentation.viewmodel.get_txn_balance.GetTxnBalanceState
 import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,6 +49,7 @@ class TransactionViewModel @Inject constructor(
     private val deleteTransactionDetailsByTxnDetailsIdUseCase: DeleteTransactionDetailsByTxnDetailsIdUseCase,
     private val updateSingleTxnDetailsByTxnIdUseCase: UpdateSingleTxnDetailsByTxnIdUseCase,
     private val getAllTxnDetailsByUserIdUseCase: GetAllTxnDetailsByUserIdUseCase,
+    private val getTxnbalanceUseCase: GetTxnBalanceUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
@@ -54,6 +57,7 @@ class TransactionViewModel @Inject constructor(
     var spaceMembersState by mutableStateOf(SpaceMembersState())
     var getAllTxnDetailsState by mutableStateOf(AllTxnDetailsState())
     var getAllTxnDetailsByTxnIdState by mutableStateOf(AllTxnDetailsState())
+    var getTxnBalanceState by mutableStateOf(GetTxnBalanceState())
 
     private val _createNewTxnEventFlow = MutableSharedFlow<CreateNewTxnEvent>()
     val createNewTxnEventFlow = _createNewTxnEventFlow.asSharedFlow()
@@ -290,6 +294,33 @@ class TransactionViewModel @Inject constructor(
                         }
                         is com.example.network.Result.Loading -> {
                             getAllTxnDetailsByTxnIdState = getAllTxnDetailsByTxnIdState.copy(
+                                isLoading = true
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getTxnBalance(userId: Int) {
+        viewModelScope.launch {
+            getTxnbalanceUseCase.invoke(userId)
+                .collectLatest { result ->
+                    when (result) {
+                        is com.example.network.Result.Success -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
+                                isLoading = false,
+                                response = result.data
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
+                                isLoading = false,
+                                response = null
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
                                 isLoading = true
                             )
                         }

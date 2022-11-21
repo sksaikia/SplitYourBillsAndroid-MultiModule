@@ -10,6 +10,7 @@ import com.example.feature_transaction.domain.model.response.delete_transaction.
 import com.example.feature_transaction.domain.model.response.delete_txn_detail.DeleteTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.domain.model.response.get_txn_list.GetTxnListResponse
+import com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse
 import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
 
@@ -35,4 +36,6 @@ interface TransactionRepository {
     suspend fun deleteTxnDetailsByTxnDetailsId(txnDetailsId: Int): Flow<Result<DeleteTxnDetailsResponse>>
 
     suspend fun updateTxnDetailsByTxnDetailsId(txnDetailsId: Int, txnList: AddTxnListBody): Flow<Result<GetSingleTxnDetailsResponse>>
+
+    suspend fun getTxnDetailsBalance(userId: Int): Flow<Result<TxnBalanceResponse>>
 }

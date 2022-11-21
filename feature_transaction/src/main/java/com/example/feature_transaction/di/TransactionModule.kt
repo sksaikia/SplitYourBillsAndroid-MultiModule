@@ -13,6 +13,7 @@ import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByInviteI
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByTxnIdUseCase
 import com.example.feature_transaction.domain.use_case.GetAllTxnDetailsByUserIdUseCase
 import com.example.feature_transaction.domain.use_case.GetSingleTxnDetailsByTxnDetailsIdUsecase
+import com.example.feature_transaction.domain.use_case.GetTxnBalanceUseCase
 import com.example.feature_transaction.domain.use_case.UpdateSingleTxnDetailsByTxnIdUseCase
 import dagger.Module
 import dagger.Provides
@@ -100,5 +101,11 @@ class TransactionModule {
     @Singleton
     fun provideUpdateSingleTxnDetailsByTxnIdUseCase(repository: TransactionRepository): UpdateSingleTxnDetailsByTxnIdUseCase {
         return UpdateSingleTxnDetailsByTxnIdUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providegetTxnBalanceUseCase(repository: TransactionRepository): GetTxnBalanceUseCase {
+        return GetTxnBalanceUseCase(repository)
     }
 }

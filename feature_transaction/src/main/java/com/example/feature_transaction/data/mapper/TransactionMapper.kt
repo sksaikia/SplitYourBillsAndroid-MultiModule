@@ -12,6 +12,7 @@ import com.example.feature_transaction.data.remote.response.delete_txn_detail.De
 import com.example.feature_transaction.data.remote.response.get_single_txn_details.GetSingleTxnDetailsResponse
 import com.example.feature_transaction.data.remote.response.get_txn_list.GetTxnListResponse
 import com.example.feature_transaction.data.remote.response.single_txn_details.TransactionDetailsResponse
+import com.example.feature_transaction.data.remote.response.txn_balance.TxnBalanceResponse
 import com.example.feature_transaction.domain.model.SpaceDetailsResponse
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.domain.model.request.create_transaction.CreateTransactionBody
@@ -232,5 +233,19 @@ fun DeleteTxnDetailsResponse.toDomainDeleteTxnDetailsResponse(): com.example.fea
         this.success,
         this.message,
         this.code
+    )
+}
+
+fun TxnBalanceResponse.toDomainTxnBalanceResponse(): com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse {
+    return com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse(
+        success = this.success,
+        data = this.data.toDomainBalanceDataResponse()
+    )
+}
+
+fun TxnBalanceResponse.TxnBalanceDataResponse.toDomainBalanceDataResponse(): com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse.TxnBalanceDataResponse {
+    return com.example.feature_transaction.domain.model.response.txn_balance.TxnBalanceResponse.TxnBalanceDataResponse(
+        this.totalIn,
+        this.totalOut
     )
 }
