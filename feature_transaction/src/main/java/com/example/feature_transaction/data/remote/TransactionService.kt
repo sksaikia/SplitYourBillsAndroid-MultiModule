@@ -57,7 +57,7 @@ interface TransactionService {
         @Body txnList: AddTxnListDTO
     ): GetSingleTxnDetailsResponse
 
-    @GET("/transaction/details/balance")
+    @GET("/api/transaction/details/balance")
     suspend fun getTxnDetailsBalance(
         @Query(value = "userId") userId: Int
     ): TxnBalanceResponse

@@ -6,6 +6,7 @@ import com.example.feature_space.data.remote.response.SingleSpaceMemberResponse
 import com.example.feature_space.data.remote.response.add_members.AddMembersResponse
 import com.example.feature_space.data.remote.response.all_members_for_space.AllMembersForSpaceResponse
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
+import com.example.feature_space.data.remote.response.txn_balance.TxnBalanceResponse
 import com.example.feature_space.data.remote.response.txn_details_by_space.SingleTxnDetailResponse
 import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailResponse
 import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
@@ -247,5 +248,19 @@ fun SingleSpaceMemberResponse.UserDetails.toDomainUserDetails(): com.example.fea
         this.phoneNo,
         this.username,
         this.userId
+    )
+}
+
+fun TxnBalanceResponse.toDomainTxnBalanceResponse(): com.example.feature_space.domain.model.response.txn_balance.TxnBalanceResponse {
+    return com.example.feature_space.domain.model.response.txn_balance.TxnBalanceResponse(
+        success = this.success,
+        data = this.data.toDomainBalanceDataResponse()
+    )
+}
+
+fun TxnBalanceResponse.TxnBalanceDataResponse.toDomainBalanceDataResponse(): com.example.feature_space.domain.model.response.txn_balance.TxnBalanceResponse.TxnBalanceDataResponse {
+    return com.example.feature_space.domain.model.response.txn_balance.TxnBalanceResponse.TxnBalanceDataResponse(
+        this.totalIn,
+        this.totalOut
     )
 }

@@ -12,6 +12,7 @@ import com.example.feature_space.domain.usecase.EditSpaceUseCase
 import com.example.feature_space.domain.usecase.GetAllMembersForSpaceIdUseCase
 import com.example.feature_space.domain.usecase.GetAllSpaceByUserIdUsecase
 import com.example.feature_space.domain.usecase.GetSpecificSpaceDetailsBySpaceIdUseCase
+import com.example.feature_space.domain.usecase.GetTxnBalanceUseCase
 import com.example.feature_space.domain.usecase.GetTxnDetailsBySpaceIdUseCase
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersEvent
 import com.example.feature_space.presentation.viewmodel.add_members.AddMembersState
@@ -22,6 +23,7 @@ import com.example.feature_space.presentation.viewmodel.create_space.CreateSpace
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceState
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceEvent
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceState
+import com.example.feature_space.presentation.viewmodel.get_txn_balance.GetTxnBalanceState
 import com.example.feature_space.presentation.viewmodel.specific_space.SingleSpaceState
 import com.example.feature_space.presentation.viewmodel.specific_space.TxnDetailsBySpaceState
 import com.example.network.Result
@@ -42,6 +44,7 @@ class SpaceViewModel @Inject constructor(
     private val addMembersToSpaceUseCase: AddMembersToSpaceUseCase,
     private val getAllMembersForSpaceIdUseCase: GetAllMembersForSpaceIdUseCase,
     private val getTxnDetailsBySpaceIdUseCase: GetTxnDetailsBySpaceIdUseCase,
+    private val getTxnbalanceUseCase: GetTxnBalanceUseCase,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
@@ -52,6 +55,7 @@ class SpaceViewModel @Inject constructor(
     var addMembersState by mutableStateOf(AddMembersState())
     var allMembersForSpaceState by mutableStateOf(AllMembersForSpaceState())
     var txnDetailsBySpaceState by mutableStateOf(TxnDetailsBySpaceState())
+    var getTxnBalanceState by mutableStateOf(GetTxnBalanceState())
 
     private val _createSpaceEventFlow = MutableSharedFlow<CreateSpaceEvent>()
     val createSpaceEventFlow = _createSpaceEventFlow.asSharedFlow()
@@ -279,4 +283,32 @@ class SpaceViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getTxnBalance() {
+        viewModelScope.launch {
+            getTxnbalanceUseCase.invoke(sessionManager.fetchUserId())
+                .collectLatest { result ->
+                    when (result) {
+                        is com.example.network.Result.Success -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
+                                isLoading = false,
+                                response = result.data
+                            )
+                        }
+                        is com.example.network.Result.Error -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
+                                isLoading = false,
+                                response = null
+                            )
+                        }
+                        is com.example.network.Result.Loading -> {
+                            getTxnBalanceState = getTxnBalanceState.copy(
+                                isLoading = true
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
 }

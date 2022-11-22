@@ -7,6 +7,7 @@ import com.example.feature_space.domain.model.response.all_member_for_space.AllM
 import com.example.feature_space.domain.model.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.domain.model.response.create_space.CreateSpaceResponse
 import com.example.feature_space.domain.model.response.space_details.SingleSpaceDetailsResponse
+import com.example.feature_space.domain.model.response.txn_balance.TxnBalanceResponse
 import com.example.feature_space.domain.model.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import com.example.network.Result
 import kotlinx.coroutines.flow.Flow
@@ -27,4 +28,5 @@ interface SpacesRepository {
 
     suspend fun getAllTxnDetailsBySpaceId(spaceId: Int): Flow<com.example.network.Result<TxnDetailsBySpaceResponse>>
 
+    suspend fun getTxnDetailsBalance(userId: Int): Flow<Result<TxnBalanceResponse>>
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.FloatingActionButton
@@ -45,9 +46,11 @@ fun SpacesScreen(
     val scaffoldState = rememberScaffoldState()
 
     val allSpacesState = spaceViewModel.allSpacesState
+    val txnBalanceState = spaceViewModel.getTxnBalanceState
 
     LaunchedEffect(key1 = true) {
         spaceViewModel.getAllSpaces()
+        spaceViewModel.getTxnBalance()
         spaceViewModel.allSpacesEventFlow.collectLatest { event ->
             when (event) {
                 is AllSpacesEvent.ShowErrorToast -> {
@@ -81,37 +84,41 @@ fun SpacesScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            TotalBalanceCard(amount = "₹ 5000.00")
+            if (txnBalanceState.isLoading) {
+                TotalBalanceLoader()
+            } else {
 
-//            Row {
-//                SpaceTrxCard(headerText = "Total In" , amount = "10000")
-//                SpaceTrxCard(headerText = "Total Out", amount = "5000")
-//            }
+                TotalBalanceCard(amount = (
+                        txnBalanceState.response?.data?.totalOut?.minus(
+                            txnBalanceState.response.data.totalIn
+                        ) ?: 0
+                        ).toString())
 
-            val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
-                Triple("Total In", "10000", R.drawable.trx_in),
-                Triple("Total Out", "5000", R.drawable.trx_out)
-            )
+                val listOfTrxCard = mutableListOf<Triple<String, String, Int>>(
+                    Triple("Total In", (txnBalanceState.response?.data?.totalIn ?: "0").toString(), R.drawable.trx_in),
+                    Triple("Total Out", (txnBalanceState.response?.data?.totalOut ?: "0").toString(), R.drawable.trx_out)
+                )
 
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                items(listOfTrxCard.size) { i ->
-                    SpaceTrxCard(
-                        headerText = listOfTrxCard[i].first,
-                        amount = listOfTrxCard[i].second,
-                        icon = listOfTrxCard[i].third
-                    )
+                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                    items(listOfTrxCard.size) { i ->
+                        SpaceTrxCard(
+                            headerText = listOfTrxCard[i].first,
+                            amount = listOfTrxCard[i].second,
+                            icon = listOfTrxCard[i].third
+                        )
+                    }
                 }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                UnifyText(
+                    text = "All Spaces",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+
             }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            UnifyText(
-                text = "All Spaces",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-
             Spacer(modifier = Modifier.height(10.dp))
 
             if (allSpacesState.isLoading) {
@@ -142,4 +149,11 @@ fun SpacesScreen(
             }
         }
     }
+}
+
+@Composable
+fun TotalBalanceLoader() {
+    ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(100.dp))
+    ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(100.dp))
+    ShimmerAnimation(modifier = Modifier.width(160.dp).height(30.dp))
 }

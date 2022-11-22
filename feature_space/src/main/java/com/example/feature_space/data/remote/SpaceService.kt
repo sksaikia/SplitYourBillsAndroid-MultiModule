@@ -7,6 +7,7 @@ import com.example.feature_space.data.remote.response.all_members_for_space.AllM
 import com.example.feature_space.data.remote.response.all_spaces.GetAllSpacesResponse
 import com.example.feature_space.data.remote.response.create_space.CreateSpaceResponse
 import com.example.feature_space.data.remote.response.space_details.SingleSpaceDetailsResponse
+import com.example.feature_space.data.remote.response.txn_balance.TxnBalanceResponse
 import com.example.feature_space.data.remote.response.txn_details_by_space.TxnDetailsBySpaceResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -44,4 +45,9 @@ interface SpaceService {
 
     @GET("transaction/details")
     suspend fun getAllTxnDetailsBySpaceId(@Query(value = "spaceId") spaceId: Int) : TxnDetailsBySpaceResponse
+
+    @GET("/api/transaction/details/balance")
+    suspend fun getTxnDetailsBalance(
+        @Query(value = "userId") userId: Int
+    ): TxnBalanceResponse
 }
