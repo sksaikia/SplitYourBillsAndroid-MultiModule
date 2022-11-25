@@ -136,7 +136,7 @@ fun TransactionScreen(
                     TransactionHomeComponent(
                         txnName = txnDetail?.transaction?.transactionName ?: "",
                         userName = txnDetail?.inviteDetails?.inviteName ?: "",
-                        txnAmount = "₹ ${txnDetail?.amount}",
+                        txnAmount = "₹ ${txnDetail?.amount?.minus(txnDetail.payableAmount) ?: 0}",
                         txnDate = txnDetail?.lastUpdated?.formatDate() ?: "",
                         modifier = Modifier.clickable {
                             navigateTo(
@@ -150,7 +150,7 @@ fun TransactionScreen(
                     TransactionHomeComponent(
                         txnName = txnDetail.transaction.transactionName,
                         userName = txnDetail.userDetails.username,
-                        txnAmount = "₹ ${txnDetail.amount}",
+                        txnAmount = "₹ ${txnDetail.amount.minus(txnDetail.payableAmount) ?: 0}",
                         txnDate = txnDetail.lastUpdated.formatDate(),
                         modifier = Modifier.clickable {
                             navigateTo(
