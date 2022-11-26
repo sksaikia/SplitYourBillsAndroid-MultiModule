@@ -1,5 +1,5 @@
 # SplitYourBillsAndroid-MultiModule
-Repo demonstrates Multi Module Clean Architecture on Android with Jetpack Compose, Coroutines, Flow, MVVM, Room caching 
+Repo demonstrates Multi Module Clean Architecture on Android with Jetpack Compose, Coroutines, Flow, MVVM
 
 Screenshots
 
@@ -18,12 +18,11 @@ Empty Transactions Screen      |  Manual Bill Split Screen | Transaction Detail 
 <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086046-18edab1d-b2be-4471-bbf9-07f3d73854cd.png" align="left" height="700" width="300" ></a>| <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086049-cafe78d0-a357-4be1-9c08-938c374e65ed.png" align="left" height="700" width="300" ></a> | <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086053-382164d1-506a-4cae-ab20-f45a50b7e48e.png" align="left" height="700" width="300" ></a>| 
 
 
-Transaction Home Screen        |  Create New Space Screen | 
-:-------------------------:|:-------------------------: | 
-<a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086054-5bf2558a-73a3-49b6-bf4a-52a932bacde2.png" align="left" height="700" width="300" ></a> | <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086838-6e91663f-652b-46be-a9c0-2d32e9714b00.png" align="left" height="700" width="300" ></a> | 
+Transaction Home Screen        |  Create New Space Screen | Create Transaction Screen |
+:-------------------------:|:-------------------------: | :-------------------------: |
+<a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086054-5bf2558a-73a3-49b6-bf4a-52a932bacde2.png" align="left" height="700" width="300" ></a> | <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204086838-6e91663f-652b-46be-a9c0-2d32e9714b00.png" align="left" height="700" width="300" ></a> | <a href="url"><img src="https://user-images.githubusercontent.com/42187769/204088019-da31fb76-3df9-43c9-b846-e8d30c1a4708.png" align="left" height="700" width="300" ></a> |
 
-
-
+<br />
 
 Figma - https://www.figma.com/file/1ALLsJ6F4cvegH2y2LOAdo/Split-Your-Bills?node-id=0%3A1 
 
