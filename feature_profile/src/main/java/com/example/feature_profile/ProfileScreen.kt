@@ -1,6 +1,5 @@
 package com.example.feature_profile
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -62,6 +61,9 @@ fun ProfileScreen(navigateTo: (String) -> Unit) {
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
+//        UserEditableCard()
+//        UserEditableCard()
+//        UserEditableCard()
         UnifyText(text = "Feature coming soon", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
         UnifyAnalogClock(
             hour = hour,

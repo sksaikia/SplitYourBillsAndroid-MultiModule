@@ -89,7 +89,7 @@ fun ContactPickerScreen(
     }
 
     if (permissionState.allPermissionsGranted) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             UnifyButton(buttonText = "Save these contacts", {
                 mapOfContacts.forEach { (key, value) ->
                     if (value) {
