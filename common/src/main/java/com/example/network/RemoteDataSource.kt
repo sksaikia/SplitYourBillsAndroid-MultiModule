@@ -8,7 +8,6 @@ open class RemoteDataSource {
 
     open suspend fun <T> safeApiCall(apiCall: suspend () -> T, error: suspend (String) -> Unit) {
         try {
-            delay(2000)
             apiCall.invoke()
         } catch (e: Throwable) {
             //  Log.d("FATAL", "safeApiCall error: ${(e as BaseErrorResponse).s}")

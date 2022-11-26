@@ -1,6 +1,7 @@
 package com.example.feature_space.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -127,6 +129,11 @@ fun SpacesScreen(
                         ShimmerAnimation(modifier = Modifier.fillMaxWidth().height(90.dp))
                     }
                 }
+            }
+
+            val totalSpace = allSpacesState.getAllSpacesResponse?.spacesResponse?.spaceMembers?.size ?: -1
+            if (totalSpace == 0 && !allSpacesState.isLoading) {
+                Image(painterResource(id = com.example.common.R.drawable.empty_event), contentDescription = "")
             }
 
             LazyVerticalGrid(columns = GridCells.Fixed(2)) {

@@ -1,6 +1,7 @@
 package com.example.feature_transaction.presentation.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +21,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -127,6 +129,13 @@ fun TransactionScreen(
             item {
                 if (getAllTxnDetailsState.isLoading) {
                     TransactionListLoaderView()
+                }
+            }
+
+            item {
+                val totalTxn = getAllTxnDetailsState.allTxnDetails?.data?.totalTransactions ?: -1
+                if (totalTxn == 0 && !getAllTxnDetailsState.isLoading) {
+                    Image(painterResource(id = com.example.common.R.drawable.empty_event), contentDescription = "")
                 }
             }
 
