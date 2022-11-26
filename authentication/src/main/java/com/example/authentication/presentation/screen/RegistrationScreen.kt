@@ -41,7 +41,7 @@ fun RegistrationScreen(
         authenticationViewModel.registrationEventFlow.collectLatest { event ->
             when(event) {
                 is RegistrationEvent.NavigateToHome -> {
-                    navigateTo(NavigationItem.HomeScreen.route)
+                    navigateTo(NavigationItem.SpacesScreen.route)
                 }
                 is RegistrationEvent.ShowErrorToast -> {
                     scaffoldState.snackbarHostState.showSnackbar(
