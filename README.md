@@ -92,6 +92,10 @@ Transaction Home Screen        |  Create New Space Screen | Create Transaction S
 
 
 
+https://user-images.githubusercontent.com/42187769/208670574-0962852b-47ac-4805-818b-fb0327e96447.mp4
+
+
+
 Figma - https://www.figma.com/file/1ALLsJ6F4cvegH2y2LOAdo/Split-Your-Bills?node-id=0%3A1 
 
 
