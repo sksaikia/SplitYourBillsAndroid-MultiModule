@@ -30,10 +30,10 @@ import com.example.ViewModelHelper
 import com.example.compositions.UserCard
 import com.example.contact_picker.entity.ListOfContact
 import com.example.design.SwipeButtonState
-import com.example.design.UnifyButton
-import com.example.design.UnifyEditText
-import com.example.design.UnifySwipeButton
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopEditText
+import com.example.design.PopSwipeButton
+import com.example.design.PopText
 import com.example.feature_space.domain.model.request.add_members.AddMembersBody
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.create_space.CreateSpaceEvent
@@ -122,14 +122,14 @@ fun CreateNewSpaceScreen(
                     navigateTo(NavigationItem.ShareSpaceScreen.route)
                 }
 
-                UnifyEditText(headerText = "Name", onValueChanged = {
+                PopEditText(headerText = "Name", onValueChanged = {
                     spaceViewModel.setSpaceName(it)
                 }, editText = spaceName.value)
-                UnifyEditText(headerText = "Description (Optional)", onValueChanged = {
+                PopEditText(headerText = "Description (Optional)", onValueChanged = {
                     spaceViewModel.setSpaceDescription(it)
                 }, editText = spaceDescription.value)
                 Spacer(modifier = Modifier.height(20.dp))
-                UnifyText(
+                PopText(
                     text = "Note: Once you have created a space, you will be able to invite other people too.... ",
                     modifier = Modifier.padding(horizontal = 20.dp)
                 )
@@ -139,13 +139,13 @@ fun CreateNewSpaceScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    UnifyButton(buttonText = "Invite Members", {
+                    PopButton(buttonText = "Invite Members", {
                         navigateTo(
                             NavigationItem.ContactPickerScreen.route
                         )
                     })
 
-                    UnifySwipeButton(
+                    PopSwipeButton(
                         onSwiped = {
                             swipeButtonState.value = SwipeButtonState.SWIPED
                             coroutineScope.launch {
@@ -167,7 +167,7 @@ fun CreateNewSpaceScreen(
                         onClickButton = {
                         },
                         content = {
-                            UnifyText(text = "Save Space", fontColor = Color.White)
+                            PopText(text = "Save Space", fontColor = Color.White)
                         }
                     )
 

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A), modifier: Modifier = Modifier) {
+fun PopLabel(text : String, color : Color = Color(0xFF4EDD8A), modifier: Modifier = Modifier) {
     Surface(
         color = color,
         shape = RectangleShape,
@@ -25,7 +25,7 @@ fun UnifyLabel(text : String, color : Color = Color(0xFF4EDD8A), modifier: Modif
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
             ) {
-            UnifyText(
+            PopText(
                 text = text,
                 fontSize = 10.sp,
                 modifier = Modifier.padding(4.dp),

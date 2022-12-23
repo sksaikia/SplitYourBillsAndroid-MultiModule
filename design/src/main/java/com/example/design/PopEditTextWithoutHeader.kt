@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun UnifyEditTextWithoutHeader(
+fun PopEditTextWithoutHeader(
     editText: String = "",
     textColor: Color = Color.Black,
     onValueChanged: (String) -> Unit = {}

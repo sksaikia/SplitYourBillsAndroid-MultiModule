@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.ShimmerAnimation
 import com.example.compositions.UserCard
-import com.example.design.UnifyText
+import com.example.design.PopText
 import com.example.feature_transaction.domain.model.response.single_txn_details.TransactionDetailsResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.util.DateHelper.formatDate
@@ -55,68 +55,68 @@ fun TransactionDetailsScreen(
                             )
                         val totalAmount =
                             calculateTotalAmount(getAllTxnDetailsByTxnIdState.allTxnDetails?.data?.transactionDetailsResponse)
-                        UnifyText(text = "Title", fontSize = 14.sp, fontWeight = FontWeight.Normal)
+                        PopText(text = "Title", fontSize = 14.sp, fontWeight = FontWeight.Normal)
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = data?.transaction?.transactionName ?: "",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Amount(Your contribution)",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = "₹ ${data?.amount} " ?: "",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(text = "When", fontSize = 14.sp, fontWeight = FontWeight.Normal)
+                        PopText(text = "When", fontSize = 14.sp, fontWeight = FontWeight.Normal)
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = data?.lastUpdated?.formatDate() ?: "",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(text = "Note", fontSize = 14.sp, fontWeight = FontWeight.Normal)
+                        PopText(text = "Note", fontSize = 14.sp, fontWeight = FontWeight.Normal)
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = data?.transaction?.transactionDescription ?: "",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Total Amount",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = "₹ $totalAmount",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Payable Amount by You",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = "₹ ${data?.payableAmount} " ?: "",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
 
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Contributors",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal

@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compositions.ShimmerAnimation
-import com.example.design.UnifyText
+import com.example.design.PopText
 import com.example.feature_space.R
 import com.example.feature_space.presentation.ui_composition.SpaceCard
 import com.example.feature_space.presentation.ui_composition.SpaceTrxCard
@@ -113,7 +113,7 @@ fun SpacesScreen(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                UnifyText(
+                PopText(
                     text = "All Spaces",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,

@@ -12,9 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compositions.UnifyAnalogClock
-import com.example.compositions.UserEditableCard
-import com.example.design.UnifyText
+import com.example.compositions.PopAnalogClock
+import com.example.design.PopText
 import kotlinx.coroutines.delay
 
 @Composable
@@ -64,8 +63,8 @@ fun ProfileScreen(navigateTo: (String) -> Unit) {
 //        UserEditableCard()
 //        UserEditableCard()
 //        UserEditableCard()
-        UnifyText(text = "Feature coming soon", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
-        UnifyAnalogClock(
+        PopText(text = "Feature coming soon", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
+        PopAnalogClock(
             hour = hour,
             minute = minute,
             modifier = Modifier.fillMaxSize()

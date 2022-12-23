@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.design.UnifyButton
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopText
 import com.example.navigation.NavigationItem
 
 @Composable
@@ -21,15 +21,15 @@ fun AuthenticationSelectionScreen(navigateTo: (String) -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        UnifyText(text = "Split Your Bills", fontSize = 36.sp)
+        PopText(text = "Split Your Bills", fontSize = 36.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-            UnifyButton(buttonText = "Login", {
+            PopButton(buttonText = "Login", {
                 // Tested with sample arg
                 navigateTo(NavigationItem.LoginScreen.route)
             })
 
-            UnifyButton(buttonText = "Register", {
+            PopButton(buttonText = "Register", {
                 navigateTo(NavigationItem.RegistrationScreen.route)
             })
         }

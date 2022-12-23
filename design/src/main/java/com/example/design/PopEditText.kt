@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyEditText(
+fun PopEditText(
     headerText: String,
     editText: String = "",
     textColor: Color = Color.Black,
@@ -29,7 +29,7 @@ fun UnifyEditText(
         var text by remember { mutableStateOf(editText) }
 
         Spacer(modifier = Modifier.height(10.dp))
-        UnifyText(text = headerText, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 16.dp))
+        PopText(text = headerText, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 16.dp))
 
         TextField(
             value = text,

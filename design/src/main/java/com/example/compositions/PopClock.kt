@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalDensity
@@ -16,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.min
 
 @Composable
-fun UnifyAnalogClock(
+fun PopAnalogClock(
     hour: Int,
     minute: Int,
     outlineColor: Color = Color.Black,

@@ -34,11 +34,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.UserCard
-import com.example.design.UnifyButton
-import com.example.design.UnifyButtonSmallType
-import com.example.design.UnifyDropDownMenu
-import com.example.design.UnifyEditText
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopButtonSmallType
+import com.example.design.PopEditText
+import com.example.design.PopMenu
+import com.example.design.PopText
 import com.example.feature_transaction.domain.model.response.SingleSpaceMemberResponse
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.all_spaces.CreateNewTxnEvent
@@ -107,10 +107,10 @@ fun CreateNewTransactionScreen(
     Scaffold(scaffoldState = scaffoldState) {
         LazyColumn {
             item {
-                UnifyEditText(headerText = "Title", onValueChanged = {
+                PopEditText(headerText = "Title", onValueChanged = {
                     txnName = it
                 })
-                UnifyEditText(headerText = "Total Amount", onValueChanged = {
+                PopEditText(headerText = "Total Amount", onValueChanged = {
                     transactionViewModel.setAmount(it)
                 })
                 Spacer(modifier = Modifier.height(20.dp))
@@ -124,14 +124,14 @@ fun CreateNewTransactionScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column {
-                        UnifyText(
+                        PopText(
                             text = "When",
                             modifier = Modifier
                                 .align(Alignment.Start)
                                 .padding(horizontal = 10.dp)
                         )
 
-                        UnifyText(
+                        PopText(
                             text = mDate.value,
                             modifier = Modifier
                                 .align(Alignment.Start)
@@ -162,7 +162,7 @@ fun CreateNewTransactionScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                UnifyText(
+                PopText(
                     text = "Space",
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
@@ -174,7 +174,7 @@ fun CreateNewTransactionScreen(
                     transactionViewModel
                 )
 
-                UnifyEditText(headerText = "Note", onValueChanged = {
+                PopEditText(headerText = "Note", onValueChanged = {
                     txnDescription = it
                 })
 
@@ -184,7 +184,7 @@ fun CreateNewTransactionScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    UnifyButton(buttonText = "Save TXN", onClickButton = {
+                    PopButton(buttonText = "Save TXN", onClickButton = {
                         transactionViewModel.createANewTransaction(
                             spaceId.value,
                             txnName,
@@ -195,7 +195,7 @@ fun CreateNewTransactionScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                UnifyText(
+                PopText(
                     text = "Select Contribution type",
                     modifier =
                     Modifier
@@ -215,7 +215,7 @@ fun CreateNewTransactionScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     items(listOfTxnSplits.size) { i ->
-                        UnifyButtonSmallType(buttonText = listOfTxnSplits[i], onClickButton = {
+                        PopButtonSmallType(buttonText = listOfTxnSplits[i], onClickButton = {
                             if (listOfTxnSplits[i] == "Manually split the bill") {
                                 navigateTo(
                                     NavigationItem.ManualBillSplitScreen.withArgs(
@@ -227,7 +227,7 @@ fun CreateNewTransactionScreen(
                     }
                 }
 
-                UnifyText(
+                PopText(
                     text = "All contributions",
                     modifier =
                     Modifier
@@ -281,7 +281,7 @@ fun MenuSample(
             .padding(16.dp),
         contentAlignment = Alignment.CenterStart
     ) {
-        UnifyDropDownMenu(
+        PopMenu(
             menuItems = billingPeriodItems,
             menuExpandedState = billingPeriodExpanded,
             seletedIndex = selectedIndex,

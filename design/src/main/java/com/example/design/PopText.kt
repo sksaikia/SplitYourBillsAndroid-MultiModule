@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyText(
+fun PopText(
     text: String,
     modifier: Modifier = Modifier,
     fontSize: TextUnit = 14.sp,

@@ -36,8 +36,8 @@ import com.example.contact_picker.R
 import com.example.contact_picker.entity.Contact
 import com.example.contact_picker.entity.ListOfContact
 import com.example.contact_picker.viewModel.ContactsViewModel
-import com.example.design.UnifyButton
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopText
 import com.example.navigation.NavigationItem
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -90,7 +90,7 @@ fun ContactPickerScreen(
 
     if (permissionState.allPermissionsGranted) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            UnifyButton(buttonText = "Save these contacts", {
+            PopButton(buttonText = "Save these contacts", {
                 mapOfContacts.forEach { (key, value) ->
                     if (value) {
                         listOfContacts.add(key)
@@ -118,7 +118,7 @@ fun ContactPickerScreen(
                         contentDescription = ""
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    UnifyText(text = "You don't have any contacts yet ")
+                    PopText(text = "You don't have any contacts yet ")
                 }
             }
             LazyColumn(
@@ -139,17 +139,17 @@ fun ContactPickerScreen(
                     when {
                         perm.hasPermission -> {
                             Column(modifier = Modifier.fillMaxWidth()) {
-                                UnifyText(text = "Permission Given YES ")
+                                PopText(text = "Permission Given YES ")
                             }
                         }
                         perm.shouldShowRationale -> {
                             Column(modifier = Modifier.fillMaxWidth()) {
-                                UnifyText(text = "Permission is need to access the contact List ")
+                                PopText(text = "Permission is need to access the contact List ")
                             }
                         }
                         !perm.hasPermission && !perm.shouldShowRationale -> {
                             Column(modifier = Modifier.fillMaxWidth()) {
-                                UnifyText(text = "Permission was permanenty denied , Set it from Settings ")
+                                PopText(text = "Permission was permanenty denied , Set it from Settings ")
                             }
                         }
                     }
@@ -173,12 +173,12 @@ fun ListItemView(contact: Contact, selectedStates: SnapshotStateMap<Int, Boolean
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                UnifyText(
+                PopText(
                     text = contact.name ?: "",
                     fontSize = if (selectedStates[index] == false) 24.sp else 12.sp
                 )
 
-                UnifyText(
+                PopText(
                     text = contact.phoneNo ?: "",
                     fontSize = if (selectedStates[index] == false) 24.sp else 12.sp
                 )

@@ -25,7 +25,7 @@ import com.example.common.R
 
 
 @Composable
-fun UnifyDropDownMenu(
+fun PopMenu(
     menuItems: List<String>,
     menuExpandedState: Boolean,
     seletedIndex : Int,

@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.design.UnifyText
+import com.example.design.PopText
 import com.example.feature_space.R
 
 @Composable
@@ -41,7 +41,7 @@ fun TransactionHomeComponent(
                 }
             )
 
-            UnifyText(
+            PopText(
                 text = txnName,
                 modifier = Modifier.padding(horizontal = 10.dp).constrainAs(transactionName) {
                     top.linkTo(parent.top)
@@ -49,7 +49,7 @@ fun TransactionHomeComponent(
                 }
             )
 
-            UnifyText(
+            PopText(
                 text = userName,
                 modifier = Modifier.padding(horizontal = 10.dp).constrainAs(transactionDescription) {
                     top.linkTo(transactionName.bottom)
@@ -57,7 +57,7 @@ fun TransactionHomeComponent(
                 }
             )
 
-            UnifyText(
+            PopText(
                 text = txnAmount,
                 modifier = Modifier.constrainAs(price) {
                     top.linkTo(parent.top)
@@ -65,7 +65,7 @@ fun TransactionHomeComponent(
                 }
             )
 
-            UnifyText(
+            PopText(
                 text = txnDate,
                 modifier = Modifier.constrainAs(date) {
                     top.linkTo(price.bottom)

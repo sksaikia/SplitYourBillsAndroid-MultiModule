@@ -19,9 +19,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.design.UnifyChip
-import com.example.design.UnifyLabel
-import com.example.design.UnifyText
+import com.example.design.PopChip
+import com.example.design.PopLabel
+import com.example.design.PopText
 
 @Composable
 fun SpaceCard(
@@ -52,13 +52,13 @@ fun SpaceCard(
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    UnifyText(modifier = Modifier.weight(0.6f), text = spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, shouldSetMaxLines = true)
-                    UnifyLabel(modifier = Modifier.weight(0.4f), text =  date)
+                    PopText(modifier = Modifier.weight(0.6f), text = spaceName, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, shouldSetMaxLines = true)
+                    PopLabel(modifier = Modifier.weight(0.4f), text =  date)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                UnifyChip(date)
+                PopChip(date)
                 Spacer(modifier = Modifier.height(10.dp))
-                UnifyText(
+                PopText(
                     text = "+ ₹ $amount",
                     fontSize = 14.sp,
                     fontColor = Color.Green,

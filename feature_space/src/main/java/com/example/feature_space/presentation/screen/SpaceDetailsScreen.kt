@@ -34,9 +34,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compositions.ShimmerAnimation
 import com.example.compositions.UserCard
-import com.example.design.UnifyButton
-import com.example.design.UnifyEditText
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopEditText
+import com.example.design.PopText
 import com.example.feature_space.presentation.ui_composition.TransactionHomeComponent
 import com.example.feature_space.presentation.viewmodel.SpaceViewModel
 import com.example.feature_space.presentation.viewmodel.edit_space.EditSpaceEvent
@@ -123,38 +123,38 @@ fun SpaceDetailsScreen(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        UnifyText(
+                        PopText(
                             text = "Space Name",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = specificSpaceDetailsState.data?.spacesResponse?.spaceName ?: "",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Description",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
                                 ?: "",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(20.dp))
-                        UnifyText(
+                        PopText(
                             text = "Created By",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(modifier = Modifier.height(6.dp))
-                        UnifyText(
+                        PopText(
                             text = specificSpaceDetailsState.data?.spacesResponse?.userResponse?.username
                                 ?: "",
                             fontSize = 20.sp,
@@ -165,11 +165,11 @@ fun SpaceDetailsScreen(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            UnifyButton(buttonText = "All Transactions", onClickButton = {
+                            PopButton(buttonText = "All Transactions", onClickButton = {
                                 shouldShowAllTxnDetailsForSpace = !shouldShowAllTxnDetailsForSpace
                                 shouldShowAllMembersForSpace = false
                             })
-                            UnifyButton(buttonText = "All members", onClickButton = {
+                            PopButton(buttonText = "All members", onClickButton = {
                                 shouldShowAllMembersForSpace = !shouldShowAllMembersForSpace
                                 shouldShowAllTxnDetailsForSpace = false
                             })
@@ -254,7 +254,7 @@ fun SpaceDetailsScreen(
                     if (editSpaceState.isLoading) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
                     }
-                    UnifyEditText(
+                    PopEditText(
                         headerText = "Space Name",
                         editText = specificSpaceDetailsState.data?.spacesResponse?.spaceName ?: "",
                         onValueChanged = {
@@ -262,7 +262,7 @@ fun SpaceDetailsScreen(
                         }
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    UnifyEditText(
+                    PopEditText(
                         headerText = "Space Description",
                         editText = specificSpaceDetailsState.data?.spacesResponse?.spaceDescription
                             ?: "",
@@ -271,7 +271,7 @@ fun SpaceDetailsScreen(
                         }
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    UnifyButton(buttonText = "Save Details", onClickButton = {
+                    PopButton(buttonText = "Save Details", onClickButton = {
                         spaceViewModel.onEditSpaceEvent(
                             EditSpaceEvent.OnSaveSpaceDetails(
                                 if (spaceName == "") specificSpaceDetailsState.data?.spacesResponse?.spaceName!! else spaceName,

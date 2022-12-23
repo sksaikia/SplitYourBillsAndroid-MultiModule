@@ -15,9 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.design.UnifyText
+import com.example.design.PopText
 
 @Composable
 fun UserCard(
@@ -36,7 +35,7 @@ fun UserCard(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        UnifyText(
+        PopText(
             modifier = Modifier
                 .padding(8.dp)
                 .drawBehind {
@@ -49,10 +48,10 @@ fun UserCard(
             fontColor = Color.White
         )
         Spacer(modifier = modifier.width(20.dp))
-        UnifyText(text = name)
+        PopText(text = name)
         Spacer(modifier = modifier.width(100.dp))
         if (shouldShowContributionAmount) {
-            UnifyText(text = "₹ $amount", fontWeight = FontWeight.Bold, shouldSetMaxLines = true)
+            PopText(text = "₹ $amount", fontWeight = FontWeight.Bold, shouldSetMaxLines = true)
         }
     }
 }

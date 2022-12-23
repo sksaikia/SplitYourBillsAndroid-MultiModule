@@ -18,7 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.navigation.NavigationItem
 
 @Composable
-fun UnifyBottomNavigation(navController : NavController, items : List<NavigationItem>) {
+fun PopBottomNavigation(navController : NavController, items : List<NavigationItem>) {
     Column {
         Divider(thickness = 1.dp,color = Color.Black.copy(0.4f))
         BottomNavigation(
@@ -40,7 +40,7 @@ fun UnifyBottomNavigation(navController : NavController, items : List<Navigation
                                 .height(20.dp)
                         )
                     },
-                    label = { UnifyText(text = item.title, fontColor = Color.Black) },
+                    label = { PopText(text = item.title, fontColor = Color.Black) },
                     selected = currentRoute == item.route,
                     onClick = {
                         navController.navigate(item.route)

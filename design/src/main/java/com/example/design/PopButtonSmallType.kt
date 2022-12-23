@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyButtonSmallType(
+fun PopButtonSmallType(
     buttonText: String,
     onClickButton : () -> Unit = {},
     modifier: Modifier = Modifier,
@@ -50,7 +49,7 @@ fun UnifyButtonSmallType(
             )
         ) {
 
-            UnifyText(
+            PopText(
                 text = buttonText,
                 fontSize = 10.sp
             )

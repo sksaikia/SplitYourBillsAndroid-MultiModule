@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.design.UnifyText
+import com.example.design.PopText
 
 @Composable
 fun SpaceTrxCard(
@@ -40,11 +40,11 @@ fun SpaceTrxCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                UnifyText(text = headerText, fontSize = 12.sp, fontWeight = FontWeight.Thin)
+                PopText(text = headerText, fontSize = 12.sp, fontWeight = FontWeight.Thin)
                 Image(painterResource(id = icon), contentDescription = "")
             }
             Spacer(modifier = Modifier.height(5.dp))
-            UnifyText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            PopText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
     }
 }

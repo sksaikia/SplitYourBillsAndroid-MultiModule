@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.design.UnifyText
+import com.example.design.PopText
 
 @Composable
 fun TotalBalanceCard(
@@ -34,9 +34,9 @@ fun TotalBalanceCard(
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            UnifyText(text = "Total Balance", fontSize = 12.sp, fontWeight = FontWeight.Thin)
+            PopText(text = "Total Balance", fontSize = 12.sp, fontWeight = FontWeight.Thin)
             Spacer(modifier = Modifier.height(5.dp))
-            UnifyText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            PopText(text = "₹ $amount", fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
     }
 }

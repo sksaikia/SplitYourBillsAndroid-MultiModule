@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.ShimmerAnimation
-import com.example.design.UnifyText
+import com.example.design.PopText
 import com.example.feature_transaction.R
 import com.example.feature_transaction.TotalBalanceCard
 import com.example.feature_transaction.presentation.ui_compositions.SpaceTrxCard
@@ -115,7 +115,7 @@ fun TransactionScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    UnifyText(
+                    PopText(
                         text = "Recent Transactions",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.ExtraBold,

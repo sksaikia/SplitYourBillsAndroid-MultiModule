@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.authentication.presentation.viewModel.AuthenticationViewModel
 import com.example.authentication.presentation.viewModel.registration.RegistrationEvent
-import com.example.design.UnifyButton
-import com.example.design.UnifyEditText
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopEditText
+import com.example.design.PopText
 import com.example.navigation.NavigationItem
 import kotlinx.coroutines.flow.collectLatest
 
@@ -58,23 +58,23 @@ fun RegistrationScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            UnifyText(text = "Split Your Bills", fontSize = 36.sp)
+            PopText(text = "Split Your Bills", fontSize = 36.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            UnifyText(text = "Registration", fontSize = 24.sp)
+            PopText(text = "Registration", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(30.dp))
-            UnifyEditText(headerText = "Name", onValueChanged = {
+            PopEditText(headerText = "Name", onValueChanged = {
                 userName = it
             })
             Spacer(modifier = Modifier.height(20.dp))
-            UnifyEditText(headerText = "Phone No.", onValueChanged = {
+            PopEditText(headerText = "Phone No.", onValueChanged = {
                 phoneNo = it
             })
             Spacer(modifier = Modifier.height(20.dp))
-            UnifyEditText(headerText = "Password", onValueChanged = {
+            PopEditText(headerText = "Password", onValueChanged = {
                 password = it
             })
             Spacer(modifier = Modifier.height(50.dp))
-            UnifyButton(buttonText = "Register", {
+            PopButton(buttonText = "Register", {
                 authenticationViewModel.onRegistrationEvent(
                     RegistrationEvent.OnUserRegistrationClick(
                         userName,

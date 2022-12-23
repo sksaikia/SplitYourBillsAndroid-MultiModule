@@ -1,6 +1,5 @@
 package com.example.design
 
-import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
@@ -48,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 
 @Composable
-fun UnifySwipeButton(
+fun PopSwipeButton(
     onSwiped: () -> Unit,
     modifier: Modifier = Modifier,
     swipeButtonState: SwipeButtonState,
@@ -118,7 +117,7 @@ fun UnifySwipeButton(
                     }
                 }
                 swiped -> {
-                    UnifyHorizontalDottedProgressBar()
+                    PopHorizontalDottedProgressBar()
                 }
                 else -> {
                     dragOffset.value = 0f

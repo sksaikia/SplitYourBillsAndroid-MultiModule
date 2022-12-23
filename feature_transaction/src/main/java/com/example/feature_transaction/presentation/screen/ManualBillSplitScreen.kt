@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ViewModelHelper.activityViewModel
 import com.example.compositions.UserEditableCard
-import com.example.design.UnifyText
+import com.example.design.PopText
 import com.example.feature_transaction.domain.model.request.add_txn_list.AddTxnListBody
 import com.example.feature_transaction.presentation.viewmodel.TransactionViewModel
 import com.example.feature_transaction.presentation.viewmodel.add_txn_details_list.AddTxnDetailsListEvent
@@ -158,13 +158,13 @@ fun totalAmount(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(modifier = Modifier.weight(0.8f), horizontalArrangement = Arrangement.SpaceEvenly) {
-                UnifyText(text = "Total Payable Amount -", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                UnifyText(
+                PopText(text = "Total Payable Amount -", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                PopText(
                     text = currentTotalPayableAmount.value.toString(),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold
                 )
-                UnifyText(
+                PopText(
                     text = "/ ${totalAmount.value}",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold
@@ -181,13 +181,13 @@ fun totalAmount(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(modifier = Modifier.weight(0.8f), horizontalArrangement = Arrangement.SpaceEvenly) {
-                UnifyText(text = "Total Amount -", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                UnifyText(
+                PopText(text = "Total Amount -", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                PopText(
                     text = currentContributionAmount.value.toString(),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold
                 )
-                UnifyText(
+                PopText(
                     text = "/ ${totalAmount.value}",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold
@@ -198,7 +198,7 @@ fun totalAmount(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
-                UnifyText(
+                PopText(
                     text = "Save",
                     fontColor = if (helperToEnableSaveButton(currentContributionAmount, totalAmount, currentTotalPayableAmount)) Color.Blue else Color.Gray,
                     fontWeight = FontWeight.ExtraBold,

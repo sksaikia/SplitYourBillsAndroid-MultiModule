@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.design.UnifyBottomNavigation
+import com.example.design.PopBottomNavigation
 import com.example.navigation.NavigationItem
 import com.example.session.SessionManager
 import com.example.splityourbillsandroid.navGraph.NavigationGraph
@@ -52,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     bottomBar = {
                         if (isVisibleBT) {
-                            UnifyBottomNavigation(
+                            PopBottomNavigation(
                                 navController = navController,
                                 items = listOf(
                                     NavigationItem.SpacesScreen,

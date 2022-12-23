@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.design.UnifyEditTextWithoutHeader
-import com.example.design.UnifyText
+import com.example.design.PopEditTextWithoutHeader
+import com.example.design.PopText
 
 @Composable
 fun UserEditableCard(
@@ -34,7 +34,7 @@ fun UserEditableCard(
         modifier = modifier.padding(horizontal = 20.dp).fillMaxWidth().padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        UnifyText(
+        PopText(
             modifier = Modifier
                 .padding(8.dp)
                 .drawBehind {
@@ -47,20 +47,20 @@ fun UserEditableCard(
             fontColor = Color.White
         )
         Spacer(modifier = modifier.width(20.dp))
-        UnifyText(text = name)
+        PopText(text = name)
         Spacer(modifier = modifier.width(40.dp))
         Column() {
             Row() {
-                UnifyText(text = "Contribution:  $")
-                UnifyEditTextWithoutHeader(
+                PopText(text = "Contribution:  $")
+                PopEditTextWithoutHeader(
                     editText = amount.toString(),
                     onValueChanged = onValueChangedForContribution
                 )
             }
 
             Row() {
-                UnifyText(text = "Payable Amount:  $")
-                UnifyEditTextWithoutHeader(
+                PopText(text = "Payable Amount:  $")
+                PopEditTextWithoutHeader(
                     editText = amount.toString(),
                     onValueChanged = onValueChangedForPayableAmount
                 )

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun UnifyChip(
+fun PopChip(
     text: String,
     randomColor : Boolean = true,
     color : Color = Color.Red,
@@ -21,7 +21,7 @@ fun UnifyChip(
         shape = CircleShape,
         elevation = 5.dp,
         modifier = modifier) {
-        UnifyText(
+        PopText(
             text = text,
             fontSize = 10.sp,
             modifier = Modifier.padding(

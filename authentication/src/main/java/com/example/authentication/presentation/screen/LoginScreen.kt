@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.authentication.presentation.viewModel.AuthenticationViewModel
 import com.example.authentication.presentation.viewModel.login.LoginEvent
-import com.example.design.UnifyButton
-import com.example.design.UnifyEditText
-import com.example.design.UnifyText
+import com.example.design.PopButton
+import com.example.design.PopEditText
+import com.example.design.PopText
 import com.example.navigation.NavigationItem
 import kotlinx.coroutines.flow.collectLatest
 
@@ -60,19 +60,19 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            UnifyText(text = "Split Your Bills", fontSize = 36.sp)
+            PopText(text = "Split Your Bills", fontSize = 36.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            UnifyText(text = "Login", fontSize = 24.sp)
+            PopText(text = "Login", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(30.dp))
-            UnifyEditText(headerText = "Phone No.", onValueChanged = {
+            PopEditText(headerText = "Phone No.", onValueChanged = {
                 phoneNo = it
             })
             Spacer(modifier = Modifier.height(20.dp))
-            UnifyEditText(headerText = "Password", onValueChanged = {
+            PopEditText(headerText = "Password", onValueChanged = {
                 password = it
             })
             Spacer(modifier = Modifier.height(50.dp))
-            UnifyButton(buttonText = "Login", {
+            PopButton(buttonText = "Login", {
                 Log.d("FATAL", "LoginScreen: $phoneNo , $password")
                 authenticationViewModel.onLoginEvent(LoginEvent.OnUserLoginClick(phoneNo, password))
             })

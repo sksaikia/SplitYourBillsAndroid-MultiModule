@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun UnifyHorizontalDottedProgressBar() {
+fun PopHorizontalDottedProgressBar() {
     val color = MaterialTheme.colors.onPrimary
     val transition = rememberInfiniteTransition()
     val state by transition.animateFloat(
