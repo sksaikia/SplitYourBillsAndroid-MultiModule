@@ -16,6 +16,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,7 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ViewModelHelper
 import com.example.compositions.UserCard
 import com.example.contact_picker.entity.ListOfContact
 import com.example.design.SwipeButtonState
@@ -47,7 +48,7 @@ import kotlinx.coroutines.launch
 fun CreateNewSpaceScreen(
     navigateTo: (String) -> Unit,
     contactList: String? = "",
-    spaceViewModel: SpaceViewModel = hiltViewModel()
+    spaceViewModel: SpaceViewModel = ViewModelHelper.activityViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
     var selectedContactList: ListOfContact? by remember {
@@ -101,14 +102,13 @@ fun CreateNewSpaceScreen(
                     ListOfContact::class.java
                 )
             selectedContactList = obj
-            Log.d("Eren", "CreateNewSpaceScreen: ${obj.list.size}")
         }
     } catch (e: Exception) {
         Log.d("Eren", "CreateNewSpaceScreen: $e")
     }
 
-    var spaceName by remember { mutableStateOf("") }
-    var spaceDescription by remember { mutableStateOf("") }
+    var spaceName = spaceViewModel.spaceName.collectAsState()
+    var spaceDescription = spaceViewModel.spaceDescription.collectAsState()
 
     Scaffold(scaffoldState = scaffoldState) {
         LazyColumn(
@@ -123,11 +123,11 @@ fun CreateNewSpaceScreen(
                 }
 
                 UnifyEditText(headerText = "Name", onValueChanged = {
-                    spaceName = it
-                })
+                    spaceViewModel.setSpaceName(it)
+                }, editText = spaceName.value)
                 UnifyEditText(headerText = "Description (Optional)", onValueChanged = {
-                    spaceDescription = it
-                })
+                    spaceViewModel.setSpaceDescription(it)
+                }, editText = spaceDescription.value)
                 Spacer(modifier = Modifier.height(20.dp))
                 UnifyText(
                     text = "Note: Once you have created a space, you will be able to invite other people too.... ",
@@ -154,7 +154,7 @@ fun CreateNewSpaceScreen(
                             }
                             Log.d("LEVI", "CreateNewSpaceScreen: ")
                             spaceViewModel.onCreateNewSpaceEvent(
-                                CreateSpaceEvent.OnCreateSpaceClick(spaceName, spaceDescription)
+                                CreateSpaceEvent.OnCreateSpaceClick(spaceName.value, spaceDescription.value)
                             )
                         },
                         swipeButtonState = swipeButtonState.value,

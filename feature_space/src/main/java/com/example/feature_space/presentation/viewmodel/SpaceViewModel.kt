@@ -30,7 +30,9 @@ import com.example.network.Result
 import com.example.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -68,6 +70,19 @@ class SpaceViewModel @Inject constructor(
 
     private val _addMembersEventFlow = MutableSharedFlow<AddMembersEvent>()
     val addMembersEventFlow = _addMembersEventFlow.asSharedFlow()
+
+    private val _spaceName = MutableStateFlow<String>("")
+    val spaceName = _spaceName.asStateFlow()
+    private val _spaceDescription = MutableStateFlow<String>("")
+    val spaceDescription = _spaceDescription.asStateFlow()
+
+    fun setSpaceName(name: String) {
+        _spaceName.value = name
+    }
+
+    fun setSpaceDescription(description: String) {
+        _spaceDescription.value = description
+    }
 
     fun getAllSpaces() {
         getAllSpaces(sessionManager.fetchUserId())
