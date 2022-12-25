@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/feature_profile" />
             <option value="$PROJECT_DIR$/feature_space" />
             <option value="$PROJECT_DIR$/feature_transaction" />
+            <option value="$PROJECT_DIR$/media_picker" />
           </set>
         </option>
       </GradleProjectSettings>
