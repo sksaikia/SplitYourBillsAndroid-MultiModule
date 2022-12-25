@@ -2,15 +2,20 @@ package com.example.feature_profile.presentation.screen
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.design.PopButton
 import com.example.feature_profile.presentation.viewmodel.UserProfileViewModel
+import com.example.navigation.NavigationItem
 
 @Composable
-fun ProfileScreen(navigateTo: (String) -> Unit,
-                  userProfileViewModel: UserProfileViewModel = hiltViewModel()) {
+fun ProfileScreen(
+    navigateTo: (String) -> Unit,
+    userProfileViewModel: UserProfileViewModel = hiltViewModel()
+) {
+    PopButton(buttonText = "Click here" , onClickButton = {
+        navigateTo(NavigationItem.MediaPickerScreen.route)
+    })
 
-
-
-//    LazyColumn {
+//   LazyColumn {
 //
 //        items(10) { i ->
 //            UserEditableCard("ABC $i")
@@ -52,9 +57,9 @@ fun ProfileScreen(navigateTo: (String) -> Unit,
 //    }
 //
 //    Column(modifier = Modifier.fillMaxSize()) {
-////        UserEditableCard()
-////        UserEditableCard()
-////        UserEditableCard()
+// //        UserEditableCard()
+// //        UserEditableCard()
+// //        UserEditableCard()
 //        PopText(text = "Feature coming soon", fontSize = 20.sp, modifier = Modifier.padding(16.dp))
 //        PopAnalogClock(
 //            hour = hour,
@@ -62,6 +67,6 @@ fun ProfileScreen(navigateTo: (String) -> Unit,
 //            modifier = Modifier.fillMaxSize()
 //        )
 //
-////        mermaid()
+// //        mermaid()
 //    }
 }

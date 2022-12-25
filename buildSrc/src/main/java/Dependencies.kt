@@ -13,6 +13,7 @@ object ComposeDependencies {
     const val uiCompose = "androidx.compose.ui:ui:${Versions.composeVersion}"
     const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.composeNavigationVersion}"
     const val constraintLayoutCompose = "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
+    const val coil = "io.coil-kt:coil-compose:${Versions.coilVersion}"
 }
 
 object AccompanistDependencies {

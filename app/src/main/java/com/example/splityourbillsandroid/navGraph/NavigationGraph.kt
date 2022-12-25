@@ -19,6 +19,7 @@ import com.example.feature_transaction.presentation.screen.CreateNewTransactionS
 import com.example.feature_transaction.presentation.screen.ManualBillSplitScreen
 import com.example.feature_transaction.presentation.screen.TransactionDetailsScreen
 import com.example.feature_transaction.presentation.screen.TransactionScreen
+import com.example.media_picker.presentation.screen.MediaPickerScreen
 import com.example.navigation.NavigationItem
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -172,7 +173,7 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.TransactionDetailsScreen.route  + "/{txnId}",
+            route = NavigationItem.TransactionDetailsScreen.route + "/{txnId}",
             arguments = listOf(
                 navArgument("txnId") {
                     type = NavType.StringType
@@ -180,10 +181,20 @@ fun NavigationGraph(
                 }
             )
         ) {
-            TransactionDetailsScreen(navigateTo = {
+            TransactionDetailsScreen(
+                navigateTo = {
+                    navController.navigate(it)
+                },
+                txnId = it.arguments?.getString("txnId")
+            )
+        }
+
+        composable(
+            route = NavigationItem.MediaPickerScreen.route
+        ) {
+            MediaPickerScreen(navigateTo = {
                 navController.navigate(it)
-            },
-            txnId = it.arguments?.getString("txnId"))
+            })
         }
     }
 }

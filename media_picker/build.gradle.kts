@@ -1,15 +1,18 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
+    id("kotlin-android")
 }
 
 android {
     namespace = "com.example.media_picker"
-    compileSdk = 32
+    compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
-        minSdk = 26
-        targetSdk = 32
+        minSdk = ConfigData.minSdkVersion
+        targetSdk = ConfigData.targetSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,14 +34,37 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.composeVersion
+    }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.DESIGN))
+
+    implementation(CoreDependencies.coreKtx)
+    implementation(CoreDependencies.lifecycleRuntimeKtx)
+
+    implementation(ComposeDependencies.activityCompose)
+    implementation(ComposeDependencies.uiCompose)
+    implementation(ComposeDependencies.toolingCompose)
+    implementation(ComposeDependencies.materialCompose)
+    implementation(ComposeDependencies.navigationCompose)
+
+    implementation(HiltDependencies.androidHilt)
+    implementation(HiltDependencies.hiltViewModelLifecycle)
+    kapt(HiltDependencies.hiltCompiler)
+    kapt(HiltDependencies.androidCompiler)
+
+    implementation(HiltDependencies.hiltNavigation)
+    implementation(AccompanistDependencies.permissions)
+    implementation(CoreDependencies.gsonDependency)
+
+    implementation(ComposeDependencies.coil)
 }

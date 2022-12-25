@@ -90,6 +90,11 @@ sealed class NavigationItem(
         title = "Transaction Details"
     )
 
+    object MediaPickerScreen: NavigationItem(
+        route = "media_picker_screen",
+        title = "Media Picker"
+    )
+
     fun withArgs(vararg args : String) : String {
         return buildString {
             append(route)
