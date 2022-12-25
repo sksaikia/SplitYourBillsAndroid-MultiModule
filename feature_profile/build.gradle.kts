@@ -1,6 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
+    id("kotlin-android")
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 android {
@@ -61,4 +65,15 @@ dependencies {
     androidTestImplementation(TestDependencies.androidxJunit)
     androidTestImplementation(TestDependencies.espresso)
 
+    implementation(RetrofitDependencies.retrofit)
+    implementation(RetrofitDependencies.gsonConverter)
+    implementation(RetrofitDependencies.okhttp)
+    implementation(RetrofitDependencies.loggingInterceptor)
+
+    implementation(HiltDependencies.androidHilt)
+    implementation(HiltDependencies.hiltViewModelLifecycle)
+    kapt(HiltDependencies.hiltCompiler)
+    kapt(HiltDependencies.androidCompiler)
+
+    implementation(HiltDependencies.hiltNavigation)
 }
