@@ -2,6 +2,7 @@ package com.example.media_picker.presentation.screen
 
 import android.Manifest
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -25,9 +31,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -80,7 +88,29 @@ fun MediaPickerScreen(
 
     if (permissionState.allPermissionsGranted) {
         viewModel.queryImageStorage(LocalContext.current.contentResolver)
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            TopAppBar(
+                modifier = Modifier.fillMaxWidth().height(50.dp),
+                backgroundColor = Color.LightGray
+            ) {
+                Row(modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween) {
+
+                    Icon(
+                        Icons.Filled.Close,
+                        "close",
+                        modifier = Modifier.width(35.dp).height(35.dp).padding(start = 10.dp)
+                    )
+                    PopText(text = "Select a profile picture", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Icon(Icons.Filled.Done, "done", modifier = Modifier.width(35.dp).height(35.dp).padding(end = 10.dp))
+                }
+            }
+
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageList.listImage?.get(checkedIndex))
@@ -93,9 +123,9 @@ fun MediaPickerScreen(
                     .height(300.dp)
             )
 
-            Divider(modifier = Modifier.fillMaxWidth().height(5.dp), color = Color.DarkGray)
+            Divider(modifier = Modifier.fillMaxWidth().height(2.dp), color = Color.LightGray)
 
-            Row(modifier = Modifier.fillMaxWidth().height(60.dp).padding(10.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier = Modifier.fillMaxWidth().height(50.dp).padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 PopText(text = "All Images", fontSize = 18.sp)
                 val displayIcon: Painter = painterResource(
                     id = com.example.media_picker.R.drawable.ic_photo_camera
@@ -103,8 +133,7 @@ fun MediaPickerScreen(
                 Image(painter = displayIcon, contentDescription = "")
             }
 
-            Divider(modifier = Modifier.fillMaxWidth().height(5.dp), color = Color.DarkGray)
-
+            Divider(modifier = Modifier.fillMaxWidth().height(2.dp), color = Color.LightGray)
 
             LazyVerticalGrid(modifier = Modifier.fillMaxWidth(), columns = GridCells.Fixed(2)) {
                 items(imageList.listImage?.size ?: 0) { i ->
@@ -131,6 +160,8 @@ fun MediaPickerScreen(
                                 .clickable {
                                     checkedIndex = i
                                 }
+                                .border(width = 1.dp, color = Color.LightGray),
+                            contentScale = ContentScale.FillBounds
                         )
                         Checkbox(
                             checked = checkedIndex == i,
