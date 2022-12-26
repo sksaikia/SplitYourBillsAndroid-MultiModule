@@ -67,4 +67,5 @@ dependencies {
     implementation(CoreDependencies.gsonDependency)
 
     implementation(ComposeDependencies.coil)
+    implementation(ComposeDependencies.constraintLayoutCompose)
 }

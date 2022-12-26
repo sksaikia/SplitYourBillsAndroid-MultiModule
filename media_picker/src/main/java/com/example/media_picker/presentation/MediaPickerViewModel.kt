@@ -21,6 +21,7 @@ class MediaPickerViewModel @Inject constructor(
     var imageList = mutableListOf<Uri>()
 
     fun queryImageStorage(contentResolver: ContentResolver) {
+        imageList.clear()
         val imageProjection = arrayOf(
             MediaStore.Images.Media.DISPLAY_NAME,
             MediaStore.Images.Media.SIZE,
@@ -50,7 +51,6 @@ class MediaPickerViewModel @Inject constructor(
                     val name = it.getString(nameColumn)
                     val size = it.getString(sizeColumn)
                     val date = it.getString(dateColumn)
-                    Log.d("FATAL", "queryImageStorage $name")
                     val contentUri = ContentUris.withAppendedId(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         id
@@ -58,7 +58,6 @@ class MediaPickerViewModel @Inject constructor(
                     imageList.add(contentUri)
                 //    listState.listImage?.add(contentUri)
                   //  imagePaths?.add(contentUri)
-                    Log.d("FATAL", "queryImageStorage: $contentUri")
                     // add the URI to the list
                     // generate the thumbnail
                     //     val thumbnail = contentResolver.loadThumbnail(contentUri, Size(480, 480), null)
