@@ -1,5 +1,6 @@
 package com.example.feature_profile.data.mapper
 
+import com.example.feature_profile.data.remote.response.ImageUploadResponse
 import com.example.feature_profile.data.remote.response.UserProfileResponse
 
 fun UserProfileResponse.toDomainUserProfileResponse(): com.example.feature_profile.domain.model.response.UserProfileResponse {
@@ -18,4 +19,11 @@ fun UserProfileResponse.toDomainUserProfileResponse(): com.example.feature_profi
  ***/
 fun convertProfilePicToAndroidSpecificUrl(profilePic: String?): String? {
     return profilePic?.replace("localhost:8080/", "10.0.2.2:8080/")
+}
+
+fun ImageUploadResponse.toDomainImageUploadResponse() : com.example.feature_profile.domain.model.response.ImageUploadResponse {
+    return com.example.feature_profile.domain.model.response.ImageUploadResponse(
+        this.message,
+        this.url
+    )
 }

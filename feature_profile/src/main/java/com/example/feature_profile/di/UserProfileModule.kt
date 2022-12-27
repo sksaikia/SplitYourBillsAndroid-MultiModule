@@ -4,6 +4,7 @@ import com.example.feature_profile.data.remote.UserProfileService
 import com.example.feature_profile.data.repository.UserProfileRepositoryImpl
 import com.example.feature_profile.domain.repository.ProfileRepository
 import com.example.feature_profile.domain.usecase.GetProfileInfoUseCase
+import com.example.feature_profile.domain.usecase.UploadProfilePicUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,12 @@ class UserProfileModule {
     @Singleton
     fun provideGetProfileInfoUseCase(repository: ProfileRepository): GetProfileInfoUseCase {
         return GetProfileInfoUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUploadProfilePicUseCase(repository: ProfileRepository): UploadProfilePicUseCase {
+        return UploadProfilePicUseCase(repository)
     }
 
 }

@@ -85,11 +85,19 @@ fun NavigationGraph(
         }
 
         composable(
-            route = NavigationItem.ProfileScreen.route
+            route = NavigationItem.ProfileScreen.route + "?uri={imageuri}",
+            arguments = listOf(
+                navArgument("uri") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = true
+                }
+
+            )
         ) {
             ProfileScreen(navigateTo = {
                 navController.navigate(it)
-            })
+            }, imageUri = it.arguments?.getString("imageuri"))
         }
 
         composable(

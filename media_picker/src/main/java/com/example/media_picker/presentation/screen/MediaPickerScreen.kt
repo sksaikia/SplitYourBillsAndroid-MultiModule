@@ -48,6 +48,7 @@ import coil.size.Scale
 import com.example.common.R
 import com.example.design.PopText
 import com.example.media_picker.presentation.MediaPickerViewModel
+import com.example.navigation.NavigationItem
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
@@ -55,11 +56,13 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @Composable
 fun MediaPickerScreen(
     navigateTo: (String) -> Unit,
+    navBackPath: String = NavigationItem.ProfileScreen.route,
     viewModel: MediaPickerViewModel = hiltViewModel()
 ) {
     val permissionState = rememberMultiplePermissionsState(
         permissions = listOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
     )
 
@@ -107,7 +110,12 @@ fun MediaPickerScreen(
                         modifier = Modifier.width(35.dp).height(35.dp).padding(start = 10.dp)
                     )
                     PopText(text = "Select a profile picture", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                    Icon(Icons.Filled.Done, "done", modifier = Modifier.width(35.dp).height(35.dp).padding(end = 10.dp))
+                    Icon(Icons.Filled.Done, "done",
+                        modifier = Modifier.width(35.dp).height(35.dp).padding(end = 10.dp)
+                            .clickable {
+                                var path = imageList.listImage?.get(checkedIndex)
+                                navigateTo(navBackPath + "?uri=${path}" )
+                            })
                 }
             }
 
