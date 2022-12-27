@@ -193,7 +193,7 @@ fun MediaPickerScreen(
                         }
                         perm.shouldShowRationale -> {
                             Column(modifier = Modifier.fillMaxWidth()) {
-                                PopText(text = "Permission is need to access the contact List ")
+                                PopText(text = "Permission is need to access the image List ")
                             }
                         }
                         !perm.hasPermission && !perm.shouldShowRationale -> {

@@ -76,4 +76,5 @@ dependencies {
     kapt(HiltDependencies.androidCompiler)
 
     implementation(HiltDependencies.hiltNavigation)
+    implementation(ComposeDependencies.coil)
 }

@@ -8,7 +8,7 @@ data class UserProfileResponse(
     @SerializedName("name")
     val name: String,
     @SerializedName("username")
-    val userName: Long,
+    val phoneNo: String,
     @SerializedName("profilePic")
-    val profilePic: String
+    val profilePic: String?
 )
