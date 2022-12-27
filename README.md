@@ -71,6 +71,7 @@ Profile Screen   |  Image Picker Screen |
 - Use SharedPreference to store user auth token
 
 - Contact Picker library to pick multiple contacts from device
+- Image Picker [Instagram style]
 
 
 ## Optimizations
@@ -82,7 +83,9 @@ Profile Screen   |  Image Picker Screen |
 
 ## Roadmap
 
-- Add Profile Screen for user
+- ~~Add Profile Screen for user~~
+
+- ~~Create Media Picker~~
 
 - Add Home Screen
 
