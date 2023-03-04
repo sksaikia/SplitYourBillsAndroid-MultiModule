@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="incidents">
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/ic_transaction.png` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/ic_transaction.png"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/ic_user.png` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/ic_user.png"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/ic_home.png` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/ic_home.png"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/ic_spent_analyzer.png` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/ic_spent_analyzer.png"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/empty_event.jpg` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/empty_event.jpg"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/ic_space.png` in densityless folder">
+        <location
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/ic_space.png"/>
+    </incident>
+
+</incidents>

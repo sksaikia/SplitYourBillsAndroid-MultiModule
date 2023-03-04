@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="incidents">
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `drawable`.">
+        <fix-data file="${:authentication*debug*sourceProvider*0*resDir*0}/drawable-v24" folderName="drawable" requiresApi="26"/>
+        <location
+            file="${:authentication*debug*sourceProvider*0*resDir*0}/drawable-v24"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <fix-data file="${:authentication*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26" folderName="mipmap-anydpi" requiresApi="26"/>
+        <location
+            file="${:authentication*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.hilt:hilt-navigation-compose than 1.0.0-alpha03 is available: 1.1.0-alpha01">
+        <fix-replace
+            description="Change to 1.1.0-alpha01"
+            family="Update versions"
+            oldString="1.0.0-alpha03"
+            replacement="1.1.0-alpha01"/>
+        <location
+            file="${:authentication*projectDir}/build.gradle"
+            line="78"
+            column="20"
+            startOffset="2261"
+            endLine="78"
+            endColumn="73"
+            endOffset="2314"/>
+    </incident>
+
+</incidents>

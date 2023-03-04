@@ -1,0 +1,8 @@
+R_DEF: Internal format may change without notice
+local
+drawable empty_event
+drawable ic_home
+drawable ic_space
+drawable ic_spent_analyzer
+drawable ic_transaction
+drawable ic_user

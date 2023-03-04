@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="incidents">
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `drawable`.">
+        <fix-data file="${:feature_transaction*debug*sourceProvider*0*resDir*0}/drawable-v24" folderName="drawable" requiresApi="26"/>
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*resDir*0}/drawable-v24"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <fix-data file="${:feature_transaction*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26" folderName="mipmap-anydpi" requiresApi="26"/>
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26"/>
+    </incident>
+
+    <incident
+        id="ComposableNaming"
+        severity="warning"
+        message="Composable functions that return Unit should start with an uppercase letter">
+        <fix-replace
+            description="Change to TotalAmount"
+            robot="true"
+            independent="true"
+            oldString="totalAmount"
+            replacement="TotalAmount"/>
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*javaDir*0}/com/example/feature_transaction/presentation/screen/ManualBillSplitScreen.kt"
+            line="138"
+            column="5"
+            startOffset="5858"
+            endLine="138"
+            endColumn="16"
+            endOffset="5869"/>
+    </incident>
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*javaDir*0}/com/example/feature_transaction/presentation/ui_compositions/SpaceTrxCard.kt"
+            line="27"
+            column="5"
+            startOffset="974"
+            endLine="27"
+            endColumn="13"
+            endOffset="982"/>
+    </incident>
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*javaDir*0}/com/example/feature_transaction/presentation/ui_compositions/TotalBalanceCard.kt"
+            line="21"
+            column="5"
+            startOffset="724"
+            endLine="21"
+            endColumn="13"
+            endOffset="732"/>
+    </incident>
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:feature_transaction*debug*sourceProvider*0*javaDir*0}/com/example/feature_transaction/presentation/ui_compositions/TransactionHomeComponent.kt"
+            line="24"
+            column="5"
+            startOffset="859"
+            endLine="24"
+            endColumn="13"
+            endOffset="867"/>
+    </incident>
+
+</incidents>

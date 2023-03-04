@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="partial_results">
+    <map id="UnusedResources">
+        <location id="R.drawable.empty_event"
+            file="${:common*debug*sourceProvider*0*resDir*0}/drawable/empty_event.jpg"/>
+        <entry
+            name="model"
+            string="drawable[empty_event(D),ic_space(U),ic_transaction(U),ic_home(U),ic_spent_analyzer(U),ic_user(U)];;;;"/>
+    </map>
+
+</incidents>

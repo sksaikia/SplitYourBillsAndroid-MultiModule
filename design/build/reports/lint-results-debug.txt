@@ -1,0 +1,35 @@
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/design/PopButton.kt:35: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier
+    ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/design/PopButtonSmallType.kt:23: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/design/PopChip.kt:17: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier
+    ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/compositions/PopClock.kt:30: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier
+    ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/design/PopLabel.kt:17: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+fun PopLabel(text : String, color : Color = Color(0xFF4EDD8A), modifier: Modifier = Modifier) {
+                                                               ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/compositions/UserCard.kt:25: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/design/src/main/java/com/example/compositions/UserEditableCard.kt:27: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+
+   Explanation for issues of type "ModifierParameter":
+   The first (or only) Modifier parameter in a Composable function should
+   follow the following rules:
+   - Be named modifier
+   - Have a type of Modifier
+   - Either have no default value, or have a default value of Modifier
+   - If optional, be the first optional parameter in the parameter list
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+0 errors, 7 warnings

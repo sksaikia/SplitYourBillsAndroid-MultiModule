@@ -1,0 +1,1 @@
+int drawable ic_photo_camera 0x0

@@ -1,0 +1,1 @@
+int drawable ic_user 0x0

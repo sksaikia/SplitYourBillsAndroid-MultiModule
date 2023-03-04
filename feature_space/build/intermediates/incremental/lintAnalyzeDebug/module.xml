@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_space"
+    name=":feature_space"
+    type="LIBRARY"
+    maven="SplitYourBillsAndroid:feature_space:"
+    gradle="7.2.1"
+    buildFolder="build"
+    bootClassPath="/Users/sourav/Library/Android/sdk/platforms/android-32/android.jar:/Users/sourav/Library/Android/sdk/build-tools/30.0.3/core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-32"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="debug"/>
+</lint-module>

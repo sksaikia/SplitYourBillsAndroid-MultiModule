@@ -1,0 +1,6 @@
+int drawable empty_event 0x0
+int drawable ic_home 0x0
+int drawable ic_space 0x0
+int drawable ic_spent_analyzer 0x0
+int drawable ic_transaction 0x0
+int drawable ic_user 0x0

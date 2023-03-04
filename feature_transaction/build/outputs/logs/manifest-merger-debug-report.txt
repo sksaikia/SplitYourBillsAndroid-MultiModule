@@ -1,0 +1,39 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:2:1-14:12
+	package
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:3:5-46
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:5:5-12:19
+	android:supportsRtl
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml:11:9-59
+uses-sdk
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+		ADDED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml
+		INJECTED from /Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/feature_transaction/src/main/AndroidManifest.xml

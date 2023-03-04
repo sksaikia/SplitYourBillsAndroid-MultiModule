@@ -1,0 +1,12 @@
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/contact_picker/src/main/res/drawable/ic_user.png: Warning: Found bitmap drawable res/drawable/ic_user.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+0 errors, 1 warnings

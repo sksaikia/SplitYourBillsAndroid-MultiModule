@@ -1,0 +1,21 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.media_picker" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="26"
+6-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="32" />
+7-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.CAMERA" />
+9-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:4:5-64
+9-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:4:22-62
+10    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+10-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:5:5-80
+10-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:5:22-78
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:6:5-79
+11-->/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/media_picker/src/main/AndroidManifest.xml:6:22-77
+12
+13</manifest>

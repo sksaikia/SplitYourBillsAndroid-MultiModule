@@ -1,0 +1,31 @@
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/empty_event.jpg: Warning: The resource R.drawable.empty_event appears to be unused [UnusedResources]
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/empty_event.jpg: Warning: Found bitmap drawable res/drawable/empty_event.jpg in densityless folder [IconLocation]
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/ic_home.png: Warning: Found bitmap drawable res/drawable/ic_home.png in densityless folder [IconLocation]
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/ic_space.png: Warning: Found bitmap drawable res/drawable/ic_space.png in densityless folder [IconLocation]
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/ic_spent_analyzer.png: Warning: Found bitmap drawable res/drawable/ic_spent_analyzer.png in densityless folder [IconLocation]
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/ic_transaction.png: Warning: Found bitmap drawable res/drawable/ic_transaction.png in densityless folder [IconLocation]
+/Users/sourav/AndroidStudioProjects/SplitYourBillsAndroid/common/src/main/res/drawable/ic_user.png: Warning: Found bitmap drawable res/drawable/ic_user.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+0 errors, 7 warnings
