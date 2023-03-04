@@ -1,0 +1,7 @@
+package hilt_aggregated_deps;
+
+import dagger.hilt.android.internal.legacy.AggregatedElementProxy;
+
+@AggregatedElementProxy(androidx_hilt_lifecycle_ViewModelFactoryModules_ActivityModuleModuleDeps.class)
+public final class _androidx_hilt_lifecycle_ViewModelFactoryModules_ActivityModuleModuleDeps {
+}
