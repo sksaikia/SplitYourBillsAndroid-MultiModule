@@ -19,8 +19,13 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Upload html test report
+      - name: Upload Lint report - App Module
         uses: actions/upload-artifact@v2
         with:
-          name: index2.html
+          name: main_app_lint_report.html
           path: app/build/reports/lint-results-debug.html
+      - name: Upload Lint report - Authentication Module
+          uses: actions/upload-artifact@v2
+          with:
+            name: authentication_lint_report.html
+            path: authentication/build/reports/lint-results-debug.html
