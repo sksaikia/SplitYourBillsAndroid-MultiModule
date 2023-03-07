@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<incidents format="6" by="lint 7.2.1" type="configured_issues">
-    <config id="JvmStaticProvidesInObjectDetector" severity="ignore"/>
-    <config id="FieldSiteTargetOnQualifierAnnotation" severity="ignore"/>
-    <config id="ModuleCompanionObjects" severity="ignore"/>
-    <config id="ModuleCompanionObjectsNotInModuleParent" severity="ignore"/>
-
-</incidents>

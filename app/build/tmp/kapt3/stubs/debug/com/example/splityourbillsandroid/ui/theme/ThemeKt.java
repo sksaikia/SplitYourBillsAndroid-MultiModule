@@ -7,8 +7,8 @@ public final class ThemeKt {
     private static final androidx.compose.material.Colors DarkColorPalette = null;
     private static final androidx.compose.material.Colors LightColorPalette = null;
     
-    @androidx.compose.runtime.Composable
-    public static final void SplitYourBillsAndroidTheme(boolean darkTheme, @org.jetbrains.annotations.NotNull
+    @androidx.compose.runtime.Composable()
+    public static final void SplitYourBillsAndroidTheme(boolean darkTheme, @org.jetbrains.annotations.NotNull()
     kotlin.jvm.functions.Function0<kotlin.Unit> content) {
     }
 }
