@@ -1,2 +1,0 @@
-com.example.media_picker
-drawable ic_photo_camera

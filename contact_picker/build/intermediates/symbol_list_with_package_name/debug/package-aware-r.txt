@@ -1,2 +1,0 @@
-com.example.contact_picker
-drawable ic_user
