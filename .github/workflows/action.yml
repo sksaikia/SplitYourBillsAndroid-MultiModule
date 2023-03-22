@@ -84,8 +84,52 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Lint Check
         run: ./gradlew lint
-      - name: Upload Lint Report
+      - name: Upload Lint report - App Module
         uses: actions/upload-artifact@v2
         with:
-          name: lint-results
+          name: main_app_lint_report.html
           path: app/build/reports/lint-results-debug.html
+      - name: Upload Lint report - Authentication Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: authentication_lint_report.html
+          path: authentication/build/reports/lint-results-debug.html
+      - name: Upload Lint report - Transaction Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: transaction_lint_report.html
+          path: feature_transaction/build/reports/lint-results-debug.html
+      - name: Upload Lint report - Space Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: space_lint_report.html
+          path: feature_space/build/reports/lint-results-debug.html
+
+      - name: Upload Lint report - Design Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: design_lint_report.html
+          path: design/build/reports/lint-results-debug.html
+
+      - name: Upload Lint report - Contact Picker Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: contact_picker_lint_report.html
+          path: contact_picker/build/reports/lint-results-debug.html
+      - name: Upload Lint report - Profile  Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: profile_lint_report.html
+          path: feature_profile/build/reports/lint-results-debug.html
+
+      - name: Upload Lint report - Common  Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: common_lint_report.html
+          path: common/build/reports/lint-results-debug.html
+
+      - name: Upload Lint report - Home Module
+        uses: actions/upload-artifact@v2
+        with:
+          name: home_lint_report.html
+          path: feature_home/build/reports/lint-results-debug.html
